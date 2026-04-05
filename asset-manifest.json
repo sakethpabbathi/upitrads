@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/upitrads/static/css/main.e3db8137.css",
-    "main.js": "/upitrads/static/js/main.bb5982be.js",
+    "main.js": "/upitrads/static/js/main.1cbbb58b.js",
     "index.html": "/upitrads/index.html",
     "main.e3db8137.css.map": "/upitrads/static/css/main.e3db8137.css.map",
-    "main.bb5982be.js.map": "/upitrads/static/js/main.bb5982be.js.map"
+    "main.1cbbb58b.js.map": "/upitrads/static/js/main.1cbbb58b.js.map"
   },
   "entrypoints": [
     "static/css/main.e3db8137.css",
-    "static/js/main.bb5982be.js"
+    "static/js/main.1cbbb58b.js"
   ]
 }
