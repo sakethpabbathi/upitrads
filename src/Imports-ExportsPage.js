@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
+// Update this line below:
+
+
 
 // --- NAVBAR COMPONENT ---
 const Navbar = ({ setActiveSlide, setPath }) => {
@@ -107,11 +110,51 @@ const Navbar = ({ setActiveSlide, setPath }) => {
 };
 
 // --- MAIN PAGE COMPONENT ---
+// const ImportsExportsPage = () => {
+//   const [activeSlide, setActiveSlide] = useState(0);
+//   const [path, setPath] = useState(["Imports & Exports"]);
+//   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+//   useEffect(() => {
+//     const handleResize = () => setIsMobile(window.innerWidth <= 768);
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, []);
+
+//   const handleBreadcrumbClick = (index) => {
+//     const newPath = path.slice(0, index + 1);
+//     setPath(newPath);
+//     if (newPath.length === 1) setActiveSlide(0); 
+//     if (newPath.length === 2) {
+//       if (newPath[0] === "Imports") setActiveSlide(1);
+//       if (newPath[0] === "Exports") setActiveSlide(6);
+//     }
+//   };
+
+
 const ImportsExportsPage = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [path, setPath] = useState(["Imports & Exports"]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  
+  const location = useLocation(); // Hook to access navigation state
 
+  // 1. Listen for navigation state changes (from Navbar)
+  useEffect(() => {
+    if (location.state) {
+      const { slideIndex, breadcrumb } = location.state;
+      
+      if (slideIndex !== undefined) {
+        setActiveSlide(slideIndex);
+      }
+      
+      if (breadcrumb) {
+        setPath(breadcrumb);
+      }
+    }
+  }, [location]); // Triggers whenever the URL or state changes
+
+  // 2. Handle Resize
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
@@ -127,6 +170,8 @@ const ImportsExportsPage = () => {
       if (newPath[0] === "Exports") setActiveSlide(6);
     }
   };
+
+  // ... (rest of your getSlideStyle and JSX remain the same)
 
   const getSlideStyle = (index) => {
     const isActive = activeSlide === index;
