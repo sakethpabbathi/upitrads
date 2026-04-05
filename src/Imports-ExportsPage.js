@@ -56,14 +56,23 @@ const Navbar = ({ setActiveSlide, setPath }) => {
 };
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const navItems = [
+  // const navItems = [
+  //   { label: "Home", target: "home" },
+  //   { label: "Import", target: "imports-exports", slide: 1, path: ["Imports"] },
+  //   { label: "Export", target: "imports-exports", slide: 6, path: ["Exports"] },
+  //   { label: "About us", target: "about" },
+  //   { label: "Contact", target: "contact" },
+  // ];
+
+const navItems = [
     { label: "Home", target: "home" },
-    { label: "Import", target: "imports-exports", slide: 1, path: ["Imports"] },
-    { label: "Export", target: "imports-exports", slide: 6, path: ["Exports"] },
+    // Changed these to target sections on the Homepage
+    { label: "Import", target: "imports-exports" }, 
+    { label: "Export", target: "imports-exports" }, 
     { label: "About us", target: "about" },
     { label: "Contact", target: "contact" },
   ];
-
+  
   return (
     <header style={navStyles.header}>
       <div style={navStyles.headerInner}>
@@ -416,69 +425,6 @@ const styles = {
     opacity: 0.8,
   },
 };
-
-// const localStyles = {
-//   app: {
-//     fontFamily: "Arial, sans-serif",
-//     background: "#f9fafc",
-//     paddingTop: "70px",
-//     minHeight: "100vh",
-//     overflowX: "hidden",
-//   },
-//   importExportSection: {
-//     padding: "50px 20px",
-//     textAlign: "center",
-//   },
-//   sectionTitle: {
-//     fontSize: "2rem",
-//     marginBottom: "30px",
-//     color: "#0d1b2a",
-//     fontWeight: "bold",
-//   },
-//   sliderWrapper: {
-//     position: "relative",
-//     width: "100%",
-//     overflow: "visible",
-//   },
-//   slide: {
-//     position: "absolute",
-//     width: "100%",
-//     display: "flex",
-//     justifyContent: "center",
-//     gap: "40px",
-//     transition: "transform 0.6s ease, opacity 0.6s ease",
-//     flexWrap: "wrap",
-//     top: 0,
-//     left: 0,
-//   },
-//   importExportCard: {
-//     width: "100%",
-//     maxWidth: "320px",
-//     borderRadius: "15px",
-//     overflow: "hidden",
-//     background: "#fff",
-//     boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-//     transition: "0.4s",
-//     cursor: "pointer",
-//     flex: "1 1 280px",
-//     margin: "10px",
-//   },
-//   imageWrapper: {
-//     position: "relative",
-//     height: "200px",
-//     overflow: "hidden",
-//   },
-//   importExportImg: {
-//     width: "100%",
-//     height: "100%",
-//     objectFit: "cover",
-//     transition: "0.5s",
-//   },
-//   cardContent: {
-//     padding: "20px",
-//     textAlign: "center",
-//   },
-// };
 
 
 const localStyles = {
