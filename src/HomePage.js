@@ -233,9 +233,7 @@ const ContactSection = () => {
         </button>
 
         {/* Show contact info manually */}
-        <p style={{ marginTop: "15px", fontSize: "14px" }}>
-          📞 Phone: +91 93477 19244
-        </p>
+       
 
         <p style={{ fontSize: "14px" }}>
           📍 Hyderabad, India
