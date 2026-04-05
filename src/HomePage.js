@@ -213,35 +213,47 @@ const AboutSection = () => {
 };
 
 
-
 const ContactSection = () => {
-  const handleWhatsApp = () => {
-    const number = "919347719244";
-    const message = "Hello, I want to enquire";
-    const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
-  };
+  const whatsappNumber = "+91 93477 19244";
 
   return (
     <section id="contact" style={styles.contactSection}>
       <h2 style={styles.sectionTitle}>Contact Us</h2>
-      <form style={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
+
+      <form
+        style={styles.contactForm}
+        onSubmit={(e) => e.preventDefault()}
+      >
         <input type="text" placeholder="Your Name" style={styles.input} required />
         <input type="tel" placeholder="Mobile Number" style={styles.input} required />
         <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
 
-        <button
-          type="button"
-          onClick={handleWhatsApp}
+        {/* SAFE CONTACT INFO */}
+        <p style={{ marginTop: "10px", fontWeight: "bold" }}>
+          Contact us on WhatsApp:
+        </p>
+
+        <p style={{ fontSize: "16px", color: "#0077b6" }}>
+          {whatsappNumber}
+        </p>
+
+        {/* OPTIONAL BUTTON (NO DIRECT REDIRECT) */}
+        <a
+          href="https://www.whatsapp.com/"
+          target="_blank"
+          rel="noopener noreferrer"
           style={styles.submitBtn}
         >
-          Send Message via WhatsApp
-        </button>
+          Open WhatsApp App
+        </a>
+
+        <p style={{ fontSize: "12px", color: "gray", marginTop: "10px" }}>
+          Open WhatsApp and send your message to the above number.
+        </p>
       </form>
     </section>
   );
 };
-
 const Footer = () => (
   <footer style={styles.footer}>
     <div style={styles.footerTop}>
