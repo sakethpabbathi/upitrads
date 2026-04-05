@@ -214,9 +214,6 @@ const AboutSection = () => {
 
 
 
-
-
-
 const ContactSection = () => {
   const handleWhatsApp = () => {
     const number = "919347719244";
