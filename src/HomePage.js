@@ -211,26 +211,46 @@ const AboutSection = () => {
   );
 };
 
-const ContactSection = () => {
-  return (
-    <section id="contact" style={styles.contactSection}>
-      <h2 style={styles.sectionTitle}>Contact Us</h2>
-      <form
-        style={styles.contactForm}
-        onSubmit={(e) => {
-          e.preventDefault();
-          const whatsappNumber = "919347719244";
-          window.open(`https://wa.me/${whatsappNumber}?text=Enquiry`, "_blank");
-        }}
+// const ContactSection = () => {
+//   return (
+//     <section id="contact" style={styles.contactSection}>
+//       <h2 style={styles.sectionTitle}>Contact Us</h2>
+//       <form
+//         style={styles.contactForm}
+//         onSubmit={(e) => {
+//           e.preventDefault();
+//           const whatsappNumber = "919347719244";
+//           window.open(`https://wa.me/${whatsappNumber}?text=Enquiry`, "_blank");
+//         }}
+//       >
+//         <input type="text" placeholder="Your Name" style={styles.input} required />
+//         <input type="tel" placeholder="Mobile Number" style={styles.input} required />
+//         <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
+//         <button type="submit" style={styles.submitBtn}>Send Message</button>
+//       </form>
+//     </section>
+//   );
+// };
+
+
+const ContactSection = () => (
+  <section id="contact" style={styles.contactSection}>
+    <h2 style={styles.sectionTitle}>Contact Us</h2>
+    <form style={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
+      <input type="text" placeholder="Your Name" style={styles.input} required />
+      <input type="tel" placeholder="Mobile Number" style={styles.input} required />
+      <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
+      <a
+        href="https://wa.me/919347719244"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={styles.submitBtn}
       >
-        <input type="text" placeholder="Your Name" style={styles.input} required />
-        <input type="tel" placeholder="Mobile Number" style={styles.input} required />
-        <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
-        <button type="submit" style={styles.submitBtn}>Send Message</button>
-      </form>
-    </section>
-  );
-};
+        Send Message via WhatsApp
+      </a>
+    </form>
+  </section>
+);
 
 const Footer = () => (
   <footer style={styles.footer}>
