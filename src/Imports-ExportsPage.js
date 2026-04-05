@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 // Update this line below:
 
-
-
 // --- NAVBAR COMPONENT ---
 const Navbar = ({ setActiveSlide, setPath }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -201,8 +199,9 @@ const ImportsExportsPage = () => {
     };
   };
 
-  const commonImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT75hzrt-cwrOqmIMGXWOP3aNi4RQSfHgesVA&s";
-
+  // const commonImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT75hzrt-cwrOqmIMGXWOP3aNi4RQSfHgesVA&s";
+// Local image from public folder
+const commonImg = process.env.PUBLIC_URL + "/fishone.jpg";
   return (
     <div style={localStyles.app}>
       <Navbar setActiveSlide={setActiveSlide} setPath={setPath} />

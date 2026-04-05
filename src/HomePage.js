@@ -168,11 +168,16 @@ const ImportExportSection = () => {
       <div style={styles.gridContainer}>
         <div style={styles.importExportCard} onClick={handleImportClick}>
           <div style={styles.imageWrapper}>
-            <img
+            {/* <img
               src="https://static.vecteezy.com/system/resources/thumbnails/020/173/239/small/global-business-logistics-transport-import-export-and-international-trade-concept-logistics-distribution-of-containers-cargo-freight-ship-train-truck-and-plane-transportation-industry-background-photo.jpg"
               style={styles.importExportImg}
               alt="Imports"
-            />
+            /> */}
+            <img
+  src={process.env.PUBLIC_URL + "/fishone.jpg"}
+  style={styles.importExportImg}
+  alt="Imports"
+/>
           </div>
           <div style={styles.cardContent}>
             <h3>Imports</h3>
@@ -183,7 +188,7 @@ const ImportExportSection = () => {
         <div style={styles.importExportCard} onClick={handleExportClick}>
           <div style={styles.imageWrapper}>
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT75hzrt-cwrOqmIMGXWOP3aNi4RQSfHgesVA&s"
+             src={process.env.PUBLIC_URL + "/fishone.jpg"}
               style={styles.importExportImg}
               alt="Exports"
             />
