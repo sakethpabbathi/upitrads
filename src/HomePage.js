@@ -214,24 +214,36 @@ const AboutSection = () => {
 
 
 
-const ContactSection = () => (
-  <section id="contact" style={styles.contactSection}>
-    <h2 style={styles.sectionTitle}>Contact Us</h2>
-    <form style={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
-      <input type="text" placeholder="Your Name" style={styles.input} required />
-      <input type="tel" placeholder="Mobile Number" style={styles.input} required />
-      <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
-      <a
-        href="https://wa.me/919347719244"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={styles.submitBtn}
-      >
-        Send Message via WhatsApp
-      </a>
-    </form>
-  </section>
-);
+
+
+
+const ContactSection = () => {
+  const handleWhatsApp = () => {
+    const number = "919347719244";
+    const message = "Hello, I want to enquire";
+    const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  };
+
+  return (
+    <section id="contact" style={styles.contactSection}>
+      <h2 style={styles.sectionTitle}>Contact Us</h2>
+      <form style={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
+        <input type="text" placeholder="Your Name" style={styles.input} required />
+        <input type="tel" placeholder="Mobile Number" style={styles.input} required />
+        <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
+
+        <button
+          type="button"
+          onClick={handleWhatsApp}
+          style={styles.submitBtn}
+        >
+          Send Message via WhatsApp
+        </button>
+      </form>
+    </section>
+  );
+};
 
 const Footer = () => (
   <footer style={styles.footer}>
