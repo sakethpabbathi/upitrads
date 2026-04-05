@@ -199,7 +199,7 @@ const ImportsExportsPage = () => {
     };
   };
 
-  // const commonImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT75hzrt-cwrOqmIMGXWOP3aNi4RQSfHgesVA&s";
+  
 // Local image from public folder
 const commonImg = process.env.PUBLIC_URL + "/fishone.jpg";
   return (
