@@ -215,14 +215,6 @@ const AboutSection = () => {
 
 
 const ContactSection = () => {
-  const handleWhatsApp = () => {
-    const number = process.env.REACT_APP_WHATSAPP_NUMBER;
-    const message = "Hello, I want to enquire";
-
-    const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
-  };
-
   return (
     <section id="contact" style={styles.contactSection}>
       <h2 style={styles.sectionTitle}>Contact Us</h2>
@@ -235,13 +227,19 @@ const ContactSection = () => {
         <input type="tel" placeholder="Mobile Number" style={styles.input} required />
         <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
 
-        <button
-          type="button"
-          onClick={handleWhatsApp}
-          style={styles.submitBtn}
-        >
-          Send Message via WhatsApp
+        {/* Simple safe button */}
+        <button type="submit" style={styles.submitBtn}>
+          Submit Enquiry
         </button>
+
+        {/* Show contact info manually */}
+        <p style={{ marginTop: "15px", fontSize: "14px" }}>
+          📞 Phone: +91 93477 19244
+        </p>
+
+        <p style={{ fontSize: "14px" }}>
+          📍 Hyderabad, India
+        </p>
       </form>
     </section>
   );
