@@ -1,38 +1,473 @@
-.App {
+
+
+
+body{
+  background: rgb(252, 253, 254);
+
+}
+html {
+  scroll-behavior: smooth;
+}
+.markets-container {
+  padding: 40px 30px;
+  background: #ffff;
+}
+
+.markets-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+
+.markets-slider {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 15px 5px;
+  scroll-behavior: smooth;
+  cursor: grab;
+}
+
+
+.markets-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.markets-slider {
+  scrollbar-width: none;
+}
+
+
+.market-card {
+  min-width: 260px;
+  height: 160px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  background: white;
+}
+
+
+.market-card:hover {
+  transform: scale(1.08);
+}
+
+
+.market-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ================= SERVICES BACKGROUND ================= */
+
+.services-section {
+  min-height: 90vh;
+  background: url("https://c.ndtvimg.com/2026-01/a9a75afa_beautiful-cryptocurrwncy-concept.jpg?im=FeatureCrop,algorithm=dnn,width=545,height=307")
+    center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Add these to your App.css if not already present */
+
+#imports-exports {
+    overflow-x: hidden; /* Prevents horizontal scroll during transitions */
+}
+
+.importExportCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.importExportCard img:hover {
+    transform: scale(1.1);
+}
+
+/* Ensure the breadcrumb is responsive */
+@media (max-width: 768px) {
+    #imports-exports h2 {
+        font-size: 22px;
+    }
+    
+    .sliderWrapper {
+        height: auto !important;
+        min-height: 500px;
+    }
+}
+
+.services-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  padding: 60px 30px;
+  color: #fff;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.services-title {
+  font-size: 36px;
+  margin-bottom: 40px;
+  animation: fadeDown 1s ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+
+.services-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+
+.service-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
+  transition: transform 0.4s;
+}
+
+.service-box:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+
+
+.fade-in {
+  animation: fadeIn 1.2s ease;
+}
+
+.slide-up {
+  animation: slideUp 1.2s ease;
+}
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+/* ================= RESPONSIVE DESIGN ================= */
+
+/* Tablets & Small Laptops */
+@media (max-width: 1024px) {
+
+  .markets-title {
+    font-size: 24px;
+  }
+
+  .services-title {
+    font-size: 30px;
+  }
+
+  .service-box {
+    padding: 20px;
+  }
+
+}
+
+
+
+
+
+/* ================= MOBILE NAV ================= */
+
+@media (max-width: 768px) {
+
+  header nav {
+    display: none !important;
+  }
+
+  header nav[style*="flex"] {
+    display: flex !important;
+  }
+
+  .hamburger {
+  
+font-size: 32px;
+    position: relative;
+    right: 0;
+    width: auto;
+  }
+
+  a {
+    margin: 12px 0 !important;
+    font-size: 18px;
+body{
+  background: rgb(252, 253, 254);
+
+}
+html {
+  scroll-behavior: smooth;
+}
+.markets-container {
+  padding: 40px 30px;
+  background: #ffff;
+}
+
+.markets-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+
+.markets-slider {
   display: flex;
-  flex-direction: column;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 15px 5px;
+  scroll-behavior: smooth;
+  cursor: grab;
+}
+
+
+.markets-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.markets-slider {
+  scrollbar-width: none;
+}
+
+
+.market-card {
+  min-width: 260px;
+  height: 160px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  background: white;
+}
+
+
+.market-card:hover {
+  transform: scale(1.08);
+}
+
+
+.market-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ================= SERVICES BACKGROUND ================= */
+
+.services-section {
+  min-height: 90vh;
+  background: url("https://c.ndtvimg.com/2026-01/a9a75afa_beautiful-cryptocurrwncy-concept.jpg?im=FeatureCrop,algorithm=dnn,width=545,height=307")
+    center/cover no-repeat;
+  position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+
+.services-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  padding: 60px 30px;
+  color: #fff;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
+
+.services-title {
+  font-size: 36px;
+  margin-bottom: 40px;
+  animation: fadeDown 1s ease;
+}
+
+
+.services-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+
+.service-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
+  transition: transform 0.4s;
+}
+
+.service-box:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+
+
+.fade-in {
+  animation: fadeIn 1.2s ease;
+}
+
+.slide-up {
+  animation: slideUp 1.2s ease;
+}
+
+
+
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(20px);
   }
+
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+/* ================= RESPONSIVE DESIGN ================= */
+
+/* Tablets & Small Laptops */
+@media (max-width: 1024px) {
+
+  .markets-title {
+    font-size: 24px;
+  }
+
+  .services-title {
+    font-size: 30px;
+  }
+
+  .service-box {
+    padding: 20px;
+  }
+
+}
+
+
+
+
+
+/* ================= MOBILE NAV ================= */
+
+@media (max-width: 768px) {
+
+  header nav {
+    display: none !important;
+  }
+
+  header nav[style*="flex"] {
+    display: flex !important;
+  }
+
+  .hamburger {
+  
+font-size: 32px;
+    position: relative;
+    right: 0;
+    width: auto;
+  }
+
+  a {
+    margin: 12px 0 !important;
+    font-size: 18px;
+  }
+
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  }
+
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
