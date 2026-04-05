@@ -14,31 +14,43 @@ const Navbar = ({ setActiveSlide, setPath }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleNavClick = (target, slideIndex = null, breadcrumb = null) => {
-    setMenuOpen(false);
+  // const handleNavClick = (target, slideIndex = null, breadcrumb = null) => {
+  //   setMenuOpen(false);
 
-    if (window.location.pathname === "/imports-exports" && slideIndex !== null) {
-      setActiveSlide(slideIndex);
-      if (breadcrumb) setPath(breadcrumb);
-      return;
-    }
-
-    if (slideIndex !== null) {
-      navigate("/imports-exports");
-      setTimeout(() => {
-        if (setActiveSlide) setActiveSlide(slideIndex);
-        if (breadcrumb && setPath) setPath(breadcrumb);
-      }, 100);
-    } else {
-      navigate("/");
-      setTimeout(() => {
-        const element = document.getElementById(target);
-        if (element) element.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    }
-  };
+  //   if (window.location.pathname === "/imports-exports" && slideIndex !== null) {
+  //     setActiveSlide(slideIndex);
+  //     if (breadcrumb) setPath(breadcrumb);
+  //     return;
+  //   }
+                 
+  //   if (slideIndex !== null) {
+  //     navigate("/imports-exports");
+  //     setTimeout(() => {
+  //       if (setActiveSlide) setActiveSlide(slideIndex);
+  //       if (breadcrumb && setPath) setPath(breadcrumb);
+  //     }, 100);
+  //   } else {
+  //     navigate("/");
+  //     setTimeout(() => {
+  //       const element = document.getElementById(target);
+  //       if (element) element.scrollIntoView({ behavior: "smooth" });
+  //     }, 100);
+  //   }
+  // };
 
   // Helper to handle the hover state for inline styles
+  
+  const handleNavClick = (target, slideIndex = null, breadcrumb = null) => {
+  setMenuOpen(false);
+
+  if (slideIndex !== null) {
+    // Navigate to Imports/Exports page with state
+    navigate("/imports-exports", { state: { slideIndex, breadcrumb } });
+  } else {
+    // Navigate to homepage with scroll target
+    navigate("/", { state: { scrollTo: target } });
+  }
+};
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const navItems = [
