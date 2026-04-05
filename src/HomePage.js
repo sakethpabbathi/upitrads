@@ -18,7 +18,7 @@ const TradingHome = () => {
         setActiveSlide={setActiveSlide} 
       />
       <AboutSection />
-      {/* <ContactSection /> */}
+      <ContactSection />
       <Footer />
     </div>
   );
@@ -212,7 +212,25 @@ const AboutSection = () => {
   );
 };
 
+const ContactSection = () => (
+  <section id="contact" style={styles.contactSection}>
+    <h2 style={styles.sectionTitle}>Contact Us</h2>
 
+    <form style={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
+      <input type="text" placeholder="Your Name" style={styles.input} required />
+      <input type="tel" placeholder="Mobile Number" style={styles.input} required />
+      <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
+
+      <button type="submit" style={styles.submitBtn}>
+        Submit
+      </button>
+    </form>
+
+    <p style={{ marginTop: "15px", color: "#555" }}>
+      We will contact you soon.
+    </p>
+  </section>
+);
 
 
 const Footer = () => (
