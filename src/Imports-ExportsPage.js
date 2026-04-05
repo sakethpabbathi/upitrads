@@ -264,8 +264,8 @@ const Footer = () => {
       <div style={styles.footerTop}>
         <span>UPIN TRADING CORPORATION</span>
         <span>📍 Hyderabad, India</span>
-        <span>📧 upintrad@123.com</span>
-        <span>📞 +91 93477 19244</span>
+        {/* <span>📧 upintrad@123.com</span>
+        <span>📞 +91 93477 19244</span> */}
       </div>
       <p style={styles.footerBottom}>
         © 2026 UPIN Tradeing Corporation. All Rights Reserved.
