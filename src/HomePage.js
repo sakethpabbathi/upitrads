@@ -18,7 +18,7 @@ const TradingHome = () => {
         setActiveSlide={setActiveSlide} 
       />
       <AboutSection />
-      <ContactSection />
+      {/* <ContactSection /> */}
       <Footer />
     </div>
   );
@@ -214,34 +214,7 @@ const AboutSection = () => {
 
 
 
-const ContactSection = () => {
-  return (
-    <section id="contact" style={styles.contactSection}>
-      <h2 style={styles.sectionTitle}>Contact Us</h2>
 
-      <form
-        style={styles.contactForm}
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <input type="text" placeholder="Your Name" style={styles.input} required />
-        <input type="tel" placeholder="Mobile Number" style={styles.input} required />
-        <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
-
-        {/* Simple safe button */}
-        <button type="submit" style={styles.submitBtn}>
-          Submit Enquiry
-        </button>
-
-        {/* Show contact info manually */}
-       
-
-        <p style={{ fontSize: "14px" }}>
-          📍 Hyderabad, India
-        </p>
-      </form>
-    </section>
-  );
-};
 const Footer = () => (
   <footer style={styles.footer}>
     <div style={styles.footerTop}>
