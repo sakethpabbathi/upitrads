@@ -17,7 +17,7 @@ const TradingHome = () => {
         setActiveSlide={setActiveSlide} 
       />
       <AboutSection />
-      <ContactSection />
+      {/* <ContactSection /> */}
       <Footer />
     </div>
   );
@@ -217,58 +217,6 @@ const AboutSection = () => {
   );
 };
 
-const ContactSection = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you! Our team will contact you shortly.");
-  };
-
-  return (
-    <section id="contact" style={styles.contactSection}>
-      <h2 style={styles.sectionTitle}>Contact Us</h2>
-
-      {/* ✅ Trust Message */}
-      <p style={{ color: "#555", marginBottom: "20px" }}>
-        Have questions about our products or services? Get in touch with us.
-      </p>
-
-      <form style={styles.contactForm} onSubmit={handleSubmit}>
-        
-        <input
-          type="text"
-          placeholder="Your Name"
-          style={styles.input}
-          required
-        />
-
-        <input
-          type="tel"
-          placeholder="Mobile Number"
-          style={styles.input}
-          pattern="[0-9]{10}"
-          title="Please enter a valid 10-digit mobile number"
-          required
-        />
-
-        <textarea
-          placeholder="Your Message"
-          rows="4"
-          style={styles.textarea}
-        ></textarea>
-
-        <button type="submit" style={styles.submitBtn}>
-          Submit
-        </button>
-      </form>
-
-      {/* ✅ Privacy + Trust */}
-      <p style={{ marginTop: "15px", fontSize: "13px", color: "#777" }}>
-        🔒 Your information is सुरक्षित (safe) and will only be used to contact you.
-      </p>
-
-    </section>
-  );
-};
 
 const Footer = () => (
   <footer style={styles.footer}>
