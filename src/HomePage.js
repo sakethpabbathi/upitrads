@@ -18,7 +18,7 @@ const TradingHome = () => {
         setActiveSlide={setActiveSlide} 
       />
       <AboutSection />
-      {/* <ContactSection /> */}
+      <ContactSection />
       <Footer />
     </div>
   );
@@ -158,22 +158,27 @@ const SubHeader = () => {
 };
 
 const ImportExportSection = () => {
-  const navigate = useNavigate();
-  const handleImportClick = () => navigate("/imports-exports");
-  const handleExportClick = () => navigate("/imports-exports");
+
+  const handleImportClick = () => {
+    document.getElementById("imports-exports")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleExportClick = () => {
+    document.getElementById("imports-exports")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section id="imports-exports" style={styles.importExportSection}>
       <h2 style={styles.sectionTitle}>Imports & Exports</h2>
+
       <div style={styles.gridContainer}>
         <div style={styles.importExportCard} onClick={handleImportClick}>
           <div style={styles.imageWrapper}>
-            
             <img
-  src={process.env.PUBLIC_URL + "/fishone.jpg"}
-  style={styles.importExportImg}
-  alt="Imports"
-/>
+              src={process.env.PUBLIC_URL + "/fishone.jpg"}
+              style={styles.importExportImg}
+              alt="Imports"
+            />
           </div>
           <div style={styles.cardContent}>
             <h3>Imports</h3>
@@ -184,7 +189,7 @@ const ImportExportSection = () => {
         <div style={styles.importExportCard} onClick={handleExportClick}>
           <div style={styles.imageWrapper}>
             <img
-             src={process.env.PUBLIC_URL + "/fishone.jpg"}
+              src={process.env.PUBLIC_URL + "/fishone.jpg"}
               style={styles.importExportImg}
               alt="Exports"
             />
@@ -198,55 +203,104 @@ const ImportExportSection = () => {
     </section>
   );
 };
-
 const AboutSection = () => {
   return (
     <section id="about" style={styles.aboutSection}>
       <h2 style={styles.sectionTitle}>About Us</h2>
       <p style={styles.aboutText}>
-        UPIN Trading Corporation is a trusted name in imports and exports...specializing in high-quality seafood, aquaculture feed, and industrial
-         solutions. We are committed to delivering premium products and reliable
-         services to customers across the globe.
+       UPIN Trading Corporation is a Hyderabad-based import and export company 
+  specializing in premium seafood, aquaculture feed, and industrial solutions. 
+  We work with trusted suppliers and clients across India and international markets, 
+  ensuring quality, reliability, and long-term business relationships.
       </p>
     </section>
   );
 };
 
-const ContactSection = () => (
-  <section id="contact" style={styles.contactSection}>
-    <h2 style={styles.sectionTitle}>Contact Us</h2>
+const ContactSection = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Thank you! Our team will contact you shortly.");
+  };
 
-    <form style={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
-      <input type="text" placeholder="Your Name" style={styles.input} required />
-      <input type="tel" placeholder="Mobile Number" style={styles.input} required />
-      <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
+  return (
+    <section id="contact" style={styles.contactSection}>
+      <h2 style={styles.sectionTitle}>Contact Us</h2>
 
-      <button type="submit" style={styles.submitBtn}>
-        Submit
-      </button>
-    </form>
+      {/* ✅ Trust Message */}
+      <p style={{ color: "#555", marginBottom: "20px" }}>
+        Have questions about our products or services? Get in touch with us.
+      </p>
 
-    <p style={{ marginTop: "15px", color: "#555" }}>
-      We will contact you soon.
-    </p>
-  </section>
-);
+      <form style={styles.contactForm} onSubmit={handleSubmit}>
+        
+        <input
+          type="text"
+          placeholder="Your Name"
+          style={styles.input}
+          required
+        />
 
+        <input
+          type="tel"
+          placeholder="Mobile Number"
+          style={styles.input}
+          pattern="[0-9]{10}"
+          title="Please enter a valid 10-digit mobile number"
+          required
+        />
+
+        <textarea
+          placeholder="Your Message"
+          rows="4"
+          style={styles.textarea}
+        ></textarea>
+
+        <button type="submit" style={styles.submitBtn}>
+          Submit
+        </button>
+      </form>
+
+      {/* ✅ Privacy + Trust */}
+      <p style={{ marginTop: "15px", fontSize: "13px", color: "#777" }}>
+        🔒 Your information is सुरक्षित (safe) and will only be used to contact you.
+      </p>
+
+    </section>
+  );
+};
 
 const Footer = () => (
   <footer style={styles.footer}>
     <div style={styles.footerTop}>
-        <span>UPIN TRADING CORPORATION</span>
-        <span>📍 Hyderabad, India</span>
-        {/* <span>📧 upintrad@123.com</span>
-        <span>📞 +91 93477 19244</span> */}
-      </div>
-      <p style={styles.footerBottom}>
-        © 2026 UPIN Tradeing Corporation. All Rights Reserved.
-      </p>
+      <span>UPIN TRADING CORPORATION</span>
+      <span>📍 Hyderabad, Telangana, India</span>
+
+      <span>
+        📞 <a href="tel:+919347719244" style={{ color: "#fff" }}>
+          +91 93477 19244
+        </a>
+      </span>
+
+      <span>
+        💬 <a
+          href="https://wa.me/919347719244"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#25D366" }}
+        >
+          WhatsApp Us
+        </a>
+      </span>
+
+      <span>📧 support@upintrading.com</span>
+    </div>
+
+    <p style={styles.footerBottom}>
+      © 2026 UPIN Trading Corporation. All Rights Reserved.
+    </p>
   </footer>
 );
-
 
 const styles = {
   app: { 

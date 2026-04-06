@@ -328,17 +328,35 @@ const Footer = () => {
     <footer id="contact" style={styles.footer}>
       <div style={styles.footerTop}>
         <span>UPIN TRADING CORPORATION</span>
-        <span>📍 Hyderabad, India</span>
-        <span>📧 pabbathisaketh123@gmail.com</span>
-        <span>📞 +91 93477 19244</span>
+
+        <span>📍 Hyderabad, Telangana, India</span>
+
+        <span>
+          📞 <a href="tel:+919347719244" style={{ color: "#fff" }}>
+            +91 93477 19244
+          </a>
+        </span>
+
+        <span>
+          💬 <a
+            href="https://wa.me/919347719244"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#25D366" }}
+          >
+            WhatsApp Us
+          </a>
+        </span>
+
+        <span>📧 support@upintrading.com</span>
       </div>
+
       <p style={styles.footerBottom}>
-        © 2026 UPIN Tradeing Corporation. All Rights Reserved.
+        © 2026 UPIN Trading Corporation. All Rights Reserved.
       </p>
     </footer>
   );
 };
-
 // --- STYLES ---
 const navStyles = {
   header: {
