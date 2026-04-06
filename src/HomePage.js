@@ -3,7 +3,6 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 
 import ScrollToTop from "./ScrollToTop";
-import { useNavigate } from "react-router-dom";
 
 const TradingHome = () => {
   const [activeSlide, setActiveSlide] = useState(0); 

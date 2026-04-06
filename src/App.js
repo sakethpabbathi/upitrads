@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import HomePage from "./HomePage";
-import ImportsExportsPage from "./Imports-ExportsPage";
+import ImportsExportsPage from "./ImportsExportsPage";
 import React from "react";
 import ScrollToTop from "./ScrollToTop";
 
