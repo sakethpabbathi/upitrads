@@ -156,8 +156,8 @@ const SubHeader = () => {
   );
 };
 
-const ImportExportSection = () => {
-
+// const ImportExportSection = () => {
+const ImportExportSection = ({ activeSlide, setActiveSlide }) => {
   const handleImportClick = () => {
     document.getElementById("imports-exports")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -351,6 +351,4 @@ footerBottom: {
   
 };
 
-export default TradingHome;// test change
-// update
-// change
+export default TradingHome;
