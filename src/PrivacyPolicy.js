@@ -27,7 +27,7 @@ const PrivacyPolicy = () => {
 
       <h3>Contact Us</h3>
       <p>
-        If you have any questions, contact us at support@upintrading.com
+        If you have any questions, contact us at sakethpabbathi@gmail.com
       </p>
     </div>
   );

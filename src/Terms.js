@@ -21,7 +21,7 @@ const Terms = () => {
 
       <h3>Contact</h3>
       <p>
-        For queries, contact support@upintrading.com
+        For queries, contact sakethpabbathi@gmail.com
       </p>
     </div>
   );

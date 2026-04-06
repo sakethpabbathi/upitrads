@@ -3,6 +3,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 
 import ScrollToTop from "./ScrollToTop";
+import { useNavigate } from "react-router-dom";
 
 const TradingHome = () => {
   const [activeSlide, setActiveSlide] = useState(0); 
@@ -18,7 +19,7 @@ const TradingHome = () => {
       />
       <AboutSection />
       {/* <ContactSection /> */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
@@ -156,28 +157,23 @@ const SubHeader = () => {
   );
 };
 
-// const ImportExportSection = () => {
-const ImportExportSection = ({ activeSlide, setActiveSlide }) => {
-  const handleImportClick = () => {
-    document.getElementById("imports-exports")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleExportClick = () => {
-    document.getElementById("imports-exports")?.scrollIntoView({ behavior: "smooth" });
-  };
+const ImportExportSection = () => {
+  const navigate = useNavigate();
+  const handleImportClick = () => navigate("/imports-exports");
+  const handleExportClick = () => navigate("/imports-exports");
 
   return (
     <section id="imports-exports" style={styles.importExportSection}>
       <h2 style={styles.sectionTitle}>Imports & Exports</h2>
-
       <div style={styles.gridContainer}>
         <div style={styles.importExportCard} onClick={handleImportClick}>
           <div style={styles.imageWrapper}>
+            
             <img
-              src={process.env.PUBLIC_URL + "/fishone.jpg"}
-              style={styles.importExportImg}
-              alt="Imports"
-            />
+  src={process.env.PUBLIC_URL + "/fishone.jpg"}
+  style={styles.importExportImg}
+  alt="Imports"
+/>
           </div>
           <div style={styles.cardContent}>
             <h3>Imports</h3>
@@ -188,7 +184,7 @@ const ImportExportSection = ({ activeSlide, setActiveSlide }) => {
         <div style={styles.importExportCard} onClick={handleExportClick}>
           <div style={styles.imageWrapper}>
             <img
-              src={process.env.PUBLIC_URL + "/fishone.jpg"}
+             src={process.env.PUBLIC_URL + "/fishone.jpg"}
               style={styles.importExportImg}
               alt="Exports"
             />
@@ -208,16 +204,53 @@ const AboutSection = () => {
     <section id="about" style={styles.aboutSection}>
       <h2 style={styles.sectionTitle}>About Us</h2>
       <p style={styles.aboutText}>
-       UPIN Trading Corporation is a Hyderabad-based import and export company 
-  specializing in premium seafood, aquaculture feed, and industrial solutions. 
-  We work with trusted suppliers and clients across India and international markets, 
-  ensuring quality, reliability, and long-term business relationships.
+        UPIN Trading Corporation is a trusted name in imports and exports...specializing in high-quality seafood, aquaculture feed, and industrial
+         solutions. We are committed to delivering premium products and reliable
+         services to customers across the globe.
       </p>
     </section>
   );
 };
 
+const ContactSection = () => (
+  <section id="contact" style={styles.contactSection}>
+    <h2 style={styles.sectionTitle}>Contact Us</h2>
 
+    <form style={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
+      <input type="text" placeholder="Your Name" style={styles.input} required />
+      <input type="tel" placeholder="Mobile Number" style={styles.input} required />
+      <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
+
+      <button type="submit" style={styles.submitBtn}>
+        Submit
+      </button>
+    </form>
+
+    <p style={{ marginTop: "15px", color: "#555" }}>
+      We will contact you soon.
+    </p>
+  </section>
+);
+
+
+const Footer = () => (
+  <footer id="contact" style={styles.footer}>
+    <div style={styles.footerTop}>
+      <span><strong>UPIN TRADING CORPORATION</strong></span>
+      <span>📍 Hyderabad, Telangana, India</span>
+      <span>
+        📧 <a href="mailto:sakethpabbathi@gmail.com" style={{ color: "#fff", textDecoration: "none" }}>sakethpabbathi@gmail.com</a>
+      </span>
+      <span>
+        💬 <a href="https://wa.me/919347719244" target="_blank" style={{ color: "#25D366", textDecoration: "none" }}>WhatsApp Us</a>
+      </span>
+    </div>
+    <div style={{ marginTop: "15px", fontSize: "12px", opacity: 0.7 }}>
+      <p>© 2026 UPIN Trading Corporation. Official Business Site.</p>
+      <p>We do not collect or store sensitive personal data or passwords.</p>
+    </div>
+  </footer>
+);
 
 const styles = {
   app: { 
