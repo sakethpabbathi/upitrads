@@ -9,37 +9,21 @@ const Navbar = ({ setActiveSlide, setPath }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
 
+const navItems = [
+    { label: "Home", target: "home" },
+    { label: "Import", target: "imports-exports" }, 
+    { label: "Export", target: "imports-exports" }, 
+    { label: "About us", target: "about" },
+    { label: "Contact", target: "contact" },
+  ];
+
+  
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // const handleNavClick = (target, slideIndex = null, breadcrumb = null) => {
-  //   setMenuOpen(false);
-
-  //   if (window.location.pathname === "/imports-exports" && slideIndex !== null) {
-  //     setActiveSlide(slideIndex);
-  //     if (breadcrumb) setPath(breadcrumb);
-  //     return;
-  //   }
-                 
-  //   if (slideIndex !== null) {
-  //     navigate("/imports-exports");
-  //     setTimeout(() => {
-  //       if (setActiveSlide) setActiveSlide(slideIndex);
-  //       if (breadcrumb && setPath) setPath(breadcrumb);
-  //     }, 100);
-  //   } else {
-  //     navigate("/");
-  //     setTimeout(() => {
-  //       const element = document.getElementById(target);
-  //       if (element) element.scrollIntoView({ behavior: "smooth" });
-  //     }, 100);
-  //   }
-  // };
-
-  // Helper to handle the hover state for inline styles
   
   const handleNavClick = (target, slideIndex = null, breadcrumb = null) => {
   setMenuOpen(false);
@@ -54,23 +38,8 @@ const Navbar = ({ setActiveSlide, setPath }) => {
 };
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  // const navItems = [
-  //   { label: "Home", target: "home" },
-  //   { label: "Import", target: "imports-exports", slide: 1, path: ["Imports"] },
-  //   { label: "Export", target: "imports-exports", slide: 6, path: ["Exports"] },
-  //   { label: "About us", target: "about" },
-  //   { label: "Contact", target: "contact" },
-  // ];
 
-const navItems = [
-    { label: "Home", target: "home" },
-    // Changed these to target sections on the Homepage
-    { label: "Import", target: "imports-exports" }, 
-    { label: "Export", target: "imports-exports" }, 
-    { label: "About us", target: "about" },
-    { label: "Contact", target: "contact" },
-  ];
-  
+
   return (
     <header style={navStyles.header}>
       <div style={navStyles.headerInner}>
@@ -116,27 +85,6 @@ const navItems = [
   );
 };
 
-// --- MAIN PAGE COMPONENT ---
-// const ImportsExportsPage = () => {
-//   const [activeSlide, setActiveSlide] = useState(0);
-//   const [path, setPath] = useState(["Imports & Exports"]);
-//   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-//   useEffect(() => {
-//     const handleResize = () => setIsMobile(window.innerWidth <= 768);
-//     window.addEventListener("resize", handleResize);
-//     return () => window.removeEventListener("resize", handleResize);
-//   }, []);
-
-//   const handleBreadcrumbClick = (index) => {
-//     const newPath = path.slice(0, index + 1);
-//     setPath(newPath);
-//     if (newPath.length === 1) setActiveSlide(0); 
-//     if (newPath.length === 2) {
-//       if (newPath[0] === "Imports") setActiveSlide(1);
-//       if (newPath[0] === "Exports") setActiveSlide(6);
-//     }
-//   };
 
 
 const ImportsExportsPage = () => {

@@ -25,6 +25,7 @@ const TradingHome = () => {
 };
 
 const Header = ({ setActiveSlide }) => {
+  const navigate = useNavigate(); 
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   // Track which link is being hovered
@@ -38,14 +39,13 @@ const Header = ({ setActiveSlide }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const navLinks = [
-    { name: "Home", href: "#home", type: "scroll" },
-    { name: "Import", href: "#imports-exports", type: "slide", value: 1 },
-    { name: "Export", href: "#imports-exports", type: "slide", value: 6 },
-    { name: "About us", href: "#about", type: "scroll" },
-    { name: "Contact", href: "#contact", type: "scroll" },
-  ];
-
+const navLinks = [
+  { name: "Home", action: () => navigate("/") },
+  { name: "Import", action: () => navigate("/imports-exports") },
+  { name: "Export", action: () => navigate("/imports-exports") },
+  { name: "About us", action: () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }) },
+  { name: "Contact", action: () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }) },
+];
   return (
     <header style={styles.header}>
       <div style={styles.headerInner}>
@@ -160,7 +160,7 @@ const SubHeader = () => {
 const ImportExportSection = () => {
   const navigate = useNavigate();
   const handleImportClick = () => navigate("/imports-exports");
-  const handleExportClick = () => navigate("/imports-exports");
+const handleExportClick = () => navigate("/imports-exports");
 
   return (
     <section id="imports-exports" style={styles.importExportSection}>
