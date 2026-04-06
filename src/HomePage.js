@@ -433,4 +433,4 @@ footerBottom: {
   
 };
 
-export default TradingHome;
+export default TradingHome;// test change
