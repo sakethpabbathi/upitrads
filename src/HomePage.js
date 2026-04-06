@@ -434,3 +434,4 @@ footerBottom: {
 };
 
 export default TradingHome;// test change
+// update
