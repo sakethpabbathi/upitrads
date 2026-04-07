@@ -384,7 +384,7 @@ const styles = {
     maxWidth: "1200px",
     margin: "0 auto",
   },
-  logoImg: { height: "50px", width: "170px", cursor: "pointer" },
+  logoImg: { height: "50px", width: "170px", cursor: "pointer",marginLeft: "-50px" },
   nav: { display: "flex", alignItems: "center", gap: "20px" },
   navLink: {
     color: "#1a365d",
