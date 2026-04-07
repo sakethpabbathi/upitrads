@@ -153,79 +153,137 @@ const ImportsExportsPage = () => {
   };
 
 
-const renderCard = (title, description, onClickAction, imgOverride = null) => {
-    const isHovered = hoveredCard === title;
-    const cardImg = imgOverride || commonImg;
+// const renderCard = (title, description, onClickAction, imgOverride = null) => {
+//     const isHovered = hoveredCard === title;
+//     const cardImg = imgOverride || commonImg;
 
-    return (
-      <div
-        key={title}
-        onMouseEnter={() => setHoveredCard(title)}
-        onMouseLeave={() => setHoveredCard(null)}
-        onClick={onClickAction}
-        style={{
-          ...localStyles.importExportCard,
-          // Change to vertical stack on mobile
-          flexDirection: isMobile ? "column" : "row", 
-          // Adjust height for mobile to look more like a square/block
-          minHeight: isMobile ? "350px" : "180px",
-          transform: isHovered ? "scale(1.02)" : "scale(1)",
-          boxShadow: isHovered ? "0 12px 30px rgba(0,0,0,0.15)" : localStyles.importExportCard.boxShadow,
-          borderColor: isHovered ? "#00b4d8" : "#f0f0f0",
-        }}
-      >
-        <div style={{
-          ...localStyles.imageWrapper,
-          width: isMobile ? "100%" : "250px", // Full width on mobile
-          height: isMobile ? "200px" : "180px", // Fixed height on mobile
-        }}>
-          <img
-            src={cardImg}
-            style={{
-              ...localStyles.importExportImg,
-              transform: isHovered ? "scale(1.1)" : "scale(1)",
-            }}
-            alt={title}
-          />
-        </div>
+//     return (
+//       <div
+//         key={title}
+//         onMouseEnter={() => setHoveredCard(title)}
+//         onMouseLeave={() => setHoveredCard(null)}
+//         onClick={onClickAction}
+//         style={{
+//           ...localStyles.importExportCard,
+//           // Change to vertical stack on mobile
+//           flexDirection: isMobile ? "column" : "row", 
+//           // Adjust height for mobile to look more like a square/block
+//           minHeight: isMobile ? "350px" : "180px",
+//           transform: isHovered ? "scale(1.02)" : "scale(1)",
+//           boxShadow: isHovered ? "0 12px 30px rgba(0,0,0,0.15)" : localStyles.importExportCard.boxShadow,
+//           borderColor: isHovered ? "#00b4d8" : "#f0f0f0",
+//         }}
+//       >
+//         <div style={{
+//           ...localStyles.imageWrapper,
+//           width: isMobile ? "100%" : "250px", // Full width on mobile
+//           height: isMobile ? "200px" : "180px", // Fixed height on mobile
+//         }}>
+//           <img
+//             src={cardImg}
+//             style={{
+//               ...localStyles.importExportImg,
+//               transform: isHovered ? "scale(1.1)" : "scale(1)",
+//             }}
+//             alt={title}
+//           />
+//         </div>
         
-        <div style={{
-          ...localStyles.cardContent,
-          textAlign: isMobile ? "center" : "left", // Center text on mobile
-          padding: isMobile ? "20px" : "30px",
-        }}>
-          <h3 style={{ margin: 0, color: "#0d1b2a", fontSize: isMobile ? "18px" : "22px" }}>
-            {title}
-          </h3>
-          {description && (
-            <p style={{
-              ...localStyles.cardText,
-              fontSize: isMobile ? "14px" : "16px"
-            }}>
-              {description}
-            </p>
-          )}
-        </div>
+//         <div style={{
+//           ...localStyles.cardContent,
+//           textAlign: isMobile ? "center" : "left", // Center text on mobile
+//           padding: isMobile ? "20px" : "30px",
+//         }}>
+//           <h3 style={{ margin: 0, color: "#0d1b2a", fontSize: isMobile ? "18px" : "22px" }}>
+//             {title}
+//           </h3>
+//           {description && (
+//             <p style={{
+//               ...localStyles.cardText,
+//               fontSize: isMobile ? "14px" : "16px"
+//             }}>
+//               {description}
+//             </p>
+//           )}
+//         </div>
 
-        {/* Arrow - Hidden on mobile if it feels too cluttered, or kept for UX */}
-        {!isMobile && (
-          <div style={{
-            position: "absolute",
-            bottom: "15px",
-            right: "20px",
-            fontSize: "24px",
-            color: "#00b4d8",
-            opacity: isHovered ? 1 : 0.5,
-            transition: "all 0.3s",
-            pointerEvents: "none",
-          }}>
-            &#8594;
-          </div>
-        )}
-      </div>
-    );
-  };
+//         {/* Arrow - Hidden on mobile if it feels too cluttered, or kept for UX */}
+//         {!isMobile && (
+//           <div style={{
+//             position: "absolute",
+//             bottom: "15px",
+//             right: "20px",
+//             fontSize: "24px",
+//             color: "#00b4d8",
+//             opacity: isHovered ? 1 : 0.5,
+//             transition: "all 0.3s",
+//             pointerEvents: "none",
+//           }}>
+//             &#8594;
+//           </div>
+//         )}
+//       </div>
+//     );
+//   };
   
+const renderCard = (title, description, onClickAction, imgOverride = null) => {
+  const isHovered = hoveredCard === title;
+  const cardImg = imgOverride || commonImg;
+
+  return (
+    <div
+      key={title}
+      onMouseEnter={() => setHoveredCard(title)}
+      onMouseLeave={() => setHoveredCard(null)}
+      onClick={onClickAction}
+      style={{
+        ...localStyles.importExportCard,
+        flexDirection: isMobile ? "column" : "row", 
+        minHeight: isMobile ? "350px" : "180px",
+        transform: isHovered ? "scale(1.02)" : "scale(1)",
+        boxShadow: isHovered ? "0 12px 30px rgba(0,0,0,0.15)" : localStyles.importExportCard.boxShadow,
+        borderColor: isHovered ? "#00b4d8" : "#f0f0f0",
+        position: "relative", // Ensure the arrow can be positioned absolutely
+      }}
+    >
+      {/* ... Image and Content Divs stay exactly the same ... */}
+      <div style={{
+        ...localStyles.imageWrapper,
+        width: isMobile ? "100%" : "250px",
+        height: isMobile ? "200px" : "180px",
+      }}>
+        <img src={cardImg} style={{...localStyles.importExportImg, transform: isHovered ? "scale(1.1)" : "scale(1)"}} alt={title} />
+      </div>
+      
+      <div style={{
+        ...localStyles.cardContent,
+        textAlign: isMobile ? "center" : "left",
+        padding: isMobile ? "20px" : "30px",
+        paddingBottom: isMobile ? "40px" : "30px", // Add space for the arrow on mobile
+      }}>
+        <h3 style={{ margin: 0, color: "#0d1b2a", fontSize: isMobile ? "18px" : "22px" }}>{title}</h3>
+        {description && <p style={{...localStyles.cardText, fontSize: isMobile ? "14px" : "16px"}}>{description}</p>}
+      </div>
+
+      {/* UPDATED ARROW LOGIC: Condition removed so it shows on mobile */}
+      <div style={{
+        position: "absolute",
+        bottom: isMobile ? "10px" : "15px", // Slightly closer to bottom on mobile
+        right: isMobile ? "50%" : "20px",    // Center it on mobile, keep right on desktop
+        transform: isMobile ? "translateX(50%)" : "none", // Perfect centering for mobile
+        fontSize: "24px",
+        color: "#00b4d8",
+        opacity: (isHovered || isMobile) ? 1 : 0.5, // Always visible on mobile for better UX
+        transition: "all 0.3s",
+        pointerEvents: "none",
+      }}>
+        &#8594;
+      </div>
+    </div>
+  );
+};
+
+
   return (
     <div style={localStyles.app}>
       <Navbar setActiveSlide={setActiveSlide} setPath={setPath} />

@@ -65,7 +65,8 @@ const navLinks = [
     // If desktop, keep your original -120px.
     marginLeft: isMobile ? "-45px" : "-120px", 
   }}
-  onClick={() => (window.location.href = "#home")}
+  // onClick={() => (window.location.href = "#")}
+  onClick={() => navigate("/")}
 />
 
         {isMobile && (
