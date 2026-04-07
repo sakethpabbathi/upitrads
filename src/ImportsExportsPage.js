@@ -150,81 +150,10 @@ const ImportsExportsPage = () => {
   const images = {
     feed: process.env.PUBLIC_URL + "/feedone.jpeg",
     hcp: process.env.PUBLIC_URL + "/hcp.jpeg",
+    fishfeed: process.env.PUBLIC_URL + "/fishfeeds.png",
+    prawnfeed: process.env.PUBLIC_URL + "/prawnfeed.jpg",
   };
 
-
-// const renderCard = (title, description, onClickAction, imgOverride = null) => {
-//     const isHovered = hoveredCard === title;
-//     const cardImg = imgOverride || commonImg;
-
-//     return (
-//       <div
-//         key={title}
-//         onMouseEnter={() => setHoveredCard(title)}
-//         onMouseLeave={() => setHoveredCard(null)}
-//         onClick={onClickAction}
-//         style={{
-//           ...localStyles.importExportCard,
-//           // Change to vertical stack on mobile
-//           flexDirection: isMobile ? "column" : "row", 
-//           // Adjust height for mobile to look more like a square/block
-//           minHeight: isMobile ? "350px" : "180px",
-//           transform: isHovered ? "scale(1.02)" : "scale(1)",
-//           boxShadow: isHovered ? "0 12px 30px rgba(0,0,0,0.15)" : localStyles.importExportCard.boxShadow,
-//           borderColor: isHovered ? "#00b4d8" : "#f0f0f0",
-//         }}
-//       >
-//         <div style={{
-//           ...localStyles.imageWrapper,
-//           width: isMobile ? "100%" : "250px", // Full width on mobile
-//           height: isMobile ? "200px" : "180px", // Fixed height on mobile
-//         }}>
-//           <img
-//             src={cardImg}
-//             style={{
-//               ...localStyles.importExportImg,
-//               transform: isHovered ? "scale(1.1)" : "scale(1)",
-//             }}
-//             alt={title}
-//           />
-//         </div>
-        
-//         <div style={{
-//           ...localStyles.cardContent,
-//           textAlign: isMobile ? "center" : "left", // Center text on mobile
-//           padding: isMobile ? "20px" : "30px",
-//         }}>
-//           <h3 style={{ margin: 0, color: "#0d1b2a", fontSize: isMobile ? "18px" : "22px" }}>
-//             {title}
-//           </h3>
-//           {description && (
-//             <p style={{
-//               ...localStyles.cardText,
-//               fontSize: isMobile ? "14px" : "16px"
-//             }}>
-//               {description}
-//             </p>
-//           )}
-//         </div>
-
-//         {/* Arrow - Hidden on mobile if it feels too cluttered, or kept for UX */}
-//         {!isMobile && (
-//           <div style={{
-//             position: "absolute",
-//             bottom: "15px",
-//             right: "20px",
-//             fontSize: "24px",
-//             color: "#00b4d8",
-//             opacity: isHovered ? 1 : 0.5,
-//             transition: "all 0.3s",
-//             pointerEvents: "none",
-//           }}>
-//             &#8594;
-//           </div>
-//         )}
-//       </div>
-//     );
-//   };
   
 const renderCard = (title, description, onClickAction, imgOverride = null) => {
   const isHovered = hoveredCard === title;
@@ -315,8 +244,8 @@ const renderCard = (title, description, onClickAction, imgOverride = null) => {
           </div>
 
           <div style={getSlideStyle(2)}>
-            {renderCard("Prawn Feed", "Optimized nutrition for various prawn species.", () => { setActiveSlide(7); setPath(["Imports", "Feed", "Prawn Feed"]); })}
-            {renderCard("Fish Feed", "Premium floating and sinking feed for fish farms.", () => { setActiveSlide(5); setPath(["Imports", "Feed", "Fish Feed"]); })}
+            {renderCard("Prawn Feed", "Optimized nutrition for various prawn species.", () => { setActiveSlide(7); setPath(["Imports", "Feed", "Prawn Feed"]); }, images.prawnfeed)}
+            {renderCard("Fish Feed", "Premium floating and sinking feed for fish farms.", () => { setActiveSlide(5); setPath(["Imports", "Feed", "Fish Feed"]); }, images.fishfeed)}
           </div>
 
           <div style={getSlideStyle(7)}>

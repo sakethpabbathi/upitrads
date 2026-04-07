@@ -39,13 +39,34 @@ const Header = ({ setActiveSlide }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+// const navLinks = [
+//   { name: "Home", action: () => navigate("/") },
+//   { name: "Import", action: () => navigate("/imports-exports") },
+//   { name: "Export", action: () => navigate("/imports-exports") },
+//   { name: "About us", action: () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }) },
+//   { name: "Contact", action: () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }) },
+// ];
+
 const navLinks = [
-  { name: "Home", action: () => navigate("/") },
-  { name: "Import", action: () => navigate("/imports-exports") },
-  { name: "Export", action: () => navigate("/imports-exports") },
-  { name: "About us", action: () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }) },
-  { name: "Contact", action: () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }) },
+  { name: "Home", action: () => window.scrollTo({ top: 0, behavior: "smooth" }) },
+  { 
+    name: "Import", 
+    action: () => document.getElementById("imports-exports")?.scrollIntoView({ behavior: "smooth" }) 
+  },
+  { 
+    name: "Export", 
+    action: () => document.getElementById("imports-exports")?.scrollIntoView({ behavior: "smooth" }) 
+  },
+  { 
+    name: "About us", 
+    action: () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }) 
+  },
+  { 
+    name: "Contact", 
+    action: () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }) 
+  },
 ];
+
   return (
     <header style={styles.header}>
       <div style={styles.headerInner}>
@@ -77,7 +98,7 @@ const navLinks = [
 
         {(!isMobile || menuOpen) && (
           <nav style={{ ...styles.nav, ...(isMobile ? styles.navOpen : {}) }}>
-            {navLinks.map((link) => (
+            {/* {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
@@ -100,7 +121,34 @@ const navLinks = [
               >
                 {link.name}
               </a>
-            ))}
+            ))} */}
+
+
+
+            {navLinks.map((link) => (
+  <a
+    key={link.name}
+    onMouseEnter={() => setHoveredLink(link.name)}
+    onMouseLeave={() => setHoveredLink(null)}
+    onClick={() => {
+      setMenuOpen(false); // Close mobile menu
+      link.action();      // This triggers the scroll or navigation
+    }}
+    style={{
+      ...styles.navLink,
+      backgroundImage: "linear-gradient(red, red)",
+      backgroundSize: hoveredLink === link.name ? "100% 2px" : "0% 2px",
+      backgroundPosition: "left bottom",
+      backgroundRepeat: "no-repeat",
+      transition: "background-size 0.3s ease",
+      paddingBottom: "5px",
+      display: "inline-block",
+      cursor: "pointer" // Add this to ensure it looks clickable
+    }}
+  >
+    {link.name}
+  </a>
+))}
           </nav>
         )}
       </div>
@@ -159,17 +207,60 @@ const Hero = () => {
   );
 };
 
+// const SubHeader = () => {
+//   return (
+//     <section style={styles.subHeader}>
+//       <div style={styles.subHeaderContent}>
+//         <h1>Trusted Global Supply<br></br>Fresh Seafood</h1>
+//         {/* <h1>Fresh Seafood</h1> */}
+//         <p>Premium Fish • Quality Prawns • Worldwide Export</p>
+//       </div>
+//     </section>
+//   );
+// };
+
 const SubHeader = () => {
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <section style={styles.subHeader}>
-      <div style={styles.subHeaderContent}>
-        <h1>Trusted Global Supply</h1>
-        <h1>Fresh Seafood</h1>
-        <p>Premium Fish • Quality Prawns • Worldwide Export</p>
+      <div style={{
+        ...styles.subHeaderInner,
+        flexDirection: isMobile ? "column" : "row"
+      }}>
+        {/* Left Image */}
+        {!isMobile && (
+          <img 
+            src={process.env.PUBLIC_URL + "/sunsetfishing.jpg"} 
+            alt="Seafood Left" 
+            style={styles.subHeaderSideImg} 
+          />
+        )}
+
+        <div style={styles.subHeaderContent}>
+          <h1 style={styles.subHeaderTitle}>
+            Trusted Global Supply<br />Fresh Seafood
+          </h1>
+          <p style={styles.subHeaderSubtitle}>
+            Premium Fish • Quality Prawns • Worldwide Export
+          </p>
+        </div>
+
+        {/* Right Image */}
+        <img 
+          src={process.env.PUBLIC_URL + "/sunsetfishing.jpg"} 
+          alt="Seafood Right" 
+          style={{
+            ...styles.subHeaderSideImg,
+            marginTop: isMobile ? "20px" : "0"
+          }} 
+        />
       </div>
     </section>
   );
 };
+
+
 
 const ImportExportSection = () => {
   const navigate = useNavigate();
@@ -195,7 +286,7 @@ const handleExportClick = () =>
           <div style={styles.imageWrapper}>
             
             <img
-  src={process.env.PUBLIC_URL + "/fishone.jpg"}
+  src={process.env.PUBLIC_URL + "/import.jpg"}
   style={styles.importExportImg}
   alt="Imports"
 />
@@ -209,7 +300,7 @@ const handleExportClick = () =>
         <div style={styles.importExportCard} onClick={handleExportClick}>
           <div style={styles.imageWrapper}>
             <img
-             src={process.env.PUBLIC_URL + "/fishone.jpg"}
+             src={process.env.PUBLIC_URL + "/SeafoodExport.jpg"}
               style={styles.importExportImg}
               alt="Exports"
             />
@@ -236,9 +327,6 @@ const AboutSection = () => {
     </section>
   );
 };
-
-
-
 
 const ContactSection = () => {
 
@@ -425,14 +513,58 @@ logoImg: {
   heroMobile: { height: "30vh" },
   heroImg: { position: "absolute", width: "100%", height: "100%", objectFit: "cover", transition: "1s" },
   heroImgMobile: { objectFit: "contain" },
+  // subHeader: { 
+  //   padding: "80px 20px", 
+  //   textAlign: "center",
+  //   // Transition from white to a very light "seafoam" blue
+  //   background: "linear-gradient(180deg, #ffffff 0%, #e0f2f1 100%)",
+  //   borderBottom: "1px solid #b2dfdb"
+  // },
+
   subHeader: { 
-    padding: "80px 20px", 
-    textAlign: "center",
-    // Transition from white to a very light "seafoam" blue
+    padding: "60px 20px", 
     background: "linear-gradient(180deg, #ffffff 0%, #e0f2f1 100%)",
-    borderBottom: "1px solid #b2dfdb"
+    borderBottom: "1px solid #b2dfdb",
+    display: "flex",
+    justifyContent: "center"
   },
-  subHeaderContent: { maxWidth: "800px", margin: "0 auto" },
+  subHeaderInner: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    maxWidth: "1200px",
+    gap: "40px",
+    width: "100%"
+  },
+  
+subHeaderContent: { 
+    flex: 1,
+    textAlign: "center" 
+  },
+
+  subHeaderTitle: {
+    fontSize: "2.5rem",
+    color: "#023e8a",
+    margin: "0 0 10px 0",
+    lineHeight: "1.2"
+  },
+
+  subHeaderSubtitle: {
+    fontSize: "1.1rem",
+    color: "#4a5568",
+    fontWeight: "500"
+  },
+
+  subHeaderSideImg: {
+    width: "200px",      // Adjust size as needed
+    height: "150px",
+    borderRadius: "15px",
+    objectFit: "cover",
+    boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
+    border: "3px solid #fff"
+  },
+  
+  // subHeaderContent: { maxWidth: "800px", margin: "0 auto" },
   importExportSection: { 
     padding: "70px 20px", 
     textAlign: "center",
