@@ -271,64 +271,20 @@ const commonImg = process.env.PUBLIC_URL + "/fishone.jpg";
   );
 };
 
-const Footer = () => {
-  return (
-    <footer id="contact" style={styles.footer}>
-      <div style={styles.footerTop}>
+const Footer = () => (
+  <footer style={styles.footer}>
+    <div style={styles.footerTop}>
         <span>UPIN TRADING CORPORATION</span>
-
-        <span>📍 Hyderabad, Telangana, India</span>
-
-        <span>
-          📞 <a href="tel:+919347719244" style={{ color: "#fff" }}>
-            +91 93477 19244
-          </a>
-        </span>
-
-        <span>
-          💬 <a
-            href="https://api.whatsapp.com/send?phone=919347719244&text=Hello%20UPIN%20Trading"
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            style={{ color: "#25D366" }}
-          >
-            WhatsApp Us
-          </a>
-        </span>
-
-        <span>
-          📧 <a href="mailto:sakethpabbathi@gmail.com" style={{ color: "#fff" }}>
-            sakethpabbathi@gmail.com
-          </a>
-        </span>
-
-        {/* ✅ Add these links */}
-        <span>
-          📄 <a href="/privacy-policy" style={{ color: "#fff" }}>
-            Privacy Policy
-          </a>
-        </span>
-
-        <span>
-          📜 <a href="/terms" style={{ color: "#fff" }}>
-            Terms & Conditions
-          </a>
-        </span>
+        <span>📍 Hyderabad, India</span>
+        {/* <span>📧 upintrad@123.com</span>
+        <span>📞 +91 93477 19244</span> */}
       </div>
-
       <p style={styles.footerBottom}>
-        © 2026 UPIN Trading Corporation. All Rights Reserved.
+        © 2026 UPIN Tradeing Corporation. All Rights Reserved.
       </p>
+  </footer>
+);
 
-      {/* ✅ VERY IMPORTANT TRUST TEXT */}
-      <p style={{ fontSize: "12px", marginTop: "8px", opacity: 0.8 }}>
-        This is the official website of UPIN Trading Corporation, Hyderabad, India.
-        We provide import and export services for seafood and aquaculture products.
-        We do not collect sensitive personal data such as passwords, OTPs, or banking details.
-      </p>
-    </footer>
-  );
-};
 // --- STYLES ---
 const navStyles = {
   header: {

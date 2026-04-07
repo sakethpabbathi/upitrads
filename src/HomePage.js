@@ -18,7 +18,7 @@ const TradingHome = () => {
         setActiveSlide={setActiveSlide} 
       />
       <AboutSection />
-      {/* <ContactSection /> */}
+      <ContactSection />
       <Footer />
     </div>
   );
@@ -150,7 +150,8 @@ const SubHeader = () => {
   return (
     <section style={styles.subHeader}>
       <div style={styles.subHeaderContent}>
-        <h1>Fresh Seafood. Trusted Global Supply.</h1>
+        <h1>Trusted Global Supply</h1>
+        <h1>Fresh Seafood</h1>
         <p>Premium Fish • Quality Prawns • Worldwide Export</p>
       </div>
     </section>
@@ -159,8 +160,19 @@ const SubHeader = () => {
 
 const ImportExportSection = () => {
   const navigate = useNavigate();
-  const handleImportClick = () => navigate("/imports-exports");
-const handleExportClick = () => navigate("/imports-exports");
+  
+//   const handleImportClick = () => navigate("/imports-exports");
+// const handleExportClick = () => navigate("/imports-exports");
+
+const handleImportClick = () =>
+  navigate("/imports-exports", {
+    state: { slideIndex: 1, breadcrumb: ["Imports"] }
+  });
+
+const handleExportClick = () =>
+  navigate("/imports-exports", {
+    state: { slideIndex: 6, breadcrumb: ["Exports"] }
+  });
 
   return (
     <section id="imports-exports" style={styles.importExportSection}>
@@ -212,43 +224,135 @@ const AboutSection = () => {
   );
 };
 
-const ContactSection = () => (
-  <section id="contact" style={styles.contactSection}>
-    <h2 style={styles.sectionTitle}>Contact Us</h2>
-
-    <form style={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
-      <input type="text" placeholder="Your Name" style={styles.input} required />
-      <input type="tel" placeholder="Mobile Number" style={styles.input} required />
-      <textarea placeholder="Your Message" rows="4" style={styles.textarea}></textarea>
-
-      <button type="submit" style={styles.submitBtn}>
-        Submit
-      </button>
-    </form>
-
-    <p style={{ marginTop: "15px", color: "#555" }}>
-      We will contact you soon.
-    </p>
-  </section>
-);
 
 
+
+const ContactSection = () => {
+
+  const [mobileError, setMobileError] = useState("");
+  const [successMsg, setSuccessMsg] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const name = e.target[0].value;
+    const mobile = e.target[1].value;
+    const message = e.target[2].value;
+
+    // ✅ Mobile validation
+    if (!/^[6-9]\d{9}$/.test(mobile)) {
+      setMobileError("Enter a valid 10-digit mobile number");
+      return;
+    } else {
+      setMobileError("");
+    }
+
+    const finalMessage = message.trim() ? message : "General enquiry";
+
+    const text = `Enquiry:\nName: ${name}\nMobile: ${mobile}\nMessage: ${finalMessage}`;
+
+    const whatsappNumber = "919347719244";
+
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+
+    window.open(url, "_blank");
+
+    // ✅ Clear form
+    e.target.reset();
+
+    // ✅ Show success popup
+    setSuccessMsg(true);
+
+    // ✅ Auto hide after 3 sec
+    setTimeout(() => {
+      setSuccessMsg(false);
+    }, 3000);
+  };
+
+  const handleMobileChange = (e) => {
+    const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+    e.target.value = value;
+
+    if (value.length === 10 && /^[6-9]\d{9}$/.test(value)) {
+      setMobileError("");
+    } else {
+      setMobileError("Enter a valid 10-digit mobile number");
+    }
+  };
+
+  return (
+    <section id="contact" style={styles.contactSection}>
+      <h2 style={styles.sectionTitle}>Contact Us</h2>
+
+      {/* ✅ Success Popup */}
+      {successMsg && (
+        <div style={{
+          backgroundColor: "#28a745",
+          color: "#fff",
+          padding: "12px",
+          borderRadius: "5px",
+          marginBottom: "15px",
+          textAlign: "center",
+          fontWeight: "bold"
+        }}>
+          ✅ Message sent successfully!
+        </div>
+      )}
+
+      <form style={styles.contactForm} onSubmit={handleSubmit}>
+        
+        <input
+          type="text"
+          placeholder="Your Name"
+          style={styles.input}
+          required
+        />
+
+        <input
+          type="tel"
+          placeholder="Enter 10-digit Mobile Number"
+          style={{
+            ...styles.input,
+            border: mobileError ? "2px solid red" : "1px solid #ccc"
+          }}
+          required
+          onInput={handleMobileChange}
+        />
+
+        {mobileError && (
+          <span style={{ color: "red", fontSize: "13px", marginTop: "-10px" }}>
+            {mobileError}
+          </span>
+        )}
+
+        <textarea
+          placeholder="Your Message (Optional)"
+          rows="4"
+          style={styles.textarea}
+        ></textarea>
+
+        <button type="submit" style={styles.submitBtn}>
+          Submit
+        </button>
+      </form>
+
+      <p style={{ marginTop: "15px", color: "#555" }}>
+        We will contact you soon.
+      </p>
+    </section>
+  );
+};
 const Footer = () => (
-  <footer id="contact" style={styles.footer}>
+  <footer style={styles.footer}>
     <div style={styles.footerTop}>
-      <span><strong>UPIN TRADING CORPORATION</strong></span>
-      <span>📍 Hyderabad, Telangana, India</span>
-      <span>
-        📧 <a href="mailto:sakethpabbathi@gmail.com" style={{ color: "#fff", textDecoration: "none" }}>sakethpabbathi@gmail.com</a>
-      </span>
-      <span>
-        💬 <a href="https://wa.me/919347719244" target="_blank" style={{ color: "#25D366", textDecoration: "none" }}>WhatsApp Us</a>
-      </span>
-    </div>
-    <div style={{ marginTop: "15px", fontSize: "12px", opacity: 0.7 }}>
-      <p>© 2026 UPIN Trading Corporation. Official Business Site.</p>
-      <p>We do not collect or store sensitive personal data or passwords.</p>
-    </div>
+        <span>UPIN TRADING CORPORATION</span>
+        <span>📍 Hyderabad, India</span>
+        {/* <span>📧 upintrad@123.com</span>
+        <span>📞 +91 93477 19244</span> */}
+      </div>
+      <p style={styles.footerBottom}>
+        © 2026 UPIN Tradeing Corporation. All Rights Reserved.
+      </p>
   </footer>
 );
 
