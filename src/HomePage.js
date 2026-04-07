@@ -49,12 +49,24 @@ const navLinks = [
   return (
     <header style={styles.header}>
       <div style={styles.headerInner}>
-        <img
+        {/* <img
           src={process.env.PUBLIC_URL + "/tradeinglogo.jpeg"}
           alt="Logo"
           style={styles.logoImg}
           onClick={() => (window.location.href = "#home")}
-        />
+        /> */}
+
+<img
+  src={process.env.PUBLIC_URL + "/tradeinglogo.jpeg"}
+  alt="Logo"
+  style={{
+    ...styles.logoImg,
+    // If mobile, move it 15px from the left edge. 
+    // If desktop, keep your original -120px.
+    marginLeft: isMobile ? "-45px" : "-120px", 
+  }}
+  onClick={() => (window.location.href = "#home")}
+/>
 
         {isMobile && (
           <div style={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
@@ -384,7 +396,15 @@ const styles = {
     maxWidth: "1200px",
     margin: "0 auto",
   },
-  logoImg: { height: "50px", width: "170px", cursor: "pointer",marginLeft: "-50px" },
+
+logoImg: {
+  height: "50px",
+  width: "170px",
+  cursor: "pointer",
+  objectFit: "contain", // Add this to keep the logo aspect ratio perfect
+},
+  
+  // logoImg: { height: "50px", width: "170px", cursor: "pointer",marginLeft: "-126px" },
   nav: { display: "flex", alignItems: "center", gap: "20px" },
   navLink: {
     color: "#1a365d",
