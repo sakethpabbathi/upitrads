@@ -71,24 +71,49 @@ const navItems = [
         {(!isMobile || menuOpen) && (
           <nav style={{ ...navStyles.nav, ...(isMobile ? navStyles.navOpen : {}) }}>
             {navItems.map((item, index) => (
-              <a
-                key={item.label}
-                onClick={() => handleNavClick(item.target, item.slide, item.path)}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                style={{
-                  ...navStyles.navLink,
-                  // The underline effect using linear-gradient background
-                  backgroundImage: "linear-gradient(red, red)",
-                  backgroundSize: hoveredIndex === index ? "100% 2px" : "0% 2px",
-                  backgroundPosition: "left bottom",
-                  backgroundRepeat: "no-repeat",
-                  transition: "background-size 0.3s ease",
-                  paddingBottom: "4px"
-                }}
-              >
-                {item.label}
-              </a>
+
+              
+              // <a
+              //   key={item.label}
+              //   onClick={() => handleNavClick(item.target, item.slide, item.path)}
+              //   onMouseEnter={() => setHoveredIndex(index)}
+              //   onMouseLeave={() => setHoveredIndex(null)}
+              //   style={{
+              //     ...navStyles.navLink,
+              //     // The underline effect using linear-gradient background
+              //     backgroundImage: "linear-gradient(red, red)",
+              //     backgroundSize: hoveredIndex === index ? "100% 2px" : "0% 2px",
+              //     backgroundPosition: "left bottom",
+              //     backgroundRepeat: "no-repeat",
+              //     transition: "background-size 0.3s ease",
+              //     paddingBottom: "4px"
+              //   }}
+              // >
+              //   {item.label}
+              // </a>
+
+<button
+  key={item.label}
+  onClick={() => handleNavClick(item.target, item.slide, item.path)}
+  onMouseEnter={() => setHoveredIndex(index)}
+  onMouseLeave={() => setHoveredIndex(null)}
+  style={{
+    ...navStyles.navLink,
+    backgroundImage: "linear-gradient(red, red)",
+    backgroundSize: hoveredIndex === index ? "100% 2px" : "0% 2px",
+    backgroundPosition: "left bottom",
+    backgroundRepeat: "no-repeat",
+    transition: "background-size 0.3s ease",
+    paddingBottom: "4px",
+    border: "none",              // ✅ important
+    backgroundColor: "transparent", // ✅ important
+    cursor: "pointer"
+  }}
+>
+  {item.label}
+</button>
+
+
             ))}
           </nav>
         )}
@@ -346,7 +371,7 @@ const navStyles = {
     margin: "10px 0",
     color: "black",
     textDecoration: "none",
-    color: "#1a365d",
+    // color: "#1a365d",
     fontWeight: "bold",
     fontSize: "16px",
     cursor: "pointer",

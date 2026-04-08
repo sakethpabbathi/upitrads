@@ -70,12 +70,6 @@ const navLinks = [
   return (
     <header style={styles.header}>
       <div style={styles.headerInner}>
-        {/* <img
-          src={process.env.PUBLIC_URL + "/tradeinglogo.jpeg"}
-          alt="Logo"
-          style={styles.logoImg}
-          onClick={() => (window.location.href = "#home")}
-        /> */}
 
 <img
   src={process.env.PUBLIC_URL + "/tradeinglogo.jpeg"}
@@ -98,56 +92,60 @@ const navLinks = [
 
         {(!isMobile || menuOpen) && (
           <nav style={{ ...styles.nav, ...(isMobile ? styles.navOpen : {}) }}>
-            {/* {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onMouseEnter={() => setHoveredLink(link.name)}
-                onMouseLeave={() => setHoveredLink(null)}
-                onClick={() => {
-                  setMenuOpen(false);
-                  if (link.type === "slide") setActiveSlide(link.value);
-                }}
-                style={{
-                  ...styles.navLink,
-                  backgroundImage: "linear-gradient(red, red)",
-                  backgroundSize: hoveredLink === link.name ? "100% 2px" : "0% 2px",
-                  backgroundPosition: "left bottom",
-                  backgroundRepeat: "no-repeat",
-                  transition: "background-size 0.3s ease",
-                  paddingBottom: "5px",
-                  display: "inline-block"
-                }}
-              >
-                {link.name}
-              </a>
-            ))} */}
 
 
 
             {navLinks.map((link) => (
-  <a
-    key={link.name}
-    onMouseEnter={() => setHoveredLink(link.name)}
-    onMouseLeave={() => setHoveredLink(null)}
-    onClick={() => {
-      setMenuOpen(false); // Close mobile menu
-      link.action();      // This triggers the scroll or navigation
-    }}
-    style={{
-      ...styles.navLink,
-      backgroundImage: "linear-gradient(red, red)",
-      backgroundSize: hoveredLink === link.name ? "100% 2px" : "0% 2px",
-      backgroundPosition: "left bottom",
-      backgroundRepeat: "no-repeat",
-      transition: "background-size 0.3s ease",
-      paddingBottom: "5px",
-      display: "inline-block",
-      cursor: "pointer" // Add this to ensure it looks clickable
-    }}
-  >
-    {link.name}
-  </a>
+              
+  // <a
+  //   key={link.name}
+  //   onMouseEnter={() => setHoveredLink(link.name)}
+  //   onMouseLeave={() => setHoveredLink(null)}
+  //   onClick={() => {
+  //     setMenuOpen(false); // Close mobile menu
+  //     link.action();      // This triggers the scroll or navigation
+  //   }}
+  //   style={{
+  //     ...styles.navLink,
+  //     backgroundImage: "linear-gradient(red, red)",
+  //     backgroundSize: hoveredLink === link.name ? "100% 2px" : "0% 2px",
+  //     backgroundPosition: "left bottom",
+  //     backgroundRepeat: "no-repeat",
+  //     transition: "background-size 0.3s ease",
+  //     paddingBottom: "5px",
+  //     display: "inline-block",
+  //     cursor: "pointer" // Add this to ensure it looks clickable
+  //   }}
+  // >
+  //   {link.name}
+  // </a>
+
+  <button
+  key={link.name}
+  onMouseEnter={() => setHoveredLink(link.name)}
+  onMouseLeave={() => setHoveredLink(null)}
+  onClick={() => {
+    setMenuOpen(false);
+    link.action();
+  }}
+  style={{
+    ...styles.navLink,
+    backgroundImage: "linear-gradient(red, red)",
+    backgroundSize: hoveredLink === link.name ? "100% 2px" : "0% 2px",
+    backgroundPosition: "left bottom",
+    backgroundRepeat: "no-repeat",
+    transition: "background-size 0.3s ease",
+    paddingBottom: "5px",
+    display: "inline-block",
+    cursor: "pointer",
+    border: "none",              // ✅ remove button border
+    backgroundColor: "transparent" // ✅ make it look like text
+  }}
+>
+  {link.name}
+</button>
+
+
 ))}
           </nav>
         )}
@@ -158,54 +156,6 @@ const navLinks = [
 
 // ... Rest of your components (Hero, SubHeader, etc.) remain exactly the same ...
 
-const Hero = () => {
-  const [index, setIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-  const images = [
-    process.env.PUBLIC_URL + "/fishone.jpg",
-    process.env.PUBLIC_URL + "/import.jpg",
-    process.env.PUBLIC_URL + "/fishesfour.png"
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  return (
-    <section
-      id="home"
-      style={{
-        ...styles.hero,
-        ...(isMobile ? styles.heroMobile : {}),
-      }}
-    >
-      {images.map((img, i) => (
-        <img
-          key={i}
-          src={img}
-          alt="Trading"
-          style={{
-            ...styles.heroImg,
-            ...(isMobile ? styles.heroImgMobile : {}),
-            opacity: i === index ? 1 : 0,
-          }}
-        />
-      ))}
-    </section>
-  );
-};
 
 // const SubHeader = () => {
 //   return (
