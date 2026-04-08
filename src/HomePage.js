@@ -97,28 +97,7 @@ const navLinks = [
 
             {navLinks.map((link) => (
               
-  // <a
-  //   key={link.name}
-  //   onMouseEnter={() => setHoveredLink(link.name)}
-  //   onMouseLeave={() => setHoveredLink(null)}
-  //   onClick={() => {
-  //     setMenuOpen(false); // Close mobile menu
-  //     link.action();      // This triggers the scroll or navigation
-  //   }}
-  //   style={{
-  //     ...styles.navLink,
-  //     backgroundImage: "linear-gradient(red, red)",
-  //     backgroundSize: hoveredLink === link.name ? "100% 2px" : "0% 2px",
-  //     backgroundPosition: "left bottom",
-  //     backgroundRepeat: "no-repeat",
-  //     transition: "background-size 0.3s ease",
-  //     paddingBottom: "5px",
-  //     display: "inline-block",
-  //     cursor: "pointer" // Add this to ensure it looks clickable
-  //   }}
-  // >
-  //   {link.name}
-  // </a>
+
 
   <button
   key={link.name}
@@ -415,6 +394,8 @@ const styles = {
     paddingTop: "70px",
     minHeight: "100vh"
   },
+
+  
   header: {
     // Glassmorphism effect for the header
     background: "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.95) 100%)",
