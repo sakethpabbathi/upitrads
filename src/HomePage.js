@@ -171,74 +171,218 @@ const SubHeader = () => {
 
 
 
+// const ImportExportSection = () => {
+//   const navigate = useNavigate();
+  
+// //   const handleImportClick = () => navigate("/imports-exports");
+// // const handleExportClick = () => navigate("/imports-exports");
+
+// const handleImportClick = () =>
+//   navigate("/imports-exports", {
+//     state: { slideIndex: 1, breadcrumb: ["Imports"] }
+//   });
+
+// const handleExportClick = () =>
+//   navigate("/imports-exports", {
+//     state: { slideIndex: 6, breadcrumb: ["Exports"] }
+//   });
+
+//   return (
+    
+//     <section id="imports-exports" style={styles.importExportSection}>
+      
+//       <h2 style={styles.sectionTitle}>Imports & Exports</h2>
+//       <div style={styles.gridContainer}>
+//         <div style={styles.importExportCard} onClick={handleImportClick}>
+//           <div style={styles.imageWrapper}>
+            
+//             <img
+//   src={process.env.PUBLIC_URL + "/import.jpg"}
+//   style={styles.importExportImg}
+//   alt="Imports"
+// />
+//           </div>
+//           <div style={styles.cardContent}>
+//             <h3>Imports</h3>
+//             <p>High-quality seafood and feed sourced globally.</p>
+//           </div>
+//         </div>
+
+//         <div style={styles.importExportCard} onClick={handleExportClick}>
+//           <div style={styles.imageWrapper}>
+//             <img
+//              src={process.env.PUBLIC_URL + "/SeafoodExport.jpg"}
+//               style={styles.importExportImg}
+//               alt="Exports"
+//             />
+//           </div>
+//           <div style={styles.cardContent}>
+//             <h3>Exports</h3>
+//             <p>Trusted export services delivering worldwide freshness.</p>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+
+
+
 const ImportExportSection = () => {
   const navigate = useNavigate();
-  
-//   const handleImportClick = () => navigate("/imports-exports");
-// const handleExportClick = () => navigate("/imports-exports");
 
-const handleImportClick = () =>
-  navigate("/imports-exports", {
-    state: { slideIndex: 1, breadcrumb: ["Imports"] }
-  });
+  const handleImportClick = () =>
+    navigate("/imports-exports", {
+      state: { slideIndex: 1, breadcrumb: ["Imports"] }
+    });
 
-const handleExportClick = () =>
-  navigate("/imports-exports", {
-    state: { slideIndex: 6, breadcrumb: ["Exports"] }
-  });
+  const handleExportClick = () =>
+    navigate("/imports-exports", {
+      state: { slideIndex: 6, breadcrumb: ["Exports"] }
+    });
 
   return (
-    
     <section id="imports-exports" style={styles.importExportSection}>
-      
       <h2 style={styles.sectionTitle}>Imports & Exports</h2>
       <div style={styles.gridContainer}>
-        <div style={styles.importExportCard} onClick={handleImportClick}>
+        
+        {/* Transparent Import Card */}
+        <div 
+          style={{ ...styles.importExportCard, ...styles.transparentCard }} 
+          onClick={handleImportClick}
+        >
           <div style={styles.imageWrapper}>
-            
             <img
-  src={process.env.PUBLIC_URL + "/import.jpg"}
-  style={styles.importExportImg}
-  alt="Imports"
-/>
+              src={process.env.PUBLIC_URL + "/import.jpg"}
+              style={styles.importExportImg}
+              alt="Imports"
+            />
           </div>
           <div style={styles.cardContent}>
-            <h3>Imports</h3>
-            <p>High-quality seafood and feed sourced globally.</p>
+            <h3 style={styles.cardTitle}>Imports</h3>
+            <p style={styles.cardText}>High-quality seafood and feed sourced globally.</p>
           </div>
         </div>
 
-        <div style={styles.importExportCard} onClick={handleExportClick}>
+        {/* Transparent Export Card */}
+        <div 
+          style={{ ...styles.importExportCard, ...styles.transparentCard }} 
+          onClick={handleExportClick}
+        >
           <div style={styles.imageWrapper}>
             <img
-             src={process.env.PUBLIC_URL + "/SeafoodExport.jpg"}
+              src={process.env.PUBLIC_URL + "/SeafoodExport.jpg"}
               style={styles.importExportImg}
               alt="Exports"
             />
           </div>
           <div style={styles.cardContent}>
-            <h3>Exports</h3>
-            <p>Trusted export services delivering worldwide freshness.</p>
+            <h3 style={styles.cardTitle}>Exports</h3>
+            <p style={styles.cardText}>Trusted export services delivering worldwide freshness.</p>
           </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+// const AboutSection = () => {
+//   return (
+//     <section id="about" style={styles.aboutSection}>
+//       <h2 style={styles.sectionTitle}>About Us</h2>
+//       <p style={styles.aboutText}>
+//         UPIN Trading Corporation is a trusted name in imports and exports...specializing in high-quality seafood, aquaculture feed, and industrial
+//          solutions. We are committed to delivering premium products and reliable
+//          services to customers across the globe.
+//       </p>
+//     </section>
+//   );
+// };
+
+const AboutSection = () => {
+  return (
+    <section id="about" style={styles.aboutSection}>
+      <div style={styles.container}>
+        <h2 style={styles.sectionTitle}>About Us</h2>
+        
+        {/* Core Company Profile */}
+        <div style={styles.textBlock}>
+          <p style={styles.paragraph}>
+            UPIN Trading Corporation is a professionally managed trading organization engaged in the import, export, and supply of high-quality aqua feed, seafood products, minerals, and chemicals. With a strong commitment to quality, traceability, and customer satisfaction, we operate across multiple sectors while maintaining rigorous standards at every stage of our operations.
+          </p>
+          <p style={styles.paragraph}>
+            We specialize in the import and trading of premium aqua feed from UNI-President Vietnam, a globally recognized brand known for its quality and performance in aquaculture nutrition. Our focus is to support farmers with reliable, nutritionally balanced feed solutions that enhance productivity, sustainability, and long-term farm success.
+          </p>
+          <p style={styles.paragraph}>
+            In addition to aqua feed trading, UPIN Trading Corporation is actively involved in the export of premium-quality seafood products. We handle a wide range of seafood products, ensuring that each consignment meets stringent quality checks and international standards. Our export operations emphasize freshness, safety, and traceability, enabling us to deliver superior seafood products to customers across global markets.
+          </p>
+        </div>
+
+        {/* Quality & Support Section */}
+        <div style={styles.textBlock}>
+          <h3 style={styles.subHeading}>Quality, Traceability, and Farmer Support</h3>
+          <p style={styles.paragraph}>
+            Quality is the foundation of everything we do. We have established a robust end-to-end traceability system, allowing us to monitor and track every stage of the farming and supply process. Our dedicated field team maintains daily follow-ups with farms, ensuring consistent monitoring, data collection, and quality assessment at every step.
+          </p>
+          <p style={styles.paragraph}>
+            Our employees work closely with farmers on a daily basis, offering practical guidance, technical suggestions, and continuous support to improve farming practices, optimize feed usage, and maintain healthy production environments. This hands-on approach enables us to ensure consistent product quality while building long-term partnerships with the farming community.
+          </p>
+        </div>
+
+        {/* Minerals & Chemicals Section */}
+        <div style={styles.textBlock}>
+          <h3 style={styles.subHeading}>Minerals and Chemicals Export</h3>
+          <p style={styles.paragraph}>
+            UPIN Trading Corporation is also expanding its global footprint in the export of high-quality minerals and chemicals. We supply carefully sourced and tested materials that meet industry-specific requirements and quality standards. Our focus is on providing reliable, consistent, and compliant products suitable for various industrial and commercial applications.
+          </p>
+          <p style={styles.paragraph}>
+            We are committed to positioning ourselves as a trusted and leading supplier of minerals and chemicals, with a strong emphasis on quality assurance, ethical sourcing, and dependable logistics.
+          </p>
+        </div>
+
+        {/* Mission & Vision Row */}
+        <div style={styles.mvContainer}>
+          <div style={styles.mvCard}>
+            <h3 style={styles.cardTitle}>Our Mission</h3>
+            <p style={styles.cardText}>
+              To become a reliable and quality-focused aqua feed supplier for farmers, deliver premium seafood products to global customers, and establish us as a leading exporter of high-quality minerals and chemicals, while maintaining transparency, traceability, and ethical business practices.
+            </p>
+          </div>
+          <div style={styles.mvCard}>
+            <h3 style={styles.cardTitle}>Our Vision</h3>
+            <ul style={styles.cardList}>
+              <li>To be recognized as a trusted partner to farmers by supplying superior-quality aqua feed and continuous technical support.</li>
+              <li>To deliver world-class seafood products that meet international quality and safety standards.</li>
+              <li>To become one of the largest and most dependable suppliers of minerals and chemicals in the global market.</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Key Highlights */}
+        <div style={styles.highlightsBox}>
+          <h3 style={styles.highlightsTitle}>Why Choose UPIN Trading Corporation</h3>
+          <ul style={styles.checkList}>
+            <li>Strong association with reputed international suppliers such as UNI-President Vietnam</li>
+            <li>End-to-end quality control and traceability systems</li>
+            <li>Dedicated field teams with daily farm monitoring and follow-up</li>
+            <li>Commitment to premium quality, compliance, and ethical trading</li>
+            <li>Multi-sector expertise in aqua feed, seafood, minerals, and chemicals</li>
+          </ul>
+        </div>
+
+        {/* Closing Quote */}
+        <div style={styles.closingBlock}>
+          <p>
+            At UPIN Trading Corporation, we believe that sustainable growth is built on quality, trust, technical expertise, and long-term relationships. Our integrated approach and commitment to excellence enable us to deliver value across the aquaculture, seafood, and industrial trading sectors.
+          </p>
         </div>
       </div>
     </section>
   );
 };
 
-
-const AboutSection = () => {
-  return (
-    <section id="about" style={styles.aboutSection}>
-      <h2 style={styles.sectionTitle}>About Us</h2>
-      <p style={styles.aboutText}>
-        UPIN Trading Corporation is a trusted name in imports and exports...specializing in high-quality seafood, aquaculture feed, and industrial
-         solutions. We are committed to delivering premium products and reliable
-         services to customers across the globe.
-      </p>
-    </section>
-  );
-};
 
 const ContactSection = () => {
 
@@ -370,23 +514,582 @@ const Footer = () => (
 );
 
 
+// const styles = {
+
+// importExportCard: { 
+//     width: "100%", 
+//     maxWidth: "360px", 
+//     borderRadius: "24px", 
+//     background: "rgba(255, 255, 255, 0.9)", // Default solid-ish white
+//     boxShadow: "0 15px 35px rgba(0,0,0,0.1)", 
+//     cursor: "pointer",
+//     overflow: "hidden",
+//     transition: "transform 0.3s ease",
+//     border: "1px solid rgba(255,255,255,0.3)"
+//   },
+
+//   // Add this new style for transparency
+//   transparentCard: {
+//     background: "rgba(255, 255, 255, 0.2)", // Much lower alpha for transparency
+//     backdropFilter: "blur(10px)",            // Frosted glass effect
+//     WebkitBackdropFilter: "blur(10px)",      // Safari support
+//     border: "1px solid rgba(255, 255, 255, 0.4)",
+//   },
+
+//   cardTitle: {
+//     color: "#001233",
+//     marginBottom: "10px"
+//   },
+
+//   cardText: {
+//     color: "#001233",
+//     fontWeight: "500"
+//   },
+
+  
+//   app: { 
+//     fontFamily: "'Segoe UI', Roboto, sans-serif", 
+//     // Global background setup
+//     backgroundImage: `url(${process.env.PUBLIC_URL + "/waterbg.jpeg"})`,
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//     backgroundAttachment: "fixed", // Parallax effect: content slides over the image
+//     backgroundRepeat: "no-repeat",
+//     paddingTop: "70px",
+//     minHeight: "100vh"
+//   },
+
+//   header: {
+//     // Frosted glass effect for the sticky header
+//     background: "white", 
+//     // backdropFilter: "blur(10px)",
+//     color: "#180e0e",
+//     padding: "12px 20px",
+//     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+//     position: "fixed",
+//     width: "100%",
+//     top: 0,
+//     zIndex: 100,
+//   },
+
+//   headerInner: {
+//     display: "flex",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     width: "90%",
+//     maxWidth: "1200px",
+//     margin: "0 auto",
+//   },
+
+//   logoImg: {
+//     height: "50px",
+//     width: "170px",
+//     cursor: "pointer",
+//     objectFit: "contain",
+//   },
+
+//   nav: { display: "flex", alignItems: "center", gap: "20px" },
+  
+//   navLink: {
+//     color: "#023e8a",
+//     textDecoration: "none",
+//     fontWeight: "bold",
+//     fontSize: "16px",
+//     cursor: "pointer",
+//     background: "none",
+//     border: "none"
+//   },
+
+//   hamburger: { fontSize: "32px", cursor: "pointer", color: "#0077b6" },
+
+//   navOpen: { 
+//     position: "absolute", 
+//     top: "70px", 
+//     left: 0, 
+//     width: "100%", 
+//     background: "rgba(255, 255, 255, 0.95)", 
+//     flexDirection: "column", 
+//     padding: "20px",
+//     boxShadow: "0 10px 15px rgba(0,0,0,0.1)"
+//   },
+
+//   subHeader: { 
+//     padding: "80px 20px", 
+//     // Light transparent overlay to separate content from image
+//     background: "rgba(255, 255, 255, 0.3)", 
+//     display: "flex",
+//     justifyContent: "center",
+//     textAlign: "center",
+//   },
+
+//   subHeaderInner: {
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     maxWidth: "1200px",
+//     gap: "40px",
+//     width: "100%"
+//   },
+
+//   // subHeaderTitle: {
+//   //   fontSize: "3rem",
+//   //   color: "#001233",
+//   //   margin: "0 0 10px 0",
+//   //   lineHeight: "1.2",
+//   //   fontWeight: "800",
+//   //   textShadow: "0 2px 4px rgba(255,255,255,0.5)"
+//   // },
+//   subHeaderTitle: {
+//     fontSize: "2.5rem",
+//     color: "#023e8a",
+//     margin: "0 0 10px 0",
+//     lineHeight: "1.2"
+//   },
+//   subHeaderSubtitle: {
+//     fontSize: "1.2rem",
+//     color: "#023e8a",
+//     fontWeight: "600",
+//     letterSpacing: "1px"
+//   },
+
+//   subHeaderSideImg: {
+//     width: "220px",
+//     height: "160px",
+//     borderRadius: "15px",
+//     objectFit: "cover",
+//     boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
+//     border: "4px solid #fff"
+//   },
+
+//   importExportSection: { 
+//     padding: "80px 20px", 
+//     textAlign: "center",
+//     background: "rgba(240, 249, 255, 0.5)", // Semi-transparent blue tint
+//   },
+
+//   sectionTitle: { 
+//     fontSize: "2.8rem", 
+//     marginBottom: "40px", 
+//     color: "#001233",
+//     fontWeight: "bold"
+//   },
+
+//   gridContainer: { 
+//     display: "flex", 
+//     justifyContent: "center", 
+//     gap: "35px", 
+//     flexWrap: "wrap" 
+//   },
+
+//   // importExportCard: { 
+//   //   width: "100%", 
+//   //   maxWidth: "360px", 
+//   //   borderRadius: "24px", 
+//   //   background: "rgba(255, 255, 255, 0.9)", // Mostly solid white for text clarity
+//   //   boxShadow: "0 15px 35px rgba(0,0,0,0.1)", 
+//   //   cursor: "pointer",
+//   //   overflow: "hidden",
+//   //   transition: "transform 0.3s ease",
+//   //   border: "1px solid rgba(255,255,255,0.3)"
+//   // },
+
+//   imageWrapper: { height: "240px", overflow: "hidden" },
+//   importExportImg: { width: "100%", height: "100%", objectFit: "cover" },
+//   cardContent: { padding: "25px", textAlign: "center" },
+
+//   aboutSection: { 
+//     padding: "100px 20px", 
+//     textAlign: "center",
+//     background: "rgba(255, 255, 255, 0.7)", 
+//     color: "#001233"
+//   },
+
+//   aboutText: { 
+//     maxWidth: "850px", 
+//     margin: "15px auto", 
+//     lineHeight: "1.9", 
+//     fontSize: "1.2rem",
+//     fontWeight: "500"
+//   },
+
+//   contactSection: { 
+//     padding: "100px 20px", 
+//     textAlign: "center",
+//     background: "rgba(235, 245, 255, 0.6)" 
+//   },
+
+//   contactForm: { 
+//     maxWidth: "550px", 
+//     margin: "0 auto", 
+//     display: "flex", 
+//     flexDirection: "column", 
+//     gap: "20px", 
+//     padding: "40px",
+//     background: "rgba(255, 255, 255, 0.95)", 
+//     borderRadius: "20px", 
+//     boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
+    
+//   },
+
+//   input: { 
+//     padding: "15px", 
+//     border: "1px solid #d1d9e6", 
+//     borderRadius: "12px", 
+//     background: "#fff",
+//     fontSize: "16px"
+//   },
+
+//   textarea: { 
+//     padding: "15px", 
+//     border: "1px solid #d1d9e6", 
+//     borderRadius: "12px", 
+//     background: "#fff",
+//     fontSize: "16px"
+//   },
+
+//   submitBtn: { 
+//     padding: "16px", 
+//     background: "linear-gradient(135deg, #00b4d8 0%, #0077b6 100%)", 
+//     color: "#fff", 
+//     fontWeight: "bold", 
+//     border: "none", 
+//     borderRadius: "12px", 
+//     cursor: "pointer", 
+//     fontSize: "17px",
+//     transition: "all 0.3s ease"
+//   },
+
+//   footer: {
+//     background: "rgba(13, 27, 42, 0.95)", 
+//     color: "#fff",
+//     padding: "25px 20px",
+//     textAlign: "center",
+//     fontSize: "14px",
+//     backdropFilter: "blur(5px)"
+//   },
+
+//   footerTop: {
+//     display: "flex",
+//     justifyContent: "center",
+//     gap: "30px",
+//     flexWrap: "wrap",
+//     alignItems: "center",
+//     marginBottom: "10px"
+//   },
+
+//   footerBottom: {
+//     fontSize: "12px",
+//     opacity: 0.7,
+//   },
+// };
+
+// const styles = {
+//   // Global Layout & Background
+//   app: { 
+//     fontFamily: "'Segoe UI', Roboto, sans-serif", 
+//     backgroundImage: `url(${process.env.PUBLIC_URL + "/waterbg.jpeg"})`,
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//     backgroundAttachment: "fixed", 
+//     backgroundRepeat: "no-repeat",
+//     paddingTop: "70px",
+//     minHeight: "100vh"
+//   },
+
+//   // Header & Navigation
+//   header: {
+//     background: "white", 
+//     color: "#180e0e",
+//     padding: "12px 20px",
+//     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+//     position: "fixed",
+//     width: "100%",
+//     top: 0,
+//     zIndex: 100,
+//   },
+//   headerInner: {
+//     display: "flex",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     width: "90%",
+//     maxWidth: "1200px",
+//     margin: "0 auto",
+//   },
+//   logoImg: {
+//     height: "50px",
+//     width: "170px",
+//     cursor: "pointer",
+//     objectFit: "contain",
+//   },
+//   nav: { display: "flex", alignItems: "center", gap: "20px" },
+//   navLink: {
+//     color: "#023e8a",
+//     textDecoration: "none",
+//     fontWeight: "bold",
+//     fontSize: "16px",
+//     cursor: "pointer",
+//     background: "none",
+//     border: "none"
+//   },
+//   hamburger: { fontSize: "32px", cursor: "pointer", color: "#0077b6" },
+//   navOpen: { 
+//     position: "absolute", 
+//     top: "70px", 
+//     left: 0, 
+//     width: "100%", 
+//     background: "rgba(255, 255, 255, 0.95)", 
+//     flexDirection: "column", 
+//     padding: "20px",
+//     boxShadow: "0 10px 15px rgba(0,0,0,0.1)"
+//   },
+
+//   // Hero / SubHeader
+//   subHeader: { 
+//     padding: "80px 20px", 
+//     background: "rgba(255, 255, 255, 0.3)", 
+//     display: "flex",
+//     justifyContent: "center",
+//     textAlign: "center",
+//   },
+//   subHeaderInner: {
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     maxWidth: "1200px",
+//     gap: "40px",
+//     width: "100%"
+//   },
+//   subHeaderTitle: {
+//     fontSize: "2.5rem",
+//     color: "#023e8a",
+//     margin: "0 0 10px 0",
+//     lineHeight: "1.2"
+//   },
+//   subHeaderSubtitle: {
+//     fontSize: "1.2rem",
+//     color: "#023e8a",
+//     fontWeight: "600",
+//     letterSpacing: "1px"
+//   },
+//   subHeaderSideImg: {
+//     width: "220px",
+//     height: "160px",
+//     borderRadius: "15px",
+//     objectFit: "cover",
+//     boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
+//     border: "4px solid #fff"
+//   },
+
+//   // Import / Export Section & Cards
+//   importExportSection: { 
+//     padding: "80px 20px", 
+//     textAlign: "center",
+//     background: "rgba(240, 249, 255, 0.5)", 
+//   },
+//   gridContainer: { 
+//     display: "flex", 
+//     justifyContent: "center", 
+//     gap: "35px", 
+//     flexWrap: "wrap" 
+//   },
+//   importExportCard: { 
+//     width: "100%", 
+//     maxWidth: "360px", 
+//     borderRadius: "24px", 
+//     background: "rgba(255, 255, 255, 0.9)", 
+//     boxShadow: "0 15px 35px rgba(0,0,0,0.1)", 
+//     cursor: "pointer",
+//     overflow: "hidden",
+//     transition: "transform 0.3s ease",
+//     border: "1px solid rgba(255,255,255,0.3)"
+//   },
+//   transparentCard: {
+//     background: "rgba(255, 255, 255, 0.2)", 
+//     backdropFilter: "blur(10px)",            
+//     WebkitBackdropFilter: "blur(10px)",      
+//     border: "1px solid rgba(255, 255, 255, 0.4)",
+//   },
+//   imageWrapper: { height: "240px", overflow: "hidden" },
+//   importExportImg: { width: "100%", height: "100%", objectFit: "cover" },
+//   cardContent: { padding: "25px", textAlign: "center" },
+
+//   // Enhanced About Section (Merged)
+//   aboutSection: { 
+//     padding: "100px 20px", 
+//     textAlign: "center",
+//     background: "rgba(255, 255, 255, 0.7)", 
+//     color: "#001233"
+//   },
+//   container: {
+//     maxWidth: "1100px",
+//     margin: "0 auto"
+//   },
+//   sectionTitle: { 
+//     fontSize: "3rem", 
+//     marginBottom: "50px", 
+//     color: "#001233",
+//     fontWeight: "bold",
+//     letterSpacing: "1px"
+//   },
+//   textBlock: {
+//     textAlign: "left",
+//     marginBottom: "45px"
+//   },
+//   subHeading: {
+//     fontSize: "1.9rem",
+//     marginBottom: "20px",
+//     color: "#001233",
+//     borderLeft: "5px solid #001233",
+//     paddingLeft: "15px"
+//   },
+//   paragraph: {
+//     fontSize: "1.15rem",
+//     lineHeight: "1.8",
+//     marginBottom: "15px",
+//     fontWeight: "500"
+//   },
+//   mvContainer: {
+//     display: "flex",
+//     flexWrap: "wrap",
+//     gap: "30px",
+//     margin: "60px 0"
+//   },
+//   mvCard: {
+//     flex: "1 1 450px",
+//     padding: "40px",
+//     background: "rgba(255, 255, 255, 0.6)",
+//     borderRadius: "15px",
+//     textAlign: "left",
+//     boxShadow: "0 10px 30px rgba(0,0,0,0.05)"
+//   },
+//   cardTitle: {
+//     fontSize: "1.7rem",
+//     color: "#001233",
+//     marginBottom: "20px",
+//     fontWeight: "bold"
+//   },
+//   cardText: {
+//     fontSize: "1.1rem",
+//     lineHeight: "1.7",
+//     color: "#001233",
+//     fontWeight: "500"
+//   },
+//   cardList: {
+//     paddingLeft: "20px",
+//     lineHeight: "1.7",
+//     fontSize: "1.1rem"
+//   },
+//   highlightsBox: {
+//     background: "#001233",
+//     color: "#ffffff",
+//     padding: "50px",
+//     borderRadius: "20px",
+//     textAlign: "left"
+//   },
+//   highlightsTitle: {
+//     fontSize: "2rem",
+//     marginBottom: "30px"
+//   },
+//   checkList: {
+//     fontSize: "1.2rem",
+//     lineHeight: "2.2",
+//     listStyleType: "square",
+//     paddingLeft: "25px"
+//   },
+//   closingBlock: {
+//     marginTop: "60px",
+//     fontSize: "1.4rem",
+//     lineHeight: "1.9",
+//     fontStyle: "italic",
+//     fontWeight: "600",
+//     color: "#001233",
+//     borderTop: "1px solid rgba(0, 18, 51, 0.1)",
+//     paddingTop: "40px"
+//   },
+
+//   // Contact Section
+//   contactSection: { 
+//     padding: "100px 20px", 
+//     textAlign: "center",
+//     background: "rgba(235, 245, 255, 0.6)" 
+//   },
+//   contactForm: { 
+//     maxWidth: "550px", 
+//     margin: "0 auto", 
+//     display: "flex", 
+//     flexDirection: "column", 
+//     gap: "20px", 
+//     padding: "40px",
+//     background: "rgba(255, 255, 255, 0.95)", 
+//     borderRadius: "20px", 
+//     boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
+//   },
+//   input: { 
+//     padding: "15px", 
+//     border: "1px solid #d1d9e6", 
+//     borderRadius: "12px", 
+//     background: "#fff",
+//     fontSize: "16px"
+//   },
+//   textarea: { 
+//     padding: "15px", 
+//     border: "1px solid #d1d9e6", 
+//     borderRadius: "12px", 
+//     background: "#fff",
+//     fontSize: "16px"
+//   },
+//   submitBtn: { 
+//     padding: "16px", 
+//     background: "linear-gradient(135deg, #00b4d8 0%, #0077b6 100%)", 
+//     color: "#fff", 
+//     fontWeight: "bold", 
+//     border: "none", 
+//     borderRadius: "12px", 
+//     cursor: "pointer", 
+//     fontSize: "17px",
+//     transition: "all 0.3s ease"
+//   },
+
+//   // Footer
+//   footer: {
+//     background: "rgba(13, 27, 42, 0.95)", 
+//     color: "#fff",
+//     padding: "25px 20px",
+//     textAlign: "center",
+//     fontSize: "14px",
+//     backdropFilter: "blur(5px)"
+//   },
+//   footerTop: {
+//     display: "flex",
+//     justifyContent: "center",
+//     gap: "30px",
+//     flexWrap: "wrap",
+//     alignItems: "center",
+//     marginBottom: "10px"
+//   },
+//   footerBottom: {
+//     fontSize: "12px",
+//     opacity: 0.7,
+//   },
+// };
+  
+
 const styles = {
+  // Global Layout & Background
   app: { 
     fontFamily: "'Segoe UI', Roboto, sans-serif", 
-    // Global background setup
     backgroundImage: `url(${process.env.PUBLIC_URL + "/waterbg.jpeg"})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
-    backgroundAttachment: "fixed", // Parallax effect: content slides over the image
+    backgroundAttachment: "fixed", 
     backgroundRepeat: "no-repeat",
     paddingTop: "70px",
     minHeight: "100vh"
   },
 
+  // Header & Navigation
   header: {
-    // Frosted glass effect for the sticky header
     background: "white", 
-    // backdropFilter: "blur(10px)",
     color: "#180e0e",
     padding: "12px 20px",
     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
@@ -395,7 +1098,6 @@ const styles = {
     top: 0,
     zIndex: 100,
   },
-
   headerInner: {
     display: "flex",
     justifyContent: "space-between",
@@ -404,16 +1106,13 @@ const styles = {
     maxWidth: "1200px",
     margin: "0 auto",
   },
-
   logoImg: {
     height: "50px",
     width: "170px",
     cursor: "pointer",
     objectFit: "contain",
   },
-
   nav: { display: "flex", alignItems: "center", gap: "20px" },
-  
   navLink: {
     color: "#023e8a",
     textDecoration: "none",
@@ -423,9 +1122,7 @@ const styles = {
     background: "none",
     border: "none"
   },
-
-  hamburger: { fontSize: "32px", cursor: "pointer", color: "#0077b6" },
-
+  hamburger: { fontSize: "32px", cursor: "pointer", color: "#0077b6","marginRight": "20px" },
   navOpen: { 
     position: "absolute", 
     top: "70px", 
@@ -437,15 +1134,14 @@ const styles = {
     boxShadow: "0 10px 15px rgba(0,0,0,0.1)"
   },
 
+  // Hero / SubHeader
   subHeader: { 
     padding: "80px 20px", 
-    // Light transparent overlay to separate content from image
     background: "rgba(255, 255, 255, 0.3)", 
     display: "flex",
     justifyContent: "center",
     textAlign: "center",
   },
-
   subHeaderInner: {
     display: "flex",
     alignItems: "center",
@@ -454,15 +1150,6 @@ const styles = {
     gap: "40px",
     width: "100%"
   },
-
-  // subHeaderTitle: {
-  //   fontSize: "3rem",
-  //   color: "#001233",
-  //   margin: "0 0 10px 0",
-  //   lineHeight: "1.2",
-  //   fontWeight: "800",
-  //   textShadow: "0 2px 4px rgba(255,255,255,0.5)"
-  // },
   subHeaderTitle: {
     fontSize: "2.5rem",
     color: "#023e8a",
@@ -475,7 +1162,6 @@ const styles = {
     fontWeight: "600",
     letterSpacing: "1px"
   },
-
   subHeaderSideImg: {
     width: "220px",
     height: "160px",
@@ -485,63 +1171,139 @@ const styles = {
     border: "4px solid #fff"
   },
 
+  // Import / Export Section & Small Cards
   importExportSection: { 
     padding: "80px 20px", 
     textAlign: "center",
-    background: "rgba(240, 249, 255, 0.5)", // Semi-transparent blue tint
+    background: "rgba(240, 249, 255, 0.5)", 
   },
-
-  sectionTitle: { 
-    fontSize: "2.8rem", 
-    marginBottom: "40px", 
-    color: "#001233",
-    fontWeight: "bold"
-  },
-
   gridContainer: { 
     display: "flex", 
     justifyContent: "center", 
     gap: "35px", 
     flexWrap: "wrap" 
   },
-
   importExportCard: { 
     width: "100%", 
-    maxWidth: "360px", 
+    maxWidth: "300px",          // Smaller Width
     borderRadius: "24px", 
-    background: "rgba(255, 255, 255, 0.9)", // Mostly solid white for text clarity
+    background: "rgba(255, 255, 255, 0.9)", 
     boxShadow: "0 15px 35px rgba(0,0,0,0.1)", 
     cursor: "pointer",
     overflow: "hidden",
     transition: "transform 0.3s ease",
     border: "1px solid rgba(255,255,255,0.3)"
   },
-
-  imageWrapper: { height: "240px", overflow: "hidden" },
+  transparentCard: {
+    background: "rgba(255, 255, 255, 0.2)", 
+    backdropFilter: "blur(10px)",            
+    WebkitBackdropFilter: "blur(10px)",      
+    border: "1px solid rgba(255, 255, 255, 0.4)",
+  },
+  imageWrapper: { height: "180px", overflow: "hidden" }, // Smaller Image
   importExportImg: { width: "100%", height: "100%", objectFit: "cover" },
-  cardContent: { padding: "25px", textAlign: "center" },
+  cardContent: { padding: "15px 20px", textAlign: "center" }, // Less Padding
 
+  // Enhanced About Section
   aboutSection: { 
     padding: "100px 20px", 
     textAlign: "center",
     background: "rgba(255, 255, 255, 0.7)", 
     color: "#001233"
   },
-
-  aboutText: { 
-    maxWidth: "850px", 
-    margin: "15px auto", 
-    lineHeight: "1.9", 
-    fontSize: "1.2rem",
+  container: {
+    maxWidth: "1100px",
+    margin: "0 auto"
+  },
+  sectionTitle: { 
+    fontSize: "3rem", 
+    marginBottom: "50px", 
+    color: "#001233",
+    fontWeight: "bold",
+    letterSpacing: "1px"
+  },
+  textBlock: {
+    textAlign: "left",
+    marginBottom: "45px"
+  },
+  subHeading: {
+    fontSize: "1.9rem",
+    marginBottom: "20px",
+    color: "#001233",
+    borderLeft: "5px solid #001233",
+    paddingLeft: "15px"
+  },
+  paragraph: {
+    fontSize: "1.15rem",
+    lineHeight: "1.8",
+    marginBottom: "15px",
     fontWeight: "500"
   },
+  mvContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "30px",
+    margin: "60px 0"
+  },
+  mvCard: {
+    flex: "1 1 450px",
+    padding: "40px",
+    background: "rgba(255, 255, 255, 0.6)",
+    borderRadius: "15px",
+    textAlign: "left",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.05)"
+  },
+  cardTitle: {
+    fontSize: "1.7rem",
+    color: "#001233",
+    marginBottom: "20px",
+    fontWeight: "bold"
+  },
+  cardText: {
+    fontSize: "1.1rem",
+    lineHeight: "1.7",
+    color: "#001233",
+    fontWeight: "500"
+  },
+  cardList: {
+    paddingLeft: "20px",
+    lineHeight: "1.7",
+    fontSize: "1.1rem"
+  },
+  highlightsBox: {
+    background: "#001233",
+    color: "#ffffff",
+    padding: "50px",
+    borderRadius: "20px",
+    textAlign: "left"
+  },
+  highlightsTitle: {
+    fontSize: "2rem",
+    marginBottom: "30px"
+  },
+  checkList: {
+    fontSize: "1.2rem",
+    lineHeight: "2.2",
+    listStyleType: "square",
+    paddingLeft: "25px"
+  },
+  closingBlock: {
+    marginTop: "60px",
+    fontSize: "1.4rem",
+    lineHeight: "1.9",
+    fontStyle: "italic",
+    fontWeight: "600",
+    color: "#001233",
+    borderTop: "1px solid rgba(0, 18, 51, 0.1)",
+    paddingTop: "40px"
+  },
 
+  // Contact Section
   contactSection: { 
     padding: "100px 20px", 
     textAlign: "center",
     background: "rgba(235, 245, 255, 0.6)" 
   },
-
   contactForm: { 
     maxWidth: "550px", 
     margin: "0 auto", 
@@ -552,9 +1314,7 @@ const styles = {
     background: "rgba(255, 255, 255, 0.95)", 
     borderRadius: "20px", 
     boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
-    
   },
-
   input: { 
     padding: "15px", 
     border: "1px solid #d1d9e6", 
@@ -562,7 +1322,6 @@ const styles = {
     background: "#fff",
     fontSize: "16px"
   },
-
   textarea: { 
     padding: "15px", 
     border: "1px solid #d1d9e6", 
@@ -570,7 +1329,6 @@ const styles = {
     background: "#fff",
     fontSize: "16px"
   },
-
   submitBtn: { 
     padding: "16px", 
     background: "linear-gradient(135deg, #00b4d8 0%, #0077b6 100%)", 
@@ -583,6 +1341,7 @@ const styles = {
     transition: "all 0.3s ease"
   },
 
+  // Footer
   footer: {
     background: "rgba(13, 27, 42, 0.95)", 
     color: "#fff",
@@ -591,7 +1350,6 @@ const styles = {
     fontSize: "14px",
     backdropFilter: "blur(5px)"
   },
-
   footerTop: {
     display: "flex",
     justifyContent: "center",
@@ -600,13 +1358,11 @@ const styles = {
     alignItems: "center",
     marginBottom: "10px"
   },
-
   footerBottom: {
     fontSize: "12px",
     opacity: 0.7,
   },
 };
-
 
 
 export default TradingHome;
