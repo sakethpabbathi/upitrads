@@ -1,6 +1,20 @@
+/* This moves the 'ocean' background left and right */
+@keyframes oceanFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
+/* This makes the cards bob up and down independently */
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
 
-
+.water-background-section {
+  position: relative;
+  overflow: hidden;
+}
 body{
   background: rgb(252, 253, 254);
 
