@@ -71,7 +71,7 @@ const navLinks = [
     ...styles.logoImg,
     // If mobile, move it 15px from the left edge. 
     // If desktop, keep your original -120px.
-    marginLeft: isMobile ? "-45px" : "-120px", 
+    marginLeft: isMobile ? "-45px" : "-70px", 
   }}
   // onClick={() => (window.location.href = "#")}
   onClick={() => navigate("/")}
@@ -187,77 +187,46 @@ const handleExportClick = () =>
     state: { slideIndex: 6, breadcrumb: ["Exports"] }
   });
 
-//   return (
+  return (
     
-//     <section id="imports-exports" style={styles.importExportSection}>
+    <section id="imports-exports" style={styles.importExportSection}>
       
-//       <h2 style={styles.sectionTitle}>Imports & Exports</h2>
-//       <div style={styles.gridContainer}>
-//         <div style={styles.importExportCard} onClick={handleImportClick}>
-//           <div style={styles.imageWrapper}>
+      <h2 style={styles.sectionTitle}>Imports & Exports</h2>
+      <div style={styles.gridContainer}>
+        <div style={styles.importExportCard} onClick={handleImportClick}>
+          <div style={styles.imageWrapper}>
             
-//             <img
-//   src={process.env.PUBLIC_URL + "/import.jpg"}
-//   style={styles.importExportImg}
-//   alt="Imports"
-// />
-//           </div>
-//           <div style={styles.cardContent}>
-//             <h3>Imports</h3>
-//             <p>High-quality seafood and feed sourced globally.</p>
-//           </div>
-//         </div>
-
-//         <div style={styles.importExportCard} onClick={handleExportClick}>
-//           <div style={styles.imageWrapper}>
-//             <img
-//              src={process.env.PUBLIC_URL + "/SeafoodExport.jpg"}
-//               style={styles.importExportImg}
-//               alt="Exports"
-//             />
-//           </div>
-//           <div style={styles.cardContent}>
-//             <h3>Exports</h3>
-//             <p>Trusted export services delivering worldwide freshness.</p>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
- return (
-  <section id="imports-exports" style={styles.importExportSection}>
-    <h2 style={styles.sectionTitle}>Imports & Exports</h2>
-    
-    <div style={styles.gridContainer}>
-      {/* Card 1 */}
-      <div style={styles.importExportCard} onClick={handleImportClick}>
-        <div style={styles.imageWrapper}>
-          <img src={process.env.PUBLIC_URL + "/import.jpg"} style={styles.importExportImg} alt="Imports" />
+            <img
+  src={process.env.PUBLIC_URL + "/import.jpg"}
+  style={styles.importExportImg}
+  alt="Imports"
+/>
+          </div>
+          <div style={styles.cardContent}>
+            <h3>Imports</h3>
+            <p>High-quality seafood and feed sourced globally.</p>
+          </div>
         </div>
-        <div style={styles.cardContent}>
-          <h3>Imports</h3>
-          <p>High-quality seafood and feed sourced globally.</p>
+
+        <div style={styles.importExportCard} onClick={handleExportClick}>
+          <div style={styles.imageWrapper}>
+            <img
+             src={process.env.PUBLIC_URL + "/SeafoodExport.jpg"}
+              style={styles.importExportImg}
+              alt="Exports"
+            />
+          </div>
+          <div style={styles.cardContent}>
+            <h3>Exports</h3>
+            <p>Trusted export services delivering worldwide freshness.</p>
+          </div>
         </div>
       </div>
-
-      {/* Card 2 - Offset the animation so they don't move at the same time */}
-      <div 
-        style={{...styles.importExportCard, animationDelay: "1s"}} 
-        onClick={handleExportClick}
-      >
-        <div style={styles.imageWrapper}>
-          <img src={process.env.PUBLIC_URL + "/SeafoodExport.jpg"} style={styles.importExportImg} alt="Exports" />
-        </div>
-        <div style={styles.cardContent}>
-          <h3>Exports</h3>
-          <p>Trusted export services delivering worldwide freshness.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
 };
+
+
 const AboutSection = () => {
   return (
     <section id="about" style={styles.aboutSection}>
@@ -401,14 +370,24 @@ const Footer = () => (
 );
 
 // const styles = {
+//   // app: { 
+//   //   fontFamily: "'Segoe UI', Roboto, sans-serif", 
+//   //   // Soft overall page gradient
+//   //   background: "linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%)", 
+//   //   paddingTop: "70px",
+//   //   minHeight: "100vh"
+//   // },
+
 //   app: { 
 //     fontFamily: "'Segoe UI', Roboto, sans-serif", 
-//     // Soft overall page gradient
-//     background: "linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%)", 
+//     // This sets the global background image
+//     backgroundImage: `url(${process.env.PUBLIC_URL + "/waterbg.jpeg"})`,
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//     backgroundAttachment: "fixed", // Keeps image still while scrolling
 //     paddingTop: "70px",
 //     minHeight: "100vh"
 //   },
-
   
 //   header: {
 //     // Glassmorphism effect for the header
@@ -487,12 +466,12 @@ const Footer = () => (
 //     textAlign: "center" 
 //   },
 
-//   subHeaderTitle: {
-//     fontSize: "2.5rem",
-//     color: "#023e8a",
-//     margin: "0 0 10px 0",
-//     lineHeight: "1.2"
-//   },
+  // subHeaderTitle: {
+  //   fontSize: "2.5rem",
+  //   color: "#023e8a",
+  //   margin: "0 0 10px 0",
+  //   lineHeight: "1.2"
+  // },
 
 //   subHeaderSubtitle: {
 //     fontSize: "1.1rem",
@@ -586,204 +565,82 @@ const Footer = () => (
   
 // };
 
-
 const styles = {
-
-imageWrapper: { 
-    height: "220px", 
-    overflow: "hidden",
-    position: "relative",
-    zIndex: 1 // Keep image behind the water overlay
-  },
-
-  importExportImg: { 
-    width: "100%", 
-    height: "100%", 
-    objectFit: "cover" 
-  },
-
-  cardContent: { 
-    padding: "20px", 
-    textAlign: "center",
-    background: "#fff",
-    position: "relative",
-    zIndex: 6 // Keep text above or inside the water line
-  },
-
-  
-subHeader: { 
-    padding: "60px 20px", 
-    // Stacked gradients: Surface light + Depth blue
-    background: `
-      linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 50%),
-      linear-gradient(-45deg, #ffffff, #e0f2f1, #80deea, #e0f2f1)
-    `,
-    backgroundSize: "200% 200%, 400% 400%",
-    animation: "caustics 8s ease infinite, organicWave 10s ease-in-out infinite",
-    borderBottom: "1px solid #b2dfdb",
-    display: "flex",
-    justifyContent: "center",
-    transition: "all 0.5s ease"
-  },
-
-  importExportSection: { 
-    padding: "100px 20px", 
-    textAlign: "center",
-    // Creates a deep, layered water look
-    background: "linear-gradient(-45deg, #00b4d8, #90e0ef, #0077b6, #48cae4)",
-    backgroundSize: "400% 400%",
-    animation: "oceanFlow 12s ease infinite",
-    position: "relative",
-  },
-
-  sectionTitle: { 
-    fontSize: "2.5rem", 
-    marginBottom: "50px", 
-    color: "#ffffff", // Changed to white to pop against blue water
-    textShadow: "0 2px 10px rgba(0,0,0,0.2)",
-    position: "relative",
-    zIndex: 2
-  },
-
-  gridContainer: { 
-    display: "flex", 
-    justifyContent: "center", 
-    gap: "40px", 
-    flexWrap: "wrap",
-    position: "relative",
-    zIndex: 2 // Ensures cards stay ABOVE the water
-  },
-
-  importExportCard: { 
-    width: "100%", 
-    maxWidth: "340px", 
-    borderRadius: "20px", 
-    background: "#ffffff", 
-    boxShadow: "0 15px 35px rgba(0,0,0,0.15)", 
-    cursor: "pointer",
-    overflow: "hidden",
-    // Added floating animation to make them look like they are in the water
-    animation: "cardFloat 6s ease-in-out infinite",
-    transition: "transform 0.3s ease"
-  },
-
-  // gridContainer: { 
-  //   display: "flex", 
-  //   justifyContent: "center", 
-  //   gap: "50px", 
-  //   flexWrap: "wrap",
-  //   perspective: "1000px" // Adds 3D depth to the floating
-  // },
-
-  // importExportCard: { 
-  //   width: "100%", 
-  //   maxWidth: "340px", 
-  //   borderRadius: "20px", 
-  //   background: "rgba(255, 255, 255, 0.95)",
-  //   boxShadow: "0 20px 50px rgba(0,0,0,0.2)",
-  //   cursor: "pointer",
-  //   overflow: "hidden",
-  //   position: "relative",
-  //   // This makes the card bob up and down like it's in the water
-  //   animation: "floatingCard 6s ease-in-out infinite",
-  //   transition: "transform 0.3s ease",
-  //   border: "1px solid rgba(255,255,255,0.3)"
-  // },
-  
-  // To make the cards feel different, we change the animation delay
-  importExportCardAlt: {
-    animation: "floatingCard 7s ease-in-out infinite",
-    animationDelay: "1s"
-  },
-
-  aboutSection: { 
-    padding: "80px 20px", 
-    textAlign: "center",
-    // Shallow water over sand
-    background: `
-      linear-gradient(180deg, rgba(255,255,255,0.4) 0%, transparent 100%),
-      linear-gradient(-45deg, #fdfbfb, #e0f7fa, #b2ebf2, #e0f7fa)
-    `,
-    backgroundSize: "400% 400%",
-    animation: "caustics 15s ease infinite, organicWave 15s ease-in-out infinite",
-    color: "#2d3748"
-  },
-
-  contactSection: { 
-    padding: "80px 20px", 
-    textAlign: "center",
-    // Misty/Deep Ocean
-    background: `
-      linear-gradient(0deg, rgba(0,0,0,0.05) 0%, transparent 100%),
-      linear-gradient(-45deg, #e1f5fe, #b3e5fc, #81d4fa, #b3e5fc)
-    `,
-    backgroundSize: "400% 400%",
-    animation: "caustics 10s ease infinite, organicWave 8s ease-in-out infinite",
-  },
-
-  
   app: { 
     fontFamily: "'Segoe UI', Roboto, sans-serif", 
-    background: "#f0f4f8", 
+    // Global background setup
+    backgroundImage: `url(${process.env.PUBLIC_URL + "/waterbg.jpeg"})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundAttachment: "fixed", // Parallax effect: content slides over the image
+    backgroundRepeat: "no-repeat",
     paddingTop: "70px",
     minHeight: "100vh"
   },
+
   header: {
-    background: "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.95) 100%)",
+    // Frosted glass effect for the sticky header
+    background: "white", 
+    // backdropFilter: "blur(10px)",
     color: "#180e0e",
     padding: "12px 20px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
     position: "fixed",
     width: "100%",
     top: 0,
     zIndex: 100,
-    backdropFilter: "blur(5px)"
   },
+
   headerInner: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "80%",
+    width: "90%",
     maxWidth: "1200px",
     margin: "0 auto",
   },
+
   logoImg: {
     height: "50px",
     width: "170px",
     cursor: "pointer",
     objectFit: "contain",
   },
+
   nav: { display: "flex", alignItems: "center", gap: "20px" },
+  
   navLink: {
-    color: "#1a365d",
+    color: "#023e8a",
     textDecoration: "none",
     fontWeight: "bold",
     fontSize: "16px",
-    cursor: "pointer"
+    cursor: "pointer",
+    background: "none",
+    border: "none"
   },
-  hamburger: { fontSize: "32px", cursor: "pointer", color: "#00b4d8" },
+
+  hamburger: { fontSize: "32px", cursor: "pointer", color: "#0077b6" },
+
   navOpen: { 
-    position: "absolute", top: "70px", left: 0, width: "100%", 
-    background: "linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%)", 
-    flexDirection: "column", padding: "20px",
+    position: "absolute", 
+    top: "70px", 
+    left: 0, 
+    width: "100%", 
+    background: "rgba(255, 255, 255, 0.95)", 
+    flexDirection: "column", 
+    padding: "20px",
     boxShadow: "0 10px 15px rgba(0,0,0,0.1)"
   },
-  hero: { height: "80vh", position: "relative", overflow: "hidden", backgroundColor: "#000" },
-  heroMobile: { height: "30vh" },
-  heroImg: { position: "absolute", width: "100%", height: "100%", objectFit: "cover", transition: "1s" },
-  heroImgMobile: { objectFit: "contain" },
-  
-  // subHeader: { 
-  //   padding: "60px 20px", 
-  //   background: "linear-gradient(-45deg, #ffffff, #e0f2f1, #b2ebf2, #e0f2f1)",
-  //   backgroundSize: "400% 400%",
-  //   animation: "waterFlow 10s ease infinite",
-  //   borderBottom: "1px solid #b2dfdb",
-  //   display: "flex",
-  //   justifyContent: "center"
-  // },
 
-  
+  subHeader: { 
+    padding: "80px 20px", 
+    // Light transparent overlay to separate content from image
+    background: "rgba(255, 255, 255, 0.3)", 
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+  },
+
   subHeaderInner: {
     display: "flex",
     alignItems: "center",
@@ -792,10 +649,15 @@ subHeader: {
     gap: "40px",
     width: "100%"
   },
-  subHeaderContent: { 
-    flex: 1,
-    textAlign: "center" 
-  },
+
+  // subHeaderTitle: {
+  //   fontSize: "3rem",
+  //   color: "#001233",
+  //   margin: "0 0 10px 0",
+  //   lineHeight: "1.2",
+  //   fontWeight: "800",
+  //   textShadow: "0 2px 4px rgba(255,255,255,0.5)"
+  // },
   subHeaderTitle: {
     fontSize: "2.5rem",
     color: "#023e8a",
@@ -803,99 +665,143 @@ subHeader: {
     lineHeight: "1.2"
   },
   subHeaderSubtitle: {
-    fontSize: "1.1rem",
-    color: "#4a5568",
-    fontWeight: "500"
+    fontSize: "1.2rem",
+    color: "#023e8a",
+    fontWeight: "600",
+    letterSpacing: "1px"
   },
+
   subHeaderSideImg: {
-    width: "200px",
-    height: "150px",
+    width: "220px",
+    height: "160px",
     borderRadius: "15px",
     objectFit: "cover",
-    boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
-    border: "3px solid #fff"
+    boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
+    border: "4px solid #fff"
   },
-  // importExportSection: { 
-  //   padding: "70px 20px", 
-  //   textAlign: "center",
-  //   background: "linear-gradient(-45deg, #e0f2f1, #e1f5fe, #b3e5fc, #e1f5fe)",
-  //   backgroundSize: "400% 400%",
-  //   animation: "waterFlow 12s ease infinite",
-  // },
 
-  
-  // sectionTitle: { 
-  //   fontSize: "2.5rem", 
-  //   marginBottom: "40px", 
-  //   color: "#023e8a",
-  //   textShadow: "1px 1px 2px rgba(0,0,0,0.05)" 
-  // },
-  // gridContainer: { display: "flex", justifyContent: "center", gap: "30px", flexWrap: "wrap" },
-  // importExportCard: { 
-  //   width: "100%", maxWidth: "340px", borderRadius: "20px", 
-  //   background: "linear-gradient(145deg, #ffffff, #f0f4f8)", 
-  //   boxShadow: "10px 10px 20px #d1d9e6, -10px -10px 20px #ffffff", 
-  //   cursor: "pointer",
-  //   overflow: "hidden"
-  // },
-  // imageWrapper: { height: "220px", overflow: "hidden" },
-  // importExportImg: { width: "100%", height: "100%", objectFit: "cover" },
-  // cardContent: { padding: "20px", textAlign: "center" },
-  
-  // aboutSection: { 
-  //   padding: "80px 20px", 
-  //   textAlign: "center",
-  //   background: "linear-gradient(-45deg, #fdfbfb, #ebedee, #e0f7fa, #ebedee)",
-  //   backgroundSize: "400% 400%",
-  //   animation: "waterFlow 15s ease infinite",
-  //   color: "#2d3748"
-  // },
+  importExportSection: { 
+    padding: "80px 20px", 
+    textAlign: "center",
+    background: "rgba(240, 249, 255, 0.5)", // Semi-transparent blue tint
+  },
 
-  aboutText: { maxWidth: "850px", margin: "15px auto", lineHeight: "1.8", fontSize: "1.1rem" },
-  
-  // contactSection: { 
-  //   padding: "80px 20px", 
-  //   textAlign: "center",
-  //   background: "linear-gradient(-45deg, #ebedee, #f1f5f9, #e1f5fe, #f1f5f9)",
-  //   backgroundSize: "400% 400%",
-  //   animation: "waterFlow 10s ease infinite",
-  // },
+  sectionTitle: { 
+    fontSize: "2.8rem", 
+    marginBottom: "40px", 
+    color: "#001233",
+    fontWeight: "bold"
+  },
 
-  
+  gridContainer: { 
+    display: "flex", 
+    justifyContent: "center", 
+    gap: "35px", 
+    flexWrap: "wrap" 
+  },
+
+  importExportCard: { 
+    width: "100%", 
+    maxWidth: "360px", 
+    borderRadius: "24px", 
+    background: "rgba(255, 255, 255, 0.9)", // Mostly solid white for text clarity
+    boxShadow: "0 15px 35px rgba(0,0,0,0.1)", 
+    cursor: "pointer",
+    overflow: "hidden",
+    transition: "transform 0.3s ease",
+    border: "1px solid rgba(255,255,255,0.3)"
+  },
+
+  imageWrapper: { height: "240px", overflow: "hidden" },
+  importExportImg: { width: "100%", height: "100%", objectFit: "cover" },
+  cardContent: { padding: "25px", textAlign: "center" },
+
+  aboutSection: { 
+    padding: "100px 20px", 
+    textAlign: "center",
+    background: "rgba(255, 255, 255, 0.7)", 
+    color: "#001233"
+  },
+
+  aboutText: { 
+    maxWidth: "850px", 
+    margin: "15px auto", 
+    lineHeight: "1.9", 
+    fontSize: "1.2rem",
+    fontWeight: "500"
+  },
+
+  contactSection: { 
+    padding: "100px 20px", 
+    textAlign: "center",
+    background: "rgba(235, 245, 255, 0.6)" 
+  },
+
   contactForm: { 
-    maxWidth: "550px", margin: "0 auto", display: "flex", 
-    flexDirection: "column", gap: "20px", padding: "30px",
-    background: "#ffffff", borderRadius: "15px", boxShadow: "0 10px 25px rgba(0,0,0,0.05)"
+    maxWidth: "550px", 
+    margin: "0 auto", 
+    display: "flex", 
+    flexDirection: "column", 
+    gap: "20px", 
+    padding: "40px",
+    background: "rgba(255, 255, 255, 0.95)", 
+    borderRadius: "20px", 
+    boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
+    
   },
-  input: { padding: "14px", border: "1px solid #cbd5e0", borderRadius: "10px", background: "#f8fafc" },
-  textarea: { padding: "14px", border: "1px solid #cbd5e0", borderRadius: "10px", background: "#f8fafc" },
-  submitBtn: { 
+
+  input: { 
     padding: "15px", 
-    background: "linear-gradient(90deg, #00b4d8 0%, #0077b6 100%)", 
-    color: "#fff", fontWeight: "bold", border: "none", borderRadius: "10px", 
-    cursor: "pointer", transition: "transform 0.2s ease" 
+    border: "1px solid #d1d9e6", 
+    borderRadius: "12px", 
+    background: "#fff",
+    fontSize: "16px"
   },
+
+  textarea: { 
+    padding: "15px", 
+    border: "1px solid #d1d9e6", 
+    borderRadius: "12px", 
+    background: "#fff",
+    fontSize: "16px"
+  },
+
+  submitBtn: { 
+    padding: "16px", 
+    background: "linear-gradient(135deg, #00b4d8 0%, #0077b6 100%)", 
+    color: "#fff", 
+    fontWeight: "bold", 
+    border: "none", 
+    borderRadius: "12px", 
+    cursor: "pointer", 
+    fontSize: "17px",
+    transition: "all 0.3s ease"
+  },
+
   footer: {
-    background: "#0d1b2a",
+    background: "rgba(13, 27, 42, 0.95)", 
     color: "#fff",
-    padding: "10px 20px",
+    padding: "25px 20px",
     textAlign: "center",
     fontSize: "14px",
-    marginTop: "16px",
+    backdropFilter: "blur(5px)"
   },
+
   footerTop: {
     display: "flex",
     justifyContent: "center",
-    gap: "25px",
+    gap: "30px",
     flexWrap: "wrap",
     alignItems: "center",
+    marginBottom: "10px"
   },
+
   footerBottom: {
-    marginTop: "5px",
     fontSize: "12px",
-    opacity: 0.8,
+    opacity: 0.7,
   },
 };
+
 
 
 export default TradingHome;

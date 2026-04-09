@@ -839,7 +839,7 @@ const ImportsExportsPage = () => {
           </div>
 
           {/* SLIDE 3: HCP PRODUCTS */}
-          <div style={getSlideStyle(3)}>
+          {/* <div style={getSlideStyle(3)}>
             {[
               "OXY-BESTOT", "GUTPRO", "ENGRO", "UNI-LIGHT", "NURI BSL", "ZEOLITE",
               "SAPONIN", "HC-BIO", "LIFE-HC", "PREMIX-SUPER C", "MAX C", "YUCA HONG",
@@ -849,16 +849,42 @@ const ImportsExportsPage = () => {
                 handleOpenBrochure(item, ["Imports", "HCP"]);
               })
             )}
-          </div>
+          </div> */}
+
+{/* SLIDE 3: HCP PRODUCTS */}
+<div style={getSlideStyle(3)}>
+  {[
+    "OXY-BESTOT", "GUTPRO", "ENGRO", "UNI-LIGHT", "NURI BSL", "ZEOLITE",
+    "SAPONIN", "HC-BIO", "LIFE-HC", "PREMIX-SUPER C", "MAX C", "YUCA HONG",
+    "DE-NO2", "GOLD-DINE", "UNI-BKC", "DEHP"
+  ].map((item) =>
+    renderCard(item, "Essential aquaculture healthcare solution.", () => {
+      // Removed handleOpenBrochure - now just updates the breadcrumb
+      setPath(["Imports", "HCP", item]); 
+    })
+  )}
+</div>
+          
 
           {/* SLIDE 6: EXPORTS */}
-          <div style={getSlideStyle(6)}>
+          {/* <div style={getSlideStyle(6)}>
             {["Shrimp", "Minerals", "Chemicals"].map((item) =>
               renderCard(item, `Top-grade ${item} processed for international export.`, () => {
                 handleOpenBrochure(item, ["Exports"]);
               })
             )}
-          </div>
+          </div> */}
+
+
+          {/* SLIDE 6: EXPORTS */}
+<div style={getSlideStyle(6)}>
+  {["Shrimp", "Minerals", "Chemicals"].map((item) =>
+    renderCard(item, `Top-grade ${item} processed for international export.`, () => {
+      // Removed handleOpenBrochure
+      setPath(["Exports", item]);
+    })
+  )}
+</div>
 
           {/* SLIDE 10: DYNAMIC BROCHURE VIEW */}
           <div style={getSlideStyle(10)}>
@@ -915,7 +941,8 @@ const Footer = () => (
 // --- STYLES ---
 const navStyles = {
   header: {
-    background: "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.95) 100%)",
+    // background: "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.95) 100%)",
+    background: "white", 
     color: "#180e0e",
     padding: "12px 20px",
     marginLeft: "-8px",
@@ -925,6 +952,7 @@ const navStyles = {
     top: 0,
     zIndex: 100,
     boxSizing: "border-box",
+    
   },
   headerInner: {
     display: "flex",
@@ -996,10 +1024,84 @@ const styles = {
   },
 };
 
+// const localStyles = {
+//   app: {
+//     fontFamily: "Arial, sans-serif",
+//     background: "linear-gradient(180deg, #e0f2f1 0%, #f0f7ff 100%)",
+//     paddingTop: "70px",
+//     minHeight: "100vh",
+//     overflowX: "hidden",
+//   },
+//   importExportSection: {
+//     padding: "60px 20px",
+//     textAlign: "center",
+//     minHeight: "calc(100vh - 150px)",
+//     transition: "all 0.5s ease",
+//   },
+//   sectionTitle: {
+//     fontSize: "36px",
+//     marginBottom: "50px",
+//     color: "#0d1b2a",
+//     fontWeight: "bold",
+//   },
+//   sliderWrapper: {
+//     position: "relative",
+//     width: "100%",
+//     maxWidth: "1000px",
+//     margin: "0 auto",
+//     overflow: "hidden",
+//   },
+//   slide: {
+//     width: "100%",
+//   },
+//   importExportCard: {
+//     display: "flex",
+//     flexDirection: "row",
+//     alignItems: "center",
+//     width: "100%",
+//     borderRadius: "15px",
+//     overflow: "hidden",
+//     background: "#fff",
+//     boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+//     cursor: "pointer",
+//     marginBottom: "30px",
+//     border: "2px solid #f0f0f0",
+//     transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease",
+//   },
+//   imageWrapper: {
+//     width: "250px",
+//     height: "180px",
+//     flexShrink: 0,
+//   },
+//   importExportImg: {
+//     width: "100%",
+//     height: "100%",
+//     objectFit: "cover",
+//     transition: "transform 0.5s ease",
+//   },
+//   cardContent: {
+//     padding: "30px",
+//     textAlign: "left",
+//     flex: 1,
+//   },
+//   cardText: {
+//     fontSize: "16px",
+//     color: "#4a5568",
+//     lineHeight: "1.6",
+//     margin: "10px 0 0 0",
+//   },
+// };
+
 const localStyles = {
   app: {
     fontFamily: "Arial, sans-serif",
-    background: "linear-gradient(180deg, #e0f2f1 0%, #f0f7ff 100%)",
+    // --- ADDED WATER BACKGROUND ---
+    backgroundImage: `url(${process.env.PUBLIC_URL + "/waterbg.jpeg"})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundAttachment: "fixed",
+    backgroundRepeat: "no-repeat",
+    // ------------------------------
     paddingTop: "70px",
     minHeight: "100vh",
     overflowX: "hidden",
@@ -1009,19 +1111,24 @@ const localStyles = {
     textAlign: "center",
     minHeight: "calc(100vh - 150px)",
     transition: "all 0.5s ease",
+    // Changed from solid gradient to semi-transparent glass effect
+    background: "rgba(255, 255, 255, 0.3)", 
+    backdropFilter: "blur(5px)", // Optional: adds a premium frosted look
   },
   sectionTitle: {
     fontSize: "36px",
     marginBottom: "50px",
     color: "#0d1b2a",
     fontWeight: "bold",
+    // Added text shadow to ensure title is readable over image
+    textShadow: "0 2px 4px rgba(255,255,255,0.8)",
   },
   sliderWrapper: {
     position: "relative",
     width: "100%",
     maxWidth: "1000px",
     margin: "0 auto",
-    overflow: "hidden",
+    overflow: "visible", // Changed to visible so shadows aren't clipped
   },
   slide: {
     width: "100%",
@@ -1033,8 +1140,9 @@ const localStyles = {
     width: "100%",
     borderRadius: "15px",
     overflow: "hidden",
-    background: "#fff",
-    boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
+    // Made cards more solid (0.95) so text remains very clear
+    background: "rgba(255, 255, 255, 0.95)", 
+    boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
     cursor: "pointer",
     marginBottom: "30px",
     border: "2px solid #f0f0f0",
@@ -1044,6 +1152,7 @@ const localStyles = {
     width: "250px",
     height: "180px",
     flexShrink: 0,
+    overflow: "hidden",
   },
   importExportImg: {
     width: "100%",
@@ -1063,5 +1172,6 @@ const localStyles = {
     margin: "10px 0 0 0",
   },
 };
+
 
 export default ImportsExportsPage;
