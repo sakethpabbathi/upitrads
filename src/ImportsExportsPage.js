@@ -317,14 +317,37 @@ const handleBreadcrumbClick = (index) => {
 </div>
 
 {/* SLIDE 8: NURSERY -> TOP ONE */}
-<div style={getSlideStyle(8)}>
+{/* <div style={getSlideStyle(8)}>
   {renderCard("Top One", "Premium Nursery formulation.", () => {
     // Direct to brochure
     setSelectedBrochure("UNIVANA P.jpg"); 
     setPath([...path, "Top One"]);
     setActiveSlide(10);
   })}
+</div> */}
+
+{/* SLIDE 8: NURSERY -> TOP ONE (Manual Gallery) */}
+<div style={getSlideStyle(8)}>
+  {renderCard(
+    "Top One", 
+    "Premium Nursery formulation.", 
+    () => {
+      // Set the manual grid object for Top One
+      setSelectedBrochure({
+        type: "grid",
+         main: "TPBOTH.png", // This is the large image at the bottom
+        images: ["TP100.png", "TP000.png"] // These show up in the grid above
+      }); 
+      
+      setPath([...path, "Top One"]);
+      setActiveSlide(10);
+    },
+    // Adding the manual card image for Slide 8 itself
+    process.env.PUBLIC_URL + "/fishone.jpg" 
+  )}
 </div>
+
+
 
 {/* SLIDE 9: GROWER -> VANNAMEI / TIGER */}
 <div style={getSlideStyle(9)}>
@@ -338,84 +361,6 @@ const handleBreadcrumbClick = (index) => {
 
 
 
-
-{/* SLIDE 10: CLEAN GRID VIEW */}
-{/* SLIDE 10: MERGED GALLERY + BROCHURE VIEW */}
-{/* <div style={getSlideStyle(10)}>
-  <div style={{ textAlign: "center", padding: "20px" }}>
-    
-    {selectedBrochure && selectedBrochure.type === "grid" ? (
-      
-      <div style={{ display: "flex", flexDirection: "column", gap: "40px", alignItems: "center" }}>
-        
-       
-        <div style={{ 
-          display: "grid", 
-          gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)", 
-          gap: "20px", 
-          maxWidth: "1000px" 
-        }}>
-          {selectedBrochure.images.map((img) => (
-            <div key={img} style={{ overflow: 'hidden', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-              <img 
-                src={process.env.PUBLIC_URL + "/" + img} 
-                style={{ width: "100%", display: "block", transition: "transform 0.3s" }} 
-                alt="Product Detail"
-                onMouseEnter={(e) => e.target.style.transform = "scale(1.05)"}
-                onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
-                onError={(e) => { e.target.style.display = 'none'; }}
-              />
-            </div>
-          ))}
-        </div>
-
-      
-        <img
-          src={process.env.PUBLIC_URL + "/" + selectedBrochure.main}
-          alt="Main Brochure"
-          style={{ 
-            maxWidth: "100%", 
-            height: "auto", 
-            borderRadius: "15px", 
-            boxShadow: "0 10px 30px rgba(0,0,0,0.2)" 
-          }}
-          onError={(e) => { e.target.src = process.env.PUBLIC_URL + "/waterbg.jpeg"; }}
-        />
-      </div>
-    ) : (
-      
-      <img
-        src={process.env.PUBLIC_URL + "/" + selectedBrochure}
-       
-        alt="Brochure"
-        style={{ maxWidth: "100%", height: "auto", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
-        onError={(e) => { e.target.src = process.env.PUBLIC_URL + "/waterbg.jpeg"; }}
-      />
-    )}
-
-    <div style={{ marginTop: "40px" }}>
-      <button
-        onClick={() => handleBreadcrumbClick(path.length - 2)}
-        style={{
-          padding: "12px 40px",
-          backgroundColor: "#00b4d8",
-          color: "white",
-          border: "none",
-          borderRadius: "30px",
-          cursor: "pointer",
-          fontWeight: "bold",
-          boxShadow: "0 4px 15px rgba(0, 180, 216, 0.4)"
-        }}
-      >
-        ← Back to List
-      </button>
-    </div>
-  </div>
-</div> */}
-
-
-{/* SLIDE 10: CLEANED GALLERY & BROCHURE VIEW */}
-{/* SLIDE 10: FINAL CLEANED VIEW */}
 <div style={getSlideStyle(10)}>
   <div style={{ textAlign: "center", padding: "20px" }}>
     
@@ -496,6 +441,9 @@ const handleBreadcrumbClick = (index) => {
     </div>
   </div>
 </div>
+
+
+{/* SLIDE 11: FULLY MANUAL MAPPING */}
 <div style={getSlideStyle(11)}>
   {(() => {
     const shrimpType = path[path.length - 1];
@@ -503,34 +451,52 @@ const handleBreadcrumbClick = (index) => {
     const tigerProducts = ["LA-ONE"];
     const productList = shrimpType === "Tiger" ? tigerProducts : vannameiProducts;
 
-    return productList.map((stage) =>
-      renderCard(`${shrimpType} - ${stage}`, `View brochure for ${stage}`, () => {
-        if (stage === "UNIVANA PEARL") {
-          // Merged: Sets type "grid" to trigger the gallery view in Slide 10
-          setSelectedBrochure({
-            type: "grid",
-            main: "UNIPEARL.jpg",
-            images: ["UP801.jpg", "UP802.jpg", "UP803.jpg", "UP804.jpg", "UP805.jpg", "UP802S.jpg"]
-          });
-        } 
-        else if (stage === "UNIVANA-P") {
-          setSelectedBrochure("UNIPEARL.jpg");
+    // --- MANUAL DATA MAPPING ---
+    // Define exactly what each card looks like and what it opens.
+    const productData = {
+      "UNIVANA PEARL": {
+        cardSrc: process.env.PUBLIC_URL + "/fishone.jpg",
+        brochure: {
+          type: "grid",
+          main: "UNIPEARL.jpg",
+          images: ["UP801.jpg", "UP802.jpg", "UP803.jpg", "UP804.jpg", "UP805.jpg", "UP802S.jpg"]
         }
-        else if (stage === "UNIVANAMI") {
-          setSelectedBrochure("UNIVANAMI.jpg");
-        } 
-        else {
-          const fileName = `${shrimpType.toLowerCase()}_${stage.toLowerCase().replace(/\s/g, "_")}`;
-          setSelectedBrochure(`${fileName}.png`);
-        }
-        
-        setPath([...path, stage]);
-        setActiveSlide(10);
-      })
-    );
+      },
+      "UNIVANA-P": {
+        cardSrc: process.env.PUBLIC_URL + "/fishone.jpg", 
+        brochure: "UNIVANA P.jpg"
+      },
+      "UNIVANAMI": {
+        cardSrc: process.env.PUBLIC_URL + "/fishone.jpg",
+        brochure: "UNIVANAMI.jpg"
+      },
+      "UNIVANA": {
+        cardSrc: process.env.PUBLIC_URL + "/fishone.jpg", 
+        brochure: "UNIPEARL.jpg" // Set manually to whatever image you want
+      },
+      "LA-ONE": {
+        cardSrc: process.env.PUBLIC_URL + "/fishone.jpg",
+        brochure: "LA-ONE.png"
+      }
+    };
+
+    return productList.map((stage) => {
+      const itemConfig = productData[stage];
+      if (!itemConfig) return null; // Safety check
+
+      return renderCard(
+        stage, // TITLE: Removed `${shrimpType} - ` prefix
+        `Technical specifications for ${stage}`, 
+        () => {
+          setSelectedBrochure(itemConfig.brochure);
+          setPath([...path, stage]);
+          setActiveSlide(10);
+        },
+        itemConfig.cardSrc // IMAGE: Direct manual source
+      );
+    });
   })()}
 </div>
-
 
    {/* SLIDE 5: FISH FEED PRODUCTS */}
           <div style={getSlideStyle(5)}>
@@ -571,39 +537,7 @@ const handleBreadcrumbClick = (index) => {
   )}
 </div>
 
-          {/* SLIDE 10: DYNAMIC BROCHURE VIEW */}
-          <div style={getSlideStyle(10)}>
-            <div style={{ textAlign: "center", padding: "20px" }}>
-              <img
-                src={process.env.PUBLIC_URL + "/" + selectedBrochure}
-                alt="Brochure"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "12px",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
-                }}
-                onError={(e) => { e.target.src = process.env.PUBLIC_URL + "/Brochure Engro.png"; }}
-              />
-              <div style={{ marginTop: "30px" }}>
-                <button
-                  onClick={() => handleBreadcrumbClick(path.length - 2)}
-                  style={{
-                    padding: "12px 30px",
-                    backgroundColor: "#00b4d8",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "25px",
-                    cursor: "pointer",
-                    fontWeight: "bold",
-                    fontSize: "16px",
-                  }}
-                >
-                  ← Back to List
-                </button>
-              </div>
-            </div>
-          </div>
+      
         </div>
       </section>
       <Footer />
