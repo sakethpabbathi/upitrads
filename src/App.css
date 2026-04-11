@@ -1,6 +1,8 @@
-
+* {
+  font-family: 'Times New Roman', Times, serif !important;
+}
 body{
-  background: rgb(252, 253, 254);
+  background:rgb(13, 27, 42);
 
 }
 html {

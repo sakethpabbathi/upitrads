@@ -127,41 +127,48 @@ const navLinks = [
 };
 
 
+// const SubHeader = () => {
+//   const isMobile = window.innerWidth <= 768;
+
+//   return (
+//     <section style={styles.subHeader}>
+//       <div style={styles.subHeaderInner}>
+//         {/* Centered Hero Image */}
+//         <img 
+//           src={process.env.PUBLIC_URL + "/shipbg.jpeg"} 
+//           alt="Seafood Hero" 
+//           style={{
+//             ...styles.subHeaderSideImg,
+//             width: isMobile ? "90%" : "800px", // Larger width for the center image
+//             height: isMobile ? "250px" : "450px", // Adjusted height for impact
+//             margin: "0 auto",
+//             display: "block"
+//           }} 
+//         />
+//       </div>
+//     </section>
+//   );
+// };
 
 // const SubHeader = () => {
 //   const isMobile = window.innerWidth <= 768;
 
 //   return (
 //     <section style={styles.subHeader}>
-//       <div style={{
-//         ...styles.subHeaderInner,
-//         flexDirection: isMobile ? "column" : "row"
-//       }}>
-//         {/* Left Image */}
-//         {!isMobile && (
-//           <img 
-//             src={process.env.PUBLIC_URL + "/sunsetfishing.jpg"} 
-//             alt="Seafood Left" 
-//             style={styles.subHeaderSideImg} 
-//           />
-//         )}
-
-//         <div style={styles.subHeaderContent}>
-//           <h1 style={styles.subHeaderTitle}>
-//             Trusted Global Supply<br />Fresh Seafood
-//           </h1>
-//           <p style={styles.subHeaderSubtitle}>
-//             Premium Fish • Quality Prawns • Worldwide Export
-//           </p>
-//         </div>
-
-//         {/* Right Image */}
+//       <div style={styles.subHeaderInner}>
 //         <img 
-//           src={process.env.PUBLIC_URL + "/sunsetfishing.jpg"} 
-//           alt="Seafood Right" 
+//           src={process.env.PUBLIC_URL + "/ship.jpeg"} 
+//           alt="Seafood Hero" 
 //           style={{
 //             ...styles.subHeaderSideImg,
-//             marginTop: isMobile ? "20px" : "0"
+//             width: isMobile ? "90%" : "850px", // Slightly wider for better presence
+//             height: isMobile ? "250px" : "450px",
+//             margin: "0 auto",
+//             display: "block",
+//             objectFit: "cover",      // CRITICAL: This removes the black bars
+//             backgroundColor: "transparent", 
+//             border: "none",
+//             boxShadow: "none" 
 //           }} 
 //         />
 //       </div>
@@ -171,28 +178,18 @@ const navLinks = [
 
 
 const SubHeader = () => {
-  const isMobile = window.innerWidth <= 768;
-
   return (
     <section style={styles.subHeader}>
       <div style={styles.subHeaderInner}>
-        {/* Centered Hero Image */}
         <img 
-          src={process.env.PUBLIC_URL + "/busyshipport.png"} 
-          alt="Seafood Hero" 
-          style={{
-            ...styles.subHeaderSideImg,
-            width: isMobile ? "90%" : "800px", // Larger width for the center image
-            height: isMobile ? "250px" : "450px", // Adjusted height for impact
-            margin: "0 auto",
-            display: "block"
-          }} 
+          src={process.env.PUBLIC_URL + "/shipbg.jpeg"} 
+          alt="UPIN Trading Shipping" 
+          style={styles.fullScreenImg} 
         />
       </div>
     </section>
   );
 };
-
 
 const ImportExportSection = () => {
   const navigate = useNavigate();
@@ -457,8 +454,8 @@ const ContactSection = () => {
 const Footer = () => (
   <footer style={styles.footer}>
     <div style={styles.footerTop}>
-        <span>UPIN TRADING CORPORATION</span>
-        <span>📍 Hyderabad, India</span>
+        <span>UPIN TRADING CORPORATION<br></br>
+       📍 Chennai, India</span>
         {/* <span>📧 upintrad@123.com</span>
         <span>📞 +91 93477 19244</span> */}
       </div>
@@ -472,8 +469,65 @@ const Footer = () => (
 
 const styles = {
   // Global Layout & Background
+
+
+  // Hero / SubHeader Section
+  // subHeader: { 
+  //   padding: "40px 20px", 
+  //   background: "transparent", // Removed the white tint
+  //   opacity: 0.5, // Full opacity for the image
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   textAlign: "center",
+  // },
+  
+  // subHeaderInner: {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   maxWidth: "1200px",
+  //   width: "100%"
+  // },
+
+
+subHeader: { 
+    padding: "0",              // Removed padding to allow edge-to-edge
+    margin: "0",
+    width: "100%",
+    overflow: "hidden",
+    background: "transparent",
+  },
+  
+  subHeaderInner: {
+    width: "100%",
+    height: "auto",
+    display: "flex",
+    opacity : 0.5, // Slight opacity for a subtle effect
+  },
+
+  fullScreenImg: {
+    width: "100vw",            // 100% of the viewport width
+    height: "80vh",           // 80% of the viewport height (adjust to 100vh for total screen)
+    objectFit: "cover",       // Crops black bars and fills the space
+    display: "block",
+    border: "none",
+    // Optional: if you want rounded corners, keep them; otherwise set to 0
+    borderRadius: "0px",       
+  },
+  
+  subHeaderSideImg: {
+    borderRadius: "24px", 
+    objectFit: "cover", // This crops the black bars from your image
+    display: "block",
+    margin: "0 auto",
+    backgroundColor: "transparent",
+    border: "none",
+    // This shadow makes the image 'pop' off the water background
+    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" 
+  },
   app: { 
-    fontFamily: "'Segoe UI', Roboto, sans-serif", 
+     fontFamily: "'Times New Roman'",
+    // fontFamily: "'Times New Roman', Times, serif",
     backgroundImage: `url(${process.env.PUBLIC_URL + "/waterbg.jpeg"})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -510,6 +564,7 @@ const styles = {
   },
   nav: { display: "flex", alignItems: "center", gap: "20px" },
   navLink: {
+    fontFamily: "'Times New Roman'",
     color: "#023e8a",
     textDecoration: "none",
     fontWeight: "bold",
@@ -531,21 +586,21 @@ const styles = {
   },
 
   // Hero / SubHeader
-  subHeader: { 
-    padding: "80px 20px", 
-    background: "rgba(255, 255, 255, 0.3)", 
-    display: "flex",
-    justifyContent: "center",
-    textAlign: "center",
-  },
-  subHeaderInner: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    maxWidth: "1200px",
-    gap: "40px",
-    width: "100%"
-  },
+  // subHeader: { 
+  //   padding: "80px 20px", 
+  //   background: "rgba(255, 255, 255, 0.3)", 
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   textAlign: "center",
+  // },
+  // subHeaderInner: {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   maxWidth: "1200px",
+  //   gap: "40px",
+  //   width: "100%"
+  // },
   subHeaderTitle: {
     fontSize: "2.5rem",
     color: "#023e8a",
@@ -558,14 +613,14 @@ const styles = {
     fontWeight: "600",
     letterSpacing: "1px"
   },
-  subHeaderSideImg: {
-    width: "220px",
-    height: "160px",
-    borderRadius: "15px",
-    objectFit: "cover",
-    // boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
-    // border: "4px solid #fff"
-  },
+  // subHeaderSideImg: {
+  //   width: "220px",
+  //   height: "160px",
+  //   borderRadius: "15px",
+  //   objectFit: "cover",
+  //   // boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
+  //   // border: "4px solid #fff"
+  // },
 
   // Import / Export Section & Small Cards
   importExportSection: { 
@@ -712,6 +767,7 @@ const styles = {
     boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
   },
   input: { 
+    fontFamily: "'Times New Roman'",
     padding: "15px", 
     border: "1px solid #d1d9e6", 
     borderRadius: "12px", 
@@ -719,6 +775,7 @@ const styles = {
     fontSize: "16px"
   },
   textarea: { 
+    fontFamily: "'Times New Roman'",
     padding: "15px", 
     border: "1px solid #d1d9e6", 
     borderRadius: "12px", 
@@ -726,6 +783,7 @@ const styles = {
     fontSize: "16px"
   },
   submitBtn: { 
+    fontFamily: "'Times New Roman'",
     padding: "16px", 
     background: "linear-gradient(135deg, #00b4d8 0%, #0077b6 100%)", 
     color: "#fff", 
@@ -739,12 +797,13 @@ const styles = {
 
   // Footer
   footer: {
-    background: "rgba(13, 27, 42, 0.95)", 
+    // background: "rgba(13, 27, 42, 0.95)", 
     color: "#fff",
     padding: "25px 20px",
     textAlign: "center",
     fontSize: "14px",
-    backdropFilter: "blur(5px)"
+    backdropFilter: "blur(5px)",
+    background:"transparent",
   },
   footerTop: {
     display: "flex",

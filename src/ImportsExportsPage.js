@@ -106,28 +106,6 @@ const ImportsExportsPage = () => {
   }, []);
 
 
-// const handleBreadcrumbClick = (index) => {
-//   const newPath = path.slice(0, index + 1);
-//   setPath(newPath);
-  
-  // Slide Mapping based on depth
-  // if (newPath.length === 1) setActiveSlide(0); // Imports & Exports
-//   if (newPath.length === 2) {
-//     if (newPath[1] === "Imports") setActiveSlide(1);
-//     if (newPath[1] === "Exports") setActiveSlide(6);
-//   }
-//   if (newPath.length === 3) {
-//     if (newPath[2] === "Prawn Feed") setActiveSlide(7);
-//     if (newPath[2] === "Fish Feed") setActiveSlide(5);
-//   }
-//   if (newPath.length === 4) {
-//     if (newPath[3] === "Nursery Feed") setActiveSlide(8); // New Slide for Top One
-//     if (newPath[3] === "Grower Feed") setActiveSlide(9);  // New Slide for Vannamei/Tiger
-//   }
-//   if (newPath.length === 5) {
-//      if (newPath[4] === "Vannamei" || newPath[4] === "Tiger") setActiveSlide(11); // New Slide for 4 cards
-//   }
-// };
 
 
 const handleBreadcrumbClick = (index) => {
@@ -179,12 +157,23 @@ const handleBreadcrumbClick = (index) => {
 
   
   // UNIQUE BROCHURE HANDLER: Sets image AND triggers the slide
-  const handleOpenBrochure = (productName, currentPath) => {
-    setSelectedBrochure(`${productName}.png`); // Matches your filename
-    setPath([...currentPath, productName]);
-    setActiveSlide(10); // Slides to brochure view
-  };
+  // const handleOpenBrochure = (productName, currentPath) => {
+  //   setSelectedBrochure(`${productName}.png`); // Matches your filename
+  //   setPath([...currentPath, productName]);
+  //   setActiveSlide(10); // Slides to brochure view
+  // };
 
+const handleOpenBrochure = (data, currentPath) => {
+  // If data is just a string (e.g. "Marian Feed"), add .png. 
+  // If it's already an object (the Grid), just use it.
+  const finalData = typeof data === "string" ? `${data}.png` : data;
+  
+  setSelectedBrochure(finalData);
+  setPath([...currentPath, typeof data === "string" ? data : "Details"]); 
+  setActiveSlide(10);
+};
+
+  
   const getSlideStyle = (index) => {
     const isActive = activeSlide === index;
     const isPast = activeSlide > index;
@@ -214,6 +203,9 @@ const handleBreadcrumbClick = (index) => {
     feed: process.env.PUBLIC_URL + "/feedcardimg.png",
     hcp: process.env.PUBLIC_URL + "/hcpcardimg.png",
     fishfeed: process.env.PUBLIC_URL + "/fishfeedcardimg.jpg",
+    // marian: process.env.PUBLIC_URL + "/marianfishfeedAi.png",
+       marian: process.env.PUBLIC_URL + "/marianfeedimg.jpg",
+    freshwater: process.env.PUBLIC_URL + "/freshwatercard.jpg",
     prawnfeed: process.env.PUBLIC_URL + "/prawnfeedcardimg.jpg",
     nursery: process.env.PUBLIC_URL + "/nurseryprawnfeedcardimg.webp",
     grower: process.env.PUBLIC_URL + "/growerprawnfeedcardimg.jpg",
@@ -312,7 +304,7 @@ const handleBreadcrumbClick = (index) => {
               }}
               onClick={() => handleBreadcrumbClick(index)}
             >
-              {item} {index < path.length - 1 && " / "}
+              {item} {index < path.length - 1 && " > "}
             </span>
           ))}
         </h2>
@@ -329,6 +321,7 @@ const handleBreadcrumbClick = (index) => {
               setPath(["/"]);
             })}
           </div>
+
 
           {/* SLIDE 1: IMPORTS */}
           <div style={getSlideStyle(1)}>
@@ -395,17 +388,6 @@ const handleBreadcrumbClick = (index) => {
 
 
 
-{/* SLIDE 9: GROWER -> VANNAMEI / TIGER */}
-{/* 
-<div style={getSlideStyle(9)}>
-  {["Vannamei", "Tiger"].map((type) =>
-    renderCard(type, `Specialized ${type} Grower feed.`, () => {
-      setActiveSlide(11);
-      setPath([...path, type]);
-    })
-  )}
-</div>
- */}
 
 {/* SLIDE 9: GROWER -> VANNAMEI / TIGER */}
 <div style={getSlideStyle(9)}>
@@ -430,30 +412,33 @@ const handleBreadcrumbClick = (index) => {
   )}
 </div>
 
+
 {/* SLIDE 10: BROCHURE / GRID VIEWER */}
 <div style={getSlideStyle(10)}>
-  <div style={{ textAlign: "center", padding: "20px" }}>
+  {/* REMOVED: padding from outer div if it causes white gaps */}
+  <div style={{ textAlign: "center", padding: "20px", backgroundColor: "transparent" }}>
     
-    {/* 1. GRID VIEW: Updated to handle Object {url, name} */}
     {selectedBrochure && selectedBrochure.type === "grid" ? (
       <div style={{ display: "flex", flexDirection: "column", gap: "40px", alignItems: "center" }}>
         <div style={{ 
           display: "grid", 
-          gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)", 
-          gap: "20px", 
-          maxWidth: "1000px" 
+          gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", 
+          gap: "30px", 
+          width: "100%",
+          maxWidth: "1100px"
         }}>
           {selectedBrochure.images.map((img, index) => {
-            // FIX: Extract URL and Name from the object
             const imgSrc = typeof img === 'string' ? img : img.url;
             const imgName = typeof img === 'string' ? "" : img.name;
 
             return (
               <div key={index} style={{ 
-                backgroundColor: '#fff',
-                borderRadius: '12px', 
-                boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
-                paddingBottom: imgName ? '15px' : '0',
+                // CHANGED: backgroundColor to transparent
+                backgroundColor: 'transparent',
+                borderRadius: '16px', 
+                // OPTIONAL: Reduced shadow opacity since background is gone
+                boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
+                paddingBottom: imgName ? '20px' : '0',
                 overflow: 'hidden'
               }}>
                 <div style={{ overflow: 'hidden' }}>
@@ -461,25 +446,25 @@ const handleBreadcrumbClick = (index) => {
                     src={process.env.PUBLIC_URL + "/" + imgSrc} 
                     style={{ 
                       width: "100%", 
-                      height: isMobile ? "150px" : "220px",
-                      objectFit: "cover",
+                      height: isMobile ? "300px" : "450px", 
+                      objectFit: "contain", 
+                      // CHANGED: backgroundColor to transparent
+                      backgroundColor: "transparent",
                       display: "block", 
                       transition: "transform 0.3s" 
                     }} 
                     alt={imgName || "Product Detail"}
-                    onMouseEnter={(e) => e.target.style.transform = "scale(1.05)"}
+                    onMouseEnter={(e) => e.target.style.transform = "scale(1.02)"}
                     onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
-                    onError={(e) => { e.target.src = ''; }}
                   />
                 </div>
-                {/* MANUAL NAME DISPLAYED HERE */}
                 {imgName && (
                   <p style={{ 
-                    marginTop: "12px", 
-                    fontSize: "14px", 
+                    marginTop: "15px", 
+                    fontSize: "18px", 
                     fontWeight: "bold", 
-                    color: "#2c3e50",
-                    padding: "0 5px"
+                    // Make sure color is visible against your app's main background
+                    color: "#2c3e50" 
                   }}>
                     {imgName}
                   </p>
@@ -489,61 +474,58 @@ const handleBreadcrumbClick = (index) => {
           })}
         </div>
         
-        {/* Main Banner Image below grid (Optional) */}
         {selectedBrochure.main && (
           <img
             src={process.env.PUBLIC_URL + "/" + selectedBrochure.main}
             alt=""
-            style={{ maxWidth: "100%", height: "auto", borderRadius: "15px", boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
-            onError={(e) => { e.target.style.display = 'none'; }}
+            style={{ 
+              width: "100%", 
+              maxWidth: "1100px", 
+              height: "auto", 
+              borderRadius: "15px", 
+              // CHANGED: backgroundColor to transparent if applicable
+              backgroundColor: "transparent",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.2)" 
+            }}
           />
         )}
       </div>
     ) : 
     
-    /* 2. ARRAY VIEW: Still works for HCP items like MAX C */
-    Array.isArray(selectedBrochure) ? (
+    (Array.isArray(selectedBrochure) || typeof selectedBrochure === 'string') && (
       <div style={{ display: "flex", flexDirection: "column", gap: "30px", alignItems: "center" }}>
-        {selectedBrochure.map((img, index) => (
+        {(Array.isArray(selectedBrochure) ? selectedBrochure : [selectedBrochure]).map((img, index) => (
           <img 
             key={index}
             src={process.env.PUBLIC_URL + "/" + img} 
             style={{ 
-              maxWidth: "100%", 
+              width: "100%", 
+              maxWidth: "1000px", 
               height: "auto", 
               borderRadius: "12px", 
-              boxShadow: "0 10px 30px rgba(0,0,0,0.15)" 
+              // CHANGED: Added transparent background just in case
+              backgroundColor: "transparent",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.2)" 
             }} 
             alt=""
-            onError={(e) => { e.target.src = ''; }}
           />
         ))}
       </div>
-    ) : 
-    
-    /* 3. SINGLE VIEW: For strings */
-    typeof selectedBrochure === 'string' && (
-      <img
-        src={process.env.PUBLIC_URL + "/" + selectedBrochure}
-        alt=""
-        style={{ maxWidth: "100%", height: "auto", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
-        onError={(e) => { e.target.src = ''; }}
-      />
     )}
 
     {/* BACK BUTTON */}
-    <div style={{ marginTop: "40px" }}>
+    <div style={{ marginTop: "50px" }}>
       <button
         onClick={() => handleBreadcrumbClick(path.length - 2)}
         style={{
-          padding: "12px 40px",
+          padding: "15px 50px",
           backgroundColor: "#00b4d8",
           color: "white",
           border: "none",
           borderRadius: "30px",
           cursor: "pointer",
           fontWeight: "bold",
-          boxShadow: "0 4px 15px rgba(0, 180, 216, 0.4)"
+          fontSize: "16px"
         }}
       >
         ← Back to List
@@ -570,12 +552,12 @@ const handleBreadcrumbClick = (index) => {
         }
       },
       "UNIVANA-P": {
-        cardSrc: process.env.PUBLIC_URL + "/univanapcardimg1.png",  
+        cardSrc: process.env.PUBLIC_URL + "/univanapcards.png",  
         brochure: "UNIVANA P.jpg"
       },
       
       "UNIVANAMI": {
-        cardSrc: process.env.PUBLIC_URL + "/univanamicardimgs.png",
+        cardSrc: process.env.PUBLIC_URL + "/univanamicardss.png",
         brochure: "UNIVANAMI.jpg"
       },
       "UNIVANA": {
@@ -584,7 +566,7 @@ const handleBreadcrumbClick = (index) => {
       },
       // --- UPDATED LA-ONE TO GRID MODE ---
       "LA-ONE": {
-        cardSrc: process.env.PUBLIC_URL + "/fishone.jpg",
+        cardSrc: process.env.PUBLIC_URL + "/laonecards.png",
         brochure: {
           type: "grid",
           // main: "LAONE.jpg", // This is the large one at the bottom
@@ -599,7 +581,7 @@ const handleBreadcrumbClick = (index) => {
 
       return renderCard(
         stage, 
-        `Technical specifications for ${stage}`, 
+        ``, 
         () => {
           setSelectedBrochure(itemConfig.brochure);
           setPath([...path, stage]);
@@ -612,97 +594,140 @@ const handleBreadcrumbClick = (index) => {
 </div>
 
 
-   {/* SLIDE 5: FISH FEED PRODUCTS */}
-          <div style={getSlideStyle(5)}>
-            {renderCard("Marian Feed", "High-protein formula for Marian species.", () => {
-              handleOpenBrochure("Marian Feed", ["Imports", "Feed", "Fish Feed"]);
-            })}
-            {renderCard("Fresh Water Fish Feed", "Balanced diet for diverse environments.", () => {
-              handleOpenBrochure("Fresh Water Fish Feed", ["Imports", "Feed", "Fish Feed"]);
-            })}
-          </div>
 
-        
+
+{/* SLIDE 5: FISH FEED PRODUCTS */}
+<div style={getSlideStyle(5)}>
+  {renderCard(
+    "Marian Feed", 
+    "High-protein formula for Marian species.", 
+    () => {
+      handleOpenBrochure(
+        {
+          type: "grid",
+          main: "", // The large featured image at the bottom
+          images: [
+            { url: "marinefishcard.png", name: "Marian Starter" },
+            { url: "marinefishcardimg.png", name: "Marian Grower" },
+            { url: "marinefeedseed.jpg", name: "Marian Finisher" }
+          ]
+        }, 
+        ["Imports", "Feed", "Fish Feed"]
+      );
+    },
+    images.marian // Card background
+  )}
+
+  {renderCard(
+    "Fresh Water Fish Feed", 
+    "Balanced diet for diverse environments.", 
+    () => {
+      handleOpenBrochure(
+        {
+          type: "grid",
+          main: "freshwater_main.jpg", // The large featured image at the bottom
+          images: [
+            { url: "freshwatercard.png" },
+            { url: "freshwaterseeds.jpg" },
+            // { url: "fw3.jpg", name: "Catfish Feed" }
+            
+          ]
+        }, 
+        ["Imports", "Feed", "Fish Feed"]
+      );
+    },
+    images.freshwater // Card background
+  )}
+</div>
+
 
 <div style={getSlideStyle(3)}>
   {(() => {
     const disabledItems = [
-      "OXY-BESTOT", "ZEOLITE", "SAPONIN", "HC-BIO", 
-      "LIFE-HC", "PREMIX-SUPER C", "DE-NO2", "DEHP"
+        
+        
     ];
 
     const hcpData = {
       "OXY-BESTOT": { 
-        card: "hcp.jpeg", 
-        desc: "Advanced oxygen booster for pond stability." 
+        card: "Bestoto2.png", 
+        desc: "Advanced oxygen booster for pond stability." ,
+        brochure: { type: "grid", main: "", images: ["oxybestotimg.jpg"] }
       },
       "GUTPRO": {
-        card: "hcp.jpeg",
+        card: "gutproicon.png",
         desc: "Probiotic supplement for better gut health.",
         brochure: { type: "grid", main: "Gutprobro.png", images: ["Gutpro.jpg"] }
       },
       "ENGRO": {
-        card: "hcp.jpeg", 
+        card: "engroicon.png", 
         desc: "Growth promoter for aquaculture species.",
-        brochure: ["labelengro.jpg","Gutprobro.png"] 
+        brochure: ["labelengro.jpg","Engrobro.png"] 
       },
       "UNI-LIGHT": {
-        card: "hcp.jpeg", 
+        card: "unilighticon.png", 
         desc: "Water conditioner for light intensity management.",
         brochure: ["Unilight.jpg","UnilightBro.jpg"] 
       },
       "NURI BSL": {
-        card: "hcp.jpeg", 
+        card: "nuribslicon.png", 
         desc: "Essential nutrients for healthy shrimp growth.",
         brochure: ["Nuribsl.jpg","NuriBsl.png"] 
       },
       "ZEOLITE": { 
-        card: "hcp.jpeg", 
-        desc: "Natural mineral for water purification." 
+        card: "zeoliteicon.png", 
+        desc: "Natural mineral for water purification." ,
+        brochure: { type: "grid", main: "", images: ["zeoliteimg.jpg"] }
       },
       "SAPONIN": { 
-        card: "hcp.jpeg", 
-        desc: "Organic extract for eliminating unwanted fish." 
+        card: "saponinicon.png", 
+        desc: "Organic extract for eliminating unwanted fish." ,
+        brochure: { type: "grid", main: "", images: ["saponinimg.jpg","saponinimg1.png"] }
       },
       "HC-BIO": { 
-        card: "hcp.jpeg", 
-        desc: "Concentrated microbial solution for waste." 
+        card: "hcbioicon.png", 
+        desc: "Concentrated microbial solution for waste." ,
+        brochure: { type: "grid", main: "", images: ["hcbioimg.png"] }
       },
       "LIFE-HC": { 
-        card: "hcp.jpeg", 
-        desc: "Vital health support for pond ecosystems." 
+        card: "lifehcicon.png", 
+        desc: "Vital health support for pond ecosystems." ,
+        brochure: { type: "grid", main: "", images: ["lifehcimg.jpg"] }
       },
       "PREMIX-SUPER C": { 
-        card: "hcp.jpeg", 
-        desc: "High potency Vitamin C for stress relief." 
+        card: "supercicon.png", 
+        desc: "High potency Vitamin C for stress relief." ,
+        brochure: { type: "grid", main: "", images: ["superc.png"] }
       },
       "MAX C": { 
-        card: "hcp.jpeg", 
+        card: "maxcicon.png", 
         desc: "Maximum strength Vitamin C for immunity.",
         brochure: ["labelmaxc.jpg","MaxCBro.png"] 
       },
       "YUCA HONG": { 
-        card: "hcp.jpeg", 
+        card: "yucahongicon.png", 
         desc: "Natural ammonia binder for clean water.",
         brochure: ["yucalabel.jpg","yucabro.png"] 
       },
       "DE-NO2": { 
-        card: "hcp.jpeg", 
-        desc: "Effective nitrite reduction formula." 
+        card: "deno2icon.png", 
+        desc: "Effective nitrite reduction formula." ,
+        brochure: { type: "grid", main: "", images: ["deno2.jpg"] }
       },
       "GOLD-DINE": { 
-        card: "hcp.jpeg", 
+        card: "golddineicon.png", 
         desc: "Iodine-based sanitizer for disease control.",
         brochure: "Goldenbro.jpg" 
       },
       "UNI-BKC": {
-        card: "hcp.jpeg", 
+        card: "unibkcicon.png", 
         desc: "Broad-spectrum disinfectant for pond safety.",
         brochure: ["Bkcbro.png"] 
       },
       "DEHP": { 
-        card: "hcp.jpeg", 
-        desc: "Specialized treatment for aquaculture health." 
+        card: "dehpicon.png", 
+        desc: "Specialized treatment for aquaculture health." ,
+        brochure: { type: "grid", main: "", images: ["dehpimg1.jpg"] }
       }
     };
 
@@ -752,7 +777,7 @@ const handleBreadcrumbClick = (index) => {
 
 
 {/* SLIDE 6: EXPORTS */}
-<div style={getSlideStyle(6)}>
+{/* <div style={getSlideStyle(6)}>
   {(() => {
     // Manually defined data with labels for the grid viewer
     const exportData = {
@@ -760,11 +785,11 @@ const handleBreadcrumbClick = (index) => {
         type: "grid",
         main: "shrimp_main.jpg",
         images: [
-          { url: "shrimp1.jpg", name: "Vannamei Shrimp" },
-          { url: "shrimp2.jpg", name: "Tiger Shrimp" },
-          { url: "shrimp3.jpg", name: "Head-on Shell-on" },
-          { url: "shrimp4.jpg", name: "PUD Shrimp" },
-          { url: "shrimp5.jpg", name: "Cooked Shrimp" }
+          { url: "shrimp1.jpg" },
+          { url: "shrimp2.jpg" },
+          { url: "shrimp3.jpg"},
+          { url: "shrimp4.jpg" },
+          { url: "shrimp5.jpg" }
         ]
       },
       "Minerals": {
@@ -782,10 +807,10 @@ const handleBreadcrumbClick = (index) => {
         type: "grid",
         main: "chem_main.jpg",
         images: [
-          { url: "chem1.jpg", name: "Water Treatment" },
-          { url: "chem2.jpg", name: "Soil Conditioner" },
-          { url: "chem3.jpg", name: "Disinfectant" },
-          { url: "chem4.jpg", name: "Oxygen Enhancer" }
+          { url: "cacl2chemical.jpeg", name: "Calcium Chloride" },
+          { url: "mgcl2chemical.jpeg", name: "Magnesium Chloride" },
+          // { url: "chem3.jpg", name: "Disinfectant" },
+          // { url: "chem4.jpg", name: "Oxygen Enhancer" }
         ]
       }
     };
@@ -806,7 +831,65 @@ const handleBreadcrumbClick = (index) => {
     );
   })()}
 </div>
-      
+       */}
+
+{/* SLIDE 6: EXPORTS */}
+<div style={getSlideStyle(6)}>
+  {(() => {
+    // Manually defined data with cardImg added for each category
+    const exportData = {
+      "Shrimp": {
+        cardImg: "shrimpcard.jpg", // Manual card image for Shrimp
+        type: "grid",
+        main: "shrimp_main.jpg",
+        images: [
+          { url: "shrimp1.jpg" },
+          { url: "shrimp2.jpg" },
+          { url: "shrimp3.jpg"},
+          { url: "shrimp4.jpg" },
+          { url: "shrimp5.jpg" }
+        ]
+      },
+      "Minerals": {
+        cardImg: "mineralscard.jpg", // Manual card image for Minerals
+        type: "grid",
+        main: "minerals_main.jpg",
+        images: [
+          { url: "lightgreenquartz.jpeg", name: "Light Green Quartz" },
+          { url: "mileyquartz.jpeg", name: "Milky Quartz" },
+          { url: "pinkquartz.jpeg", name: "Pink Quartz" },
+          { url: "quartzbgrade.jpeg", name: "Quartz B-Grade" },
+          { url: "quartzgranual.jpeg", name: "Quartz Granules" }
+        ]
+      },
+      "Chemicals": {
+        cardImg: "chemicalcard.jpg", // Manual card image for Chemicals
+        type: "grid",
+        main: "chem_main.jpg",
+        images: [
+          { url: "cacl2chemical.jpeg", name: "Calcium Chloride" },
+          { url: "mgcl2chemical.jpeg", name: "Magnesium Chloride" }
+        ]
+      }
+    };
+
+    return Object.keys(exportData).map((item) => {
+      const config = exportData[item];
+      return renderCard(
+        item,
+        `Top-grade ${item} processed for international export.`,
+        () => {
+          setSelectedBrochure(config);
+          setPath(["Exports", item]);
+          setActiveSlide(10);
+        },
+        process.env.PUBLIC_URL + "/" + config.cardImg // Passing the manual card image here
+      );
+    });
+  })()}
+</div>
+
+       
         </div>
       </section>
       <Footer />
@@ -814,23 +897,37 @@ const handleBreadcrumbClick = (index) => {
   );
 };
 
+// const Footer = () => (
+//   <footer style={styles.footer}>
+//     <div style={styles.footerTop}>
+//       <span>UPIN TRADING CORPORATION</span>
+//       <span>📍 Hyderabad, India</span>
+//     </div>
+//     <p style={styles.footerBottom}>
+//       © 2026 UPIN Tradeing Corporation. All Rights Reserved.
+//     </p>
+//   </footer>
+// );
+
+
 const Footer = () => (
   <footer style={styles.footer}>
     <div style={styles.footerTop}>
-      <span>UPIN TRADING CORPORATION</span>
-      <span>📍 Hyderabad, India</span>
-    </div>
-    <p style={styles.footerBottom}>
-      © 2026 UPIN Tradeing Corporation. All Rights Reserved.
-    </p>
+        <span>UPIN TRADING CORPORATION<br></br>
+       📍 Chennai, India</span>
+        {/* <span>📧 upintrad@123.com</span>
+        <span>📞 +91 93477 19244</span> */}
+      </div>
+      <p style={styles.footerBottom}>
+        © 2026 UPIN Tradeing Corporation. All Rights Reserved.
+      </p>
   </footer>
 );
 
+
+
 // --- STYLES ---
 const navStyles = {
-
-
-  
   header: {
     // background: "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.95) 100%)",
     background: "white", 
@@ -842,11 +939,13 @@ const navStyles = {
     boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
     top: 0,
     zIndex: 100,
+    fontFamily: "'Times New Roman'",
     boxSizing: "border-box",
     
   },
   headerInner: {
     display: "flex",
+    fontFamily: "'Times New Roman'",
     justifyContent: "space-between",
     alignItems: "center",
     width: "81%",
@@ -855,11 +954,13 @@ const navStyles = {
   },
   logoImg: {
     height: "50px",
+    fontFamily: "'Times New Roman'",
     width: "185px",
     objectFit: "contain",
     cursor: "pointer",
   },
   nav: {
+    fontFamily: "'Times New Roman'",
     display: "flex",
     alignItems: "center",
     gap: "20px",
@@ -867,7 +968,9 @@ const navStyles = {
   },
   navLink: {
     margin: "10px 0",
-    color: "black",
+    color: "#023e8a",
+    fontFamily: "'Times New Roman'",
+    // color: "black",
     textDecoration: "none",
     fontWeight: "bold",
     fontSize: "16px",
@@ -893,32 +996,60 @@ const navStyles = {
 };
 
 const styles = {
-  footer: {
-    background: "#0d1b2a",
+  // footer: {
+  //   // background: "#0d1b2a",
+  //   background:"transparent",
+  //   color: "#fff",
+  //   padding: "10px 20px",
+  //   textAlign: "center",
+  //   fontSize: "14px",
+  //   marginTop: "16px",
+  //   fontFamily: "'Times New Roman'",
+  // },
+  // footerTop: {
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   gap: "25px",
+  //   flexWrap: "wrap",
+  //   alignItems: "center",
+  // },
+  // footerBottom: {
+  //   marginTop: "5px",
+  //   fontSize: "12px",
+  //   opacity: 0.8,
+  // },
+
+
+footer: {
+    // background: "rgba(13, 27, 42, 0.95)", 
     color: "#fff",
-    padding: "10px 20px",
+    padding: "25px 20px",
     textAlign: "center",
     fontSize: "14px",
-    marginTop: "16px",
+    backdropFilter: "blur(5px)",
+    background:"transparent",
   },
   footerTop: {
     display: "flex",
     justifyContent: "center",
-    gap: "25px",
+    gap: "30px",
     flexWrap: "wrap",
     alignItems: "center",
+    marginBottom: "10px"
   },
   footerBottom: {
-    marginTop: "5px",
     fontSize: "12px",
-    opacity: 0.8,
+    opacity: 0.7,
   },
+
+  
 };
 
 const localStyles = {
   app: {
-    fontFamily: "Arial, sans-serif",
+    
     // --- ADDED WATER BACKGROUND ---
+    fontFamily: "'Times New Roman'",
     backgroundImage: `url(${process.env.PUBLIC_URL + "/waterbg.jpeg"})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -945,6 +1076,7 @@ const localStyles = {
     fontWeight: "bold",
     // Added text shadow to ensure title is readable over image
     textShadow: "0 2px 4px rgba(255,255,255,0.8)",
+    fontFamily: "'Times New Roman'",
   },
   sliderWrapper: {
     position: "relative",
@@ -952,6 +1084,7 @@ const localStyles = {
     maxWidth: "1000px",
     margin: "0 auto",
     overflow: "visible", // Changed to visible so shadows aren't clipped
+    fontFamily: "'Times New Roman'",
   },
   slide: {
     width: "100%",
@@ -959,6 +1092,7 @@ const localStyles = {
   importExportCard: {
     display: "flex",
     flexDirection: "row",
+    fontFamily: "'Times New Roman'",
     alignItems: "center",
     width: "100%",
     borderRadius: "15px",
@@ -987,11 +1121,13 @@ const localStyles = {
     padding: "30px",
     textAlign: "left",
     flex: 1,
+    fontFamily: "'Times New Roman'",
   },
   cardText: {
     fontSize: "16px",
     color: "#4a5568",
     lineHeight: "1.6",
+    fontFamily: "'Times New Roman'",
     margin: "10px 0 0 0",
   },
 };
