@@ -106,26 +106,73 @@ const ImportsExportsPage = () => {
   }, []);
 
 
+// const handleBreadcrumbClick = (index) => {
+//   const newPath = path.slice(0, index + 1);
+//   setPath(newPath);
+  
+  // Slide Mapping based on depth
+  // if (newPath.length === 1) setActiveSlide(0); // Imports & Exports
+//   if (newPath.length === 2) {
+//     if (newPath[1] === "Imports") setActiveSlide(1);
+//     if (newPath[1] === "Exports") setActiveSlide(6);
+//   }
+//   if (newPath.length === 3) {
+//     if (newPath[2] === "Prawn Feed") setActiveSlide(7);
+//     if (newPath[2] === "Fish Feed") setActiveSlide(5);
+//   }
+//   if (newPath.length === 4) {
+//     if (newPath[3] === "Nursery Feed") setActiveSlide(8); // New Slide for Top One
+//     if (newPath[3] === "Grower Feed") setActiveSlide(9);  // New Slide for Vannamei/Tiger
+//   }
+//   if (newPath.length === 5) {
+//      if (newPath[4] === "Vannamei" || newPath[4] === "Tiger") setActiveSlide(11); // New Slide for 4 cards
+//   }
+// };
+
+
 const handleBreadcrumbClick = (index) => {
+  // 1. Get the new path by slicing up to the clicked index
   const newPath = path.slice(0, index + 1);
   setPath(newPath);
   
-  // Slide Mapping based on depth
-  if (newPath.length === 1) setActiveSlide(0); // Imports & Exports
-  if (newPath.length === 2) {
-    if (newPath[1] === "Imports") setActiveSlide(1);
-    if (newPath[1] === "Exports") setActiveSlide(6);
+  const depth = newPath.length;
+  const lastItem = newPath[depth - 1];
+
+  // --- Depth 1: Root Categories ---
+  if (depth === 1) {
+    if (lastItem === "Imports" || lastItem === "Imports & Exports") setActiveSlide(1);
+    if (lastItem === "Exports") setActiveSlide(6);
   }
-  if (newPath.length === 3) {
-    if (newPath[2] === "Prawn Feed") setActiveSlide(7);
-    if (newPath[2] === "Fish Feed") setActiveSlide(5);
+
+  // --- Depth 2: Sub-Categories (e.g., Imports > Feed) ---
+  else if (depth === 2) {
+    if (lastItem === "Feed") setActiveSlide(2);
+    if (lastItem === "HCP") setActiveSlide(3);
+    // If it's an Export sub-item, stay on Slide 6 or specific export slide
   }
-  if (newPath.length === 4) {
-    if (newPath[3] === "Nursery Feed") setActiveSlide(8); // New Slide for Top One
-    if (newPath[3] === "Grower Feed") setActiveSlide(9);  // New Slide for Vannamei/Tiger
+
+  // --- Depth 3: Specific Feeds (e.g., Feed > Prawn Feed) ---
+  else if (depth === 3) {
+    if (lastItem === "Prawn Feed") setActiveSlide(7);
+    if (lastItem === "Fish Feed") setActiveSlide(5);
+    // Handle HCP items if they are at depth 3
+    if (newPath[1] === "HCP") setActiveSlide(10); 
   }
-  if (newPath.length === 5) {
-     if (newPath[4] === "Vannamei" || newPath[4] === "Tiger") setActiveSlide(11); // New Slide for 4 cards
+
+  // --- Depth 4: Growth Stages (e.g., Prawn Feed > Nursery) ---
+  else if (depth === 4) {
+    if (lastItem === "Nursery Feed") setActiveSlide(8);
+    if (lastItem === "Grower Feed") setActiveSlide(9);
+  }
+
+  // --- Depth 5: Species (e.g., Grower > Vannamei) ---
+  else if (depth === 5) {
+    if (lastItem === "Vannamei" || lastItem === "Tiger") setActiveSlide(11);
+  }
+  
+  // --- Depth 6: Final Product (Brochure View) ---
+  else if (depth === 6) {
+    setActiveSlide(10);
   }
 };
 
@@ -164,10 +211,14 @@ const handleBreadcrumbClick = (index) => {
 
   const commonImg = process.env.PUBLIC_URL + "/fishone.jpg";
   const images = {
-    feed: process.env.PUBLIC_URL + "/feedone.jpeg",
-    hcp: process.env.PUBLIC_URL + "/hcp.jpeg",
-    fishfeed: process.env.PUBLIC_URL + "/fishfeeds.png",
-    prawnfeed: process.env.PUBLIC_URL + "/prawnfeed.jpg",
+    feed: process.env.PUBLIC_URL + "/feedcardimg.png",
+    hcp: process.env.PUBLIC_URL + "/hcpcardimg.png",
+    fishfeed: process.env.PUBLIC_URL + "/fishfeedcardimg.jpg",
+    prawnfeed: process.env.PUBLIC_URL + "/prawnfeedcardimg.jpg",
+    nursery: process.env.PUBLIC_URL + "/nurseryprawnfeedcardimg.webp",
+    grower: process.env.PUBLIC_URL + "/growerprawnfeedcardimg.jpg",
+    vannamei: process.env.PUBLIC_URL + "/vannameicard.png",
+    tiger: process.env.PUBLIC_URL + "/tigercardimg.png",
   };
 
   const renderCard = (title, description, onClickAction, imgOverride = null) => {
@@ -271,11 +322,11 @@ const handleBreadcrumbClick = (index) => {
           <div style={getSlideStyle(0)}>
             {renderCard("Imports", "Global aquaculture sourcing and supply chain excellence.", () => {
               setActiveSlide(1);
-              setPath(["Imports"]);
+              setPath(["/"]);
             })}
             {renderCard("Exports", "Worldwide fresh delivery with certified quality standards.", () => {
               setActiveSlide(6);
-              setPath(["Exports"]);
+              setPath(["/"]);
             })}
           </div>
 
@@ -308,23 +359,18 @@ const handleBreadcrumbClick = (index) => {
 <div style={getSlideStyle(7)}>
   {renderCard("Nursery Feed", "High-protein starter feed.", () => {
     setActiveSlide(8);
-    setPath([...path, "Nursery Feed"]);
-  })}
+     setPath([...path, "Nursery Feed"]);
+  
+  },
+  images.nursery
+  )}
   {renderCard("Grower Feed", "Advanced nutrition for growth stages.", () => {
     setActiveSlide(9);
-    setPath([...path, "Grower Feed"]);
-  })}
+    setPath(["Imports", "Feed", "Prawn Feed", "Grower Feed"]);
+  }, 
+    images.grower)}
 </div>
 
-{/* SLIDE 8: NURSERY -> TOP ONE */}
-{/* <div style={getSlideStyle(8)}>
-  {renderCard("Top One", "Premium Nursery formulation.", () => {
-    // Direct to brochure
-    setSelectedBrochure("UNIVANA P.jpg"); 
-    setPath([...path, "Top One"]);
-    setActiveSlide(10);
-  })}
-</div> */}
 
 {/* SLIDE 8: NURSERY -> TOP ONE (Manual Gallery) */}
 <div style={getSlideStyle(8)}>
@@ -335,21 +381,22 @@ const handleBreadcrumbClick = (index) => {
       // Set the manual grid object for Top One
       setSelectedBrochure({
         type: "grid",
-         main: "TPBOTH.png", // This is the large image at the bottom
-        images: ["TP100.png", "TP000.png"] // These show up in the grid above
+        //  main: "TPBOTH.png", // This is the large image at the bottom
+        images: ["TOPONEPackage.jpg", "TOPONEPackage1.jpg"] // These show up in the grid above
       }); 
       
       setPath([...path, "Top One"]);
       setActiveSlide(10);
     },
     // Adding the manual card image for Slide 8 itself
-    process.env.PUBLIC_URL + "/fishone.jpg" 
+    process.env.PUBLIC_URL + "/Toponecardimg.png" 
   )}
 </div>
 
 
 
 {/* SLIDE 9: GROWER -> VANNAMEI / TIGER */}
+{/* 
 <div style={getSlideStyle(9)}>
   {["Vannamei", "Tiger"].map((type) =>
     renderCard(type, `Specialized ${type} Grower feed.`, () => {
@@ -358,70 +405,133 @@ const handleBreadcrumbClick = (index) => {
     })
   )}
 </div>
+ */}
 
+{/* SLIDE 9: GROWER -> VANNAMEI / TIGER */}
+<div style={getSlideStyle(9)}>
+  {renderCard(
+    "Vannamei", 
+    "Specialized Vannamei Grower feed.", 
+    () => {
+      setActiveSlide(11);
+      setPath([...path, "Vannamei"]);
+    }, 
+    images.vannamei
+  )}
 
+  {renderCard(
+    "Tiger", 
+    "Specialized Tiger Grower feed.", 
+    () => {
+      setActiveSlide(11);
+      setPath([...path, "Tiger"]);
+    }, 
+    images.tiger
+  )}
+</div>
 
+{/* SLIDE 10: BROCHURE / GRID VIEWER */}
 <div style={getSlideStyle(10)}>
   <div style={{ textAlign: "center", padding: "20px" }}>
     
+    {/* 1. GRID VIEW: Updated to handle Object {url, name} */}
     {selectedBrochure && selectedBrochure.type === "grid" ? (
-      /* --- GRID VIEW: 6 IMAGES ABOVE + BROCHURE BELOW --- */
       <div style={{ display: "flex", flexDirection: "column", gap: "40px", alignItems: "center" }}>
-        
-        {/* 6 Image Grid */}
         <div style={{ 
           display: "grid", 
           gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)", 
           gap: "20px", 
           maxWidth: "1000px" 
         }}>
-          {selectedBrochure.images.map((img) => (
-            <div key={img} style={{ overflow: 'hidden', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-              <img 
-                src={process.env.PUBLIC_URL + "/" + img} 
-                style={{ width: "100%", display: "block", transition: "transform 0.3s" }} 
-                alt="Product Detail"
-                onMouseEnter={(e) => e.target.style.transform = "scale(1.05)"}
-                onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
-                // Hide small cards if they fail to load
-                onError={(e) => { e.target.style.display = 'none'; }}
-              />
-            </div>
-          ))}
-        </div>
+          {selectedBrochure.images.map((img, index) => {
+            // FIX: Extract URL and Name from the object
+            const imgSrc = typeof img === 'string' ? img : img.url;
+            const imgName = typeof img === 'string' ? "" : img.name;
 
-        {/* Large Main Brochure */}
-        <img
-          src={process.env.PUBLIC_URL + "/" + selectedBrochure.main}
-          alt="Main Brochure"
-          style={{ 
-            maxWidth: "100%", 
-            height: "auto", 
-            borderRadius: "15px", 
-            boxShadow: "0 10px 30px rgba(0,0,0,0.2)" 
-          }}
-          // Fallback changed to waterbg.jpeg
-          onError={(e) => { e.target.src = process.env.PUBLIC_URL + "/waterbg.jpeg"; }}
-        />
+            return (
+              <div key={index} style={{ 
+                backgroundColor: '#fff',
+                borderRadius: '12px', 
+                boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                paddingBottom: imgName ? '15px' : '0',
+                overflow: 'hidden'
+              }}>
+                <div style={{ overflow: 'hidden' }}>
+                  <img 
+                    src={process.env.PUBLIC_URL + "/" + imgSrc} 
+                    style={{ 
+                      width: "100%", 
+                      height: isMobile ? "150px" : "220px",
+                      objectFit: "cover",
+                      display: "block", 
+                      transition: "transform 0.3s" 
+                    }} 
+                    alt={imgName || "Product Detail"}
+                    onMouseEnter={(e) => e.target.style.transform = "scale(1.05)"}
+                    onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
+                    onError={(e) => { e.target.src = ''; }}
+                  />
+                </div>
+                {/* MANUAL NAME DISPLAYED HERE */}
+                {imgName && (
+                  <p style={{ 
+                    marginTop: "12px", 
+                    fontSize: "14px", 
+                    fontWeight: "bold", 
+                    color: "#2c3e50",
+                    padding: "0 5px"
+                  }}>
+                    {imgName}
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+        
+        {/* Main Banner Image below grid (Optional) */}
+        {selectedBrochure.main && (
+          <img
+            src={process.env.PUBLIC_URL + "/" + selectedBrochure.main}
+            alt=""
+            style={{ maxWidth: "100%", height: "auto", borderRadius: "15px", boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
+            onError={(e) => { e.target.style.display = 'none'; }}
+          />
+        )}
       </div>
-    ) : (
-      /* --- SINGLE VIEW: Only renders if selectedBrochure is a standard string path --- */
-      typeof selectedBrochure === 'string' && (
-        <img
-          src={process.env.PUBLIC_URL + "/" + selectedBrochure}
-          alt="Brochure"
-          style={{ 
-            maxWidth: "100%", 
-            height: "auto", 
-            borderRadius: "12px", 
-            boxShadow: "0 10px 30px rgba(0,0,0,0.2)" 
-          }}
-          // Fallback changed to waterbg.jpeg
-          onError={(e) => { e.target.src = process.env.PUBLIC_URL + "/waterbg.jpeg"; }}
-        />
-      )
+    ) : 
+    
+    /* 2. ARRAY VIEW: Still works for HCP items like MAX C */
+    Array.isArray(selectedBrochure) ? (
+      <div style={{ display: "flex", flexDirection: "column", gap: "30px", alignItems: "center" }}>
+        {selectedBrochure.map((img, index) => (
+          <img 
+            key={index}
+            src={process.env.PUBLIC_URL + "/" + img} 
+            style={{ 
+              maxWidth: "100%", 
+              height: "auto", 
+              borderRadius: "12px", 
+              boxShadow: "0 10px 30px rgba(0,0,0,0.15)" 
+            }} 
+            alt=""
+            onError={(e) => { e.target.src = ''; }}
+          />
+        ))}
+      </div>
+    ) : 
+    
+    /* 3. SINGLE VIEW: For strings */
+    typeof selectedBrochure === 'string' && (
+      <img
+        src={process.env.PUBLIC_URL + "/" + selectedBrochure}
+        alt=""
+        style={{ maxWidth: "100%", height: "auto", borderRadius: "12px", boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
+        onError={(e) => { e.target.src = ''; }}
+      />
     )}
 
+    {/* BACK BUTTON */}
     <div style={{ marginTop: "40px" }}>
       <button
         onClick={() => handleBreadcrumbClick(path.length - 2)}
@@ -443,7 +553,6 @@ const handleBreadcrumbClick = (index) => {
 </div>
 
 
-{/* SLIDE 11: FULLY MANUAL MAPPING */}
 <div style={getSlideStyle(11)}>
   {(() => {
     const shrimpType = path[path.length - 1];
@@ -451,11 +560,9 @@ const handleBreadcrumbClick = (index) => {
     const tigerProducts = ["LA-ONE"];
     const productList = shrimpType === "Tiger" ? tigerProducts : vannameiProducts;
 
-    // --- MANUAL DATA MAPPING ---
-    // Define exactly what each card looks like and what it opens.
     const productData = {
       "UNIVANA PEARL": {
-        cardSrc: process.env.PUBLIC_URL + "/fishone.jpg",
+        cardSrc: process.env.PUBLIC_URL + "/pearlcardimg.png",
         brochure: {
           type: "grid",
           main: "UNIPEARL.jpg",
@@ -463,40 +570,47 @@ const handleBreadcrumbClick = (index) => {
         }
       },
       "UNIVANA-P": {
-        cardSrc: process.env.PUBLIC_URL + "/fishone.jpg", 
+        cardSrc: process.env.PUBLIC_URL + "/univanapcardimg1.png",  
         brochure: "UNIVANA P.jpg"
       },
+      
       "UNIVANAMI": {
-        cardSrc: process.env.PUBLIC_URL + "/fishone.jpg",
+        cardSrc: process.env.PUBLIC_URL + "/univanamicardimgs.png",
         brochure: "UNIVANAMI.jpg"
       },
       "UNIVANA": {
-        cardSrc: process.env.PUBLIC_URL + "/fishone.jpg", 
-        brochure: "UNIPEARL.jpg" // Set manually to whatever image you want
+        cardSrc: process.env.PUBLIC_URL + "/univanacardimg.png", 
+        brochure: "univana.png" 
       },
+      // --- UPDATED LA-ONE TO GRID MODE ---
       "LA-ONE": {
         cardSrc: process.env.PUBLIC_URL + "/fishone.jpg",
-        brochure: "LA-ONE.png"
+        brochure: {
+          type: "grid",
+          // main: "LAONE.jpg", // This is the large one at the bottom
+          images: ["LAONE.jpg", "LAONE1.jpg"] // These show up as cards at the top
+        }
       }
     };
 
     return productList.map((stage) => {
       const itemConfig = productData[stage];
-      if (!itemConfig) return null; // Safety check
+      if (!itemConfig) return null;
 
       return renderCard(
-        stage, // TITLE: Removed `${shrimpType} - ` prefix
+        stage, 
         `Technical specifications for ${stage}`, 
         () => {
           setSelectedBrochure(itemConfig.brochure);
           setPath([...path, stage]);
           setActiveSlide(10);
         },
-        itemConfig.cardSrc // IMAGE: Direct manual source
+        itemConfig.cardSrc 
       );
     });
   })()}
 </div>
+
 
    {/* SLIDE 5: FISH FEED PRODUCTS */}
           <div style={getSlideStyle(5)}>
@@ -508,35 +622,190 @@ const handleBreadcrumbClick = (index) => {
             })}
           </div>
 
-          
+        
 
-{/* SLIDE 3: HCP PRODUCTS */}
 <div style={getSlideStyle(3)}>
-  {[
-    "OXY-BESTOT", "GUTPRO", "ENGRO", "UNI-LIGHT", "NURI BSL", "ZEOLITE",
-    "SAPONIN", "HC-BIO", "LIFE-HC", "PREMIX-SUPER C", "MAX C", "YUCA HONG",
-    "DE-NO2", "GOLD-DINE", "UNI-BKC", "DEHP"
-  ].map((item) =>
-    renderCard(item, "Essential aquaculture healthcare solution.", () => {
-      // Removed handleOpenBrochure - now just updates the breadcrumb
-      setPath(["Imports", "HCP", item]); 
-    })
-  )}
+  {(() => {
+    const disabledItems = [
+      "OXY-BESTOT", "ZEOLITE", "SAPONIN", "HC-BIO", 
+      "LIFE-HC", "PREMIX-SUPER C", "DE-NO2", "DEHP"
+    ];
+
+    const hcpData = {
+      "OXY-BESTOT": { 
+        card: "hcp.jpeg", 
+        desc: "Advanced oxygen booster for pond stability." 
+      },
+      "GUTPRO": {
+        card: "hcp.jpeg",
+        desc: "Probiotic supplement for better gut health.",
+        brochure: { type: "grid", main: "Gutprobro.png", images: ["Gutpro.jpg"] }
+      },
+      "ENGRO": {
+        card: "hcp.jpeg", 
+        desc: "Growth promoter for aquaculture species.",
+        brochure: ["labelengro.jpg","Gutprobro.png"] 
+      },
+      "UNI-LIGHT": {
+        card: "hcp.jpeg", 
+        desc: "Water conditioner for light intensity management.",
+        brochure: ["Unilight.jpg","UnilightBro.jpg"] 
+      },
+      "NURI BSL": {
+        card: "hcp.jpeg", 
+        desc: "Essential nutrients for healthy shrimp growth.",
+        brochure: ["Nuribsl.jpg","NuriBsl.png"] 
+      },
+      "ZEOLITE": { 
+        card: "hcp.jpeg", 
+        desc: "Natural mineral for water purification." 
+      },
+      "SAPONIN": { 
+        card: "hcp.jpeg", 
+        desc: "Organic extract for eliminating unwanted fish." 
+      },
+      "HC-BIO": { 
+        card: "hcp.jpeg", 
+        desc: "Concentrated microbial solution for waste." 
+      },
+      "LIFE-HC": { 
+        card: "hcp.jpeg", 
+        desc: "Vital health support for pond ecosystems." 
+      },
+      "PREMIX-SUPER C": { 
+        card: "hcp.jpeg", 
+        desc: "High potency Vitamin C for stress relief." 
+      },
+      "MAX C": { 
+        card: "hcp.jpeg", 
+        desc: "Maximum strength Vitamin C for immunity.",
+        brochure: ["labelmaxc.jpg","MaxCBro.png"] 
+      },
+      "YUCA HONG": { 
+        card: "hcp.jpeg", 
+        desc: "Natural ammonia binder for clean water.",
+        brochure: ["yucalabel.jpg","yucabro.png"] 
+      },
+      "DE-NO2": { 
+        card: "hcp.jpeg", 
+        desc: "Effective nitrite reduction formula." 
+      },
+      "GOLD-DINE": { 
+        card: "hcp.jpeg", 
+        desc: "Iodine-based sanitizer for disease control.",
+        brochure: "Goldenbro.jpg" 
+      },
+      "UNI-BKC": {
+        card: "hcp.jpeg", 
+        desc: "Broad-spectrum disinfectant for pond safety.",
+        brochure: ["Bkcbro.png"] 
+      },
+      "DEHP": { 
+        card: "hcp.jpeg", 
+        desc: "Specialized treatment for aquaculture health." 
+      }
+    };
+
+    const items = [
+      "OXY-BESTOT", "GUTPRO", "ENGRO", "UNI-LIGHT", "NURI BSL", "ZEOLITE",
+      "SAPONIN", "HC-BIO", "LIFE-HC", "PREMIX-SUPER C", "MAX C", "YUCA HONG",
+      "DE-NO2", "GOLD-DINE", "UNI-BKC", "DEHP"
+    ];
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        {items.map((item) => {
+          const config = hcpData[item];
+          const isDisabled = disabledItems.includes(item);
+
+          return (
+            <div key={item} style={{ cursor: "pointer" }}>
+              {renderCard(
+                item, 
+                // Using the manual 'desc' from hcpData
+                config?.desc || "Essential aquaculture solution.", 
+                isDisabled ? () => {} : () => {
+                  setSelectedBrochure(config ? config.brochure : "waterbg.jpeg");
+                  setPath(["Imports", "HCP", item]);
+                  setActiveSlide(10);
+                },
+                process.env.PUBLIC_URL + "/" + (config?.card || "hcp.jpeg")
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  })()}
 </div>
-          
-
-
 
           {/* SLIDE 6: EXPORTS */}
-<div style={getSlideStyle(6)}>
+{/* <div style={getSlideStyle(6)}>
   {["Shrimp", "Minerals", "Chemicals"].map((item) =>
     renderCard(item, `Top-grade ${item} processed for international export.`, () => {
       // Removed handleOpenBrochure
       setPath(["Exports", item]);
     })
   )}
-</div>
+</div> */}
 
+
+
+{/* SLIDE 6: EXPORTS */}
+<div style={getSlideStyle(6)}>
+  {(() => {
+    // Manually defined data with labels for the grid viewer
+    const exportData = {
+      "Shrimp": {
+        type: "grid",
+        main: "shrimp_main.jpg",
+        images: [
+          { url: "shrimp1.jpg", name: "Vannamei Shrimp" },
+          { url: "shrimp2.jpg", name: "Tiger Shrimp" },
+          { url: "shrimp3.jpg", name: "Head-on Shell-on" },
+          { url: "shrimp4.jpg", name: "PUD Shrimp" },
+          { url: "shrimp5.jpg", name: "Cooked Shrimp" }
+        ]
+      },
+      "Minerals": {
+        type: "grid",
+        main: "minerals_main.jpg",
+        images: [
+          { url: "lightgreenquartz.jpeg", name: "Light Green Quartz" },
+          { url: "mileyquartz.jpeg", name: "Milky Quartz" },
+          { url: "pinkquartz.jpeg", name: "Pink Quartz" },
+          { url: "quartzbgrade.jpeg", name: "Quartz B-Grade" },
+          { url: "quartzgranual.jpeg", name: "Quartz Granules" }
+        ]
+      },
+      "Chemicals": {
+        type: "grid",
+        main: "chem_main.jpg",
+        images: [
+          { url: "chem1.jpg", name: "Water Treatment" },
+          { url: "chem2.jpg", name: "Soil Conditioner" },
+          { url: "chem3.jpg", name: "Disinfectant" },
+          { url: "chem4.jpg", name: "Oxygen Enhancer" }
+        ]
+      }
+    };
+
+    return Object.keys(exportData).map((item) =>
+      renderCard(
+        item,
+        `Top-grade ${item} processed for international export.`,
+        () => {
+          // Set the specific grid data for Slide 10
+          setSelectedBrochure(exportData[item]);
+          // Update breadcrumb path
+          setPath(["Exports", item]);
+          // Navigate to the Grid Viewer
+          setActiveSlide(10);
+        }
+      )
+    );
+  })()}
+</div>
       
         </div>
       </section>
@@ -544,7 +813,6 @@ const handleBreadcrumbClick = (index) => {
     </div>
   );
 };
-
 
 const Footer = () => (
   <footer style={styles.footer}>
@@ -646,74 +914,6 @@ const styles = {
     opacity: 0.8,
   },
 };
-
-// const localStyles = {
-//   app: {
-//     fontFamily: "Arial, sans-serif",
-//     background: "linear-gradient(180deg, #e0f2f1 0%, #f0f7ff 100%)",
-//     paddingTop: "70px",
-//     minHeight: "100vh",
-//     overflowX: "hidden",
-//   },
-//   importExportSection: {
-//     padding: "60px 20px",
-//     textAlign: "center",
-//     minHeight: "calc(100vh - 150px)",
-//     transition: "all 0.5s ease",
-//   },
-//   sectionTitle: {
-//     fontSize: "36px",
-//     marginBottom: "50px",
-//     color: "#0d1b2a",
-//     fontWeight: "bold",
-//   },
-//   sliderWrapper: {
-//     position: "relative",
-//     width: "100%",
-//     maxWidth: "1000px",
-//     margin: "0 auto",
-//     overflow: "hidden",
-//   },
-//   slide: {
-//     width: "100%",
-//   },
-//   importExportCard: {
-//     display: "flex",
-//     flexDirection: "row",
-//     alignItems: "center",
-//     width: "100%",
-//     borderRadius: "15px",
-//     overflow: "hidden",
-//     background: "#fff",
-//     boxShadow: "0 8px 25px rgba(0,0,0,0.1)",
-//     cursor: "pointer",
-//     marginBottom: "30px",
-//     border: "2px solid #f0f0f0",
-//     transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease",
-//   },
-//   imageWrapper: {
-//     width: "250px",
-//     height: "180px",
-//     flexShrink: 0,
-//   },
-//   importExportImg: {
-//     width: "100%",
-//     height: "100%",
-//     objectFit: "cover",
-//     transition: "transform 0.5s ease",
-//   },
-//   cardContent: {
-//     padding: "30px",
-//     textAlign: "left",
-//     flex: 1,
-//   },
-//   cardText: {
-//     fontSize: "16px",
-//     color: "#4a5568",
-//     lineHeight: "1.6",
-//     margin: "10px 0 0 0",
-//   },
-// };
 
 const localStyles = {
   app: {
