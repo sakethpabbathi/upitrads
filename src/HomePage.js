@@ -1,8 +1,9 @@
 import "./App.css";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import ScrollToTop from "./ScrollToTop";
+import emailjs from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
 
 const TradingHome = () => {
@@ -126,70 +127,72 @@ const navLinks = [
   );
 };
 
-
-// const SubHeader = () => {
-//   const isMobile = window.innerWidth <= 768;
-
-//   return (
-//     <section style={styles.subHeader}>
-//       <div style={styles.subHeaderInner}>
-//         {/* Centered Hero Image */}
-//         <img 
-//           src={process.env.PUBLIC_URL + "/shipbg.jpeg"} 
-//           alt="Seafood Hero" 
-//           style={{
-//             ...styles.subHeaderSideImg,
-//             width: isMobile ? "90%" : "800px", // Larger width for the center image
-//             height: isMobile ? "250px" : "450px", // Adjusted height for impact
-//             margin: "0 auto",
-//             display: "block"
-//           }} 
-//         />
-//       </div>
-//     </section>
-//   );
-// };
-
-// const SubHeader = () => {
-//   const isMobile = window.innerWidth <= 768;
-
-//   return (
-//     <section style={styles.subHeader}>
-//       <div style={styles.subHeaderInner}>
-//         <img 
-//           src={process.env.PUBLIC_URL + "/ship.jpeg"} 
-//           alt="Seafood Hero" 
-//           style={{
-//             ...styles.subHeaderSideImg,
-//             width: isMobile ? "90%" : "850px", // Slightly wider for better presence
-//             height: isMobile ? "250px" : "450px",
-//             margin: "0 auto",
-//             display: "block",
-//             objectFit: "cover",      // CRITICAL: This removes the black bars
-//             backgroundColor: "transparent", 
-//             border: "none",
-//             boxShadow: "none" 
-//           }} 
-//         />
-//       </div>
-//     </section>
-//   );
-// };
-
-
 const SubHeader = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <section style={styles.subHeader}>
       <div style={styles.subHeaderInner}>
         <img 
           src={process.env.PUBLIC_URL + "/shipbg.jpeg"} 
           alt="UPIN Trading Shipping" 
-          style={styles.fullScreenImg} 
+          style={{
+            ...styles.fullScreenImg,
+            height: isMobile ? "40vh" : "80vh", // Shorter height on mobile for better UX
+          }} 
         />
       </div>
     </section>
   );
 };
+
+
+
+
+// const SubHeader = () => {
+//   const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+
+//   React.useEffect(() => {
+//     const handleResize = () => setIsMobile(window.innerWidth <= 768);
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, []);
+
+//   return (
+//     <section style={styles.subHeader}>
+//       <div 
+//         style={{
+//           ...styles.subHeaderInner,
+//           height: isMobile ? "250px" : "450px", // Shorter height on mobile
+//           backgroundPosition: isMobile ? "center right" : "center center", // Adjust focus for mobile
+//         }}
+//       >
+//         {/* If you want text over the ship image, add it here */}
+//       </div>
+//     </section>
+//   );
+// };
+
+
+// const SubHeader = () => {
+//   return (
+//     <section style={styles.subHeader}>
+//       <div style={styles.subHeaderInner}>
+//         <img 
+//           src={process.env.PUBLIC_URL + "/"} 
+//           alt="UPIN Trading Shipping" 
+//           style={styles.fullScreenImg} 
+//         />
+//       </div>
+//     </section>
+//   );
+// };
 
 const ImportExportSection = () => {
   const navigate = useNavigate();
@@ -216,7 +219,7 @@ const ImportExportSection = () => {
         >
           <div style={styles.imageWrapper}>
             <img
-              src={process.env.PUBLIC_URL + "/importimg.webp"}
+              src={process.env.PUBLIC_URL + "/importicon.png"}
               style={styles.importExportImg}
               alt="Imports"
             />
@@ -234,7 +237,7 @@ const ImportExportSection = () => {
         >
           <div style={styles.imageWrapper}>
             <img
-              src={process.env.PUBLIC_URL + "/exportimg.png"}
+              src={process.env.PUBLIC_URL + "/exporticon.png"}
               style={styles.importExportImg}
               alt="Exports"
             />
@@ -334,118 +337,365 @@ const AboutSection = () => {
 };
 
 
-const ContactSection = () => {
+// const ContactSection = () => {
 
+//   const [mobileError, setMobileError] = useState("");
+//   const [successMsg, setSuccessMsg] = useState(false);
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     const name = e.target[0].value;
+//     const mobile = e.target[1].value;
+//     const message = e.target[2].value;
+
+//     // ✅ Mobile validation
+//     if (!/^[6-9]\d{9}$/.test(mobile)) {
+//       setMobileError("Enter a valid 10-digit mobile number");
+//       return;
+//     } else {
+//       setMobileError("");
+//     }
+
+//     const finalMessage = message.trim() ? message : "General enquiry";
+
+//     const text = `Enquiry:\nName: ${name}\nMobile: ${mobile}\nMessage: ${finalMessage}`;
+
+//     const whatsappNumber = "919347719244";
+
+//     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+
+//     window.open(url, "_blank");
+
+//     // ✅ Clear form
+//     e.target.reset();
+
+//     // ✅ Show success popup
+//     setSuccessMsg(true);
+
+//     // ✅ Auto hide after 3 sec
+//     setTimeout(() => {
+//       setSuccessMsg(false);
+//     }, 3000);
+//   };
+
+//   const handleMobileChange = (e) => {
+//     const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+//     e.target.value = value;
+
+//     if (value.length === 10 && /^[6-9]\d{9}$/.test(value)) {
+//       setMobileError("");
+//     } else {
+//       setMobileError("Enter a valid 10-digit mobile number");
+//     }
+//   };
+
+//   return (
+//     <section id="contact" style={styles.contactSection}>
+//       <h2 style={styles.sectionTitle}>Contact Us</h2>
+
+//       {/* ✅ Success Popup */}
+//       {successMsg && (
+//         <div style={{
+//           backgroundColor: "#28a745",
+//           color: "#fff",
+//           padding: "12px",
+//           borderRadius: "5px",
+//           marginBottom: "15px",
+//           textAlign: "center",
+//           fontWeight: "bold"
+//         }}>
+//           ✅ Message sent successfully!
+//         </div>
+//       )}
+
+//       <form style={styles.contactForm} onSubmit={handleSubmit}>
+        
+//         <input
+//           type="text"
+//           placeholder="Your Name"
+//           style={styles.input}
+//           required
+//         />
+
+//         <input
+//           type="tel"
+//           placeholder="Enter 10-digit Mobile Number"
+//           style={{
+//             ...styles.input,
+//             border: mobileError ? "2px solid red" : "1px solid #ccc"
+//           }}
+//           required
+//           onInput={handleMobileChange}
+//         />
+
+//         {mobileError && (
+//           <span style={{ color: "red", fontSize: "13px", marginTop: "-10px" }}>
+//             {mobileError}
+//           </span>
+//         )}
+
+//         <textarea
+//           placeholder="Your Message (Optional)"
+//           rows="4"
+//           style={styles.textarea}
+//         ></textarea>
+
+//         <button type="submit" style={styles.submitBtn}>
+//           Submit
+//         </button>
+//       </form>
+
+//       <p style={{ marginTop: "15px", color: "#555" }}>
+//         We will contact you soon.
+//       </p>
+//     </section>
+//   );
+// };
+
+// const ContactSection = () => {
+//   const form = useRef();
+//   const [mobileError, setMobileError] = useState("");
+//   const [status, setStatus] = useState(""); // 'sending', 'success', 'error'
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     const mobile = e.target[1].value;
+
+//     // Mobile validation
+//     if (!/^[6-9]\d{9}$/.test(mobile)) {
+//       setMobileError("Enter a valid 10-digit mobile number");
+//       return;
+//     }
+
+//     setStatus("sending");
+
+//     // Replace these 3 strings with your actual EmailJS IDs
+//     const SERVICE_ID = "service_5dq5e0q";
+//     const TEMPLATE_ID = "template_v3576f1";
+//     const PUBLIC_KEY = "hWdH4ks-q1Wk5ROgh";
+
+//     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+//       .then(() => {
+//         setStatus("success");
+//         setMobileError("");
+//         e.target.reset();
+//         setTimeout(() => setStatus(""), 5000);
+//       }, (error) => {
+//         console.log(error.text);
+//         setStatus("error");
+//       });
+//   };
+
+//   const handleMobileChange = (e) => {
+//     const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+//     if (value.length === 10 && /^[6-9]\d{9}$/.test(value)) {
+//       setMobileError("");
+//     } else {
+//       setMobileError("Enter a valid 10-digit mobile number");
+//     }
+//   };
+
+//   return (
+//     <section id="contact" style={contactStyles.contactSection}>
+//       <h2 style={contactStyles.sectionTitle}>Contact Us</h2>
+
+//       {/* Status Notifications */}
+//       {status === "success" && (
+//         <div style={contactStyles.successBanner}>✅ Message sent to sakethchintu7856@gmail.com!</div>
+//       )}
+//       {status === "error" && (
+//         <div style={contactStyles.errorBanner}>❌ Failed to send. Please try again.</div>
+//       )}
+
+//       <form ref={form} style={contactStyles.contactForm} onSubmit={handleSubmit}>
+//         <input
+//           type="text"
+//           name="from_name" // Matches EmailJS Template
+//           placeholder="Your Name"
+//           style={contactStyles.input}
+//           required
+//         />
+
+//         <input
+//           type="tel"
+//           name="mobile_number" // Matches EmailJS Template
+//           placeholder="Enter 10-digit Mobile Number"
+//           style={{
+//             ...contactStyles.input,
+//             border: mobileError ? "2px solid red" : "1px solid #ccc"
+//           }}
+//           required
+//           onInput={handleMobileChange}
+//         />
+
+//         {mobileError && (
+//           <span style={{ color: "red", fontSize: "13px", marginTop: "-10px", fontFamily: "serif" }}>
+//             {mobileError}
+//           </span>
+//         )}
+
+//         <textarea
+//           name="message" // Matches EmailJS Template
+//           placeholder="Your Message (Optional)"
+//           rows="4"
+//           style={contactStyles.textarea}
+//         ></textarea>
+
+//         <button 
+//           type="submit" 
+//           disabled={status === "sending"}
+//           style={{
+//             ...contactStyles.submitBtn,
+//             backgroundColor: status === "sending" ? "#ccc" : "#00b4d8"
+//           }}
+//         >
+//           {status === "sending" ? "Sending..." : "Submit Enquiry"}
+//         </button>
+//       </form>
+
+//       <p style={{ marginTop: "15px", color: "#555", fontFamily: "'Times New Roman', serif" }}>
+//         Your details will be mailed directly to our support team.
+//       </p>
+//     </section>
+//   );
+// };
+
+const ContactSection = () => {
+  const form = useRef();
   const [mobileError, setMobileError] = useState("");
-  const [successMsg, setSuccessMsg] = useState(false);
+  const [status, setStatus] = useState(""); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const mobileValue = e.target.mobile.value; // Access by the new name
 
-    const name = e.target[0].value;
-    const mobile = e.target[1].value;
-    const message = e.target[2].value;
-
-    // ✅ Mobile validation
-    if (!/^[6-9]\d{9}$/.test(mobile)) {
+    if (!/^[6-9]\d{9}$/.test(mobileValue)) {
       setMobileError("Enter a valid 10-digit mobile number");
       return;
-    } else {
-      setMobileError("");
     }
 
-    const finalMessage = message.trim() ? message : "General enquiry";
+    setStatus("sending");
 
-    const text = `Enquiry:\nName: ${name}\nMobile: ${mobile}\nMessage: ${finalMessage}`;
+    const SERVICE_ID = "service_5dq5e0q";
+    const TEMPLATE_ID = "template_v3576f1";
+    const PUBLIC_KEY = "hWdH4ks-q1Wk5ROgh";
 
-    const whatsappNumber = "919347719244";
-
-    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
-
-    window.open(url, "_blank");
-
-    // ✅ Clear form
-    e.target.reset();
-
-    // ✅ Show success popup
-    setSuccessMsg(true);
-
-    // ✅ Auto hide after 3 sec
-    setTimeout(() => {
-      setSuccessMsg(false);
-    }, 3000);
-  };
-
-  const handleMobileChange = (e) => {
-    const value = e.target.value.replace(/\D/g, "").slice(0, 10);
-    e.target.value = value;
-
-    if (value.length === 10 && /^[6-9]\d{9}$/.test(value)) {
-      setMobileError("");
-    } else {
-      setMobileError("Enter a valid 10-digit mobile number");
-    }
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+      .then(() => {
+        setStatus("success");
+        setMobileError("");
+        e.target.reset();
+        setTimeout(() => setStatus(""), 5000);
+      }, (error) => {
+        console.error("EmailJS Error:", error.text);
+        setStatus("error");
+      });
   };
 
   return (
-    <section id="contact" style={styles.contactSection}>
-      <h2 style={styles.sectionTitle}>Contact Us</h2>
+    <section id="contact" style={contactStyles.contactSection}>
+      <h2 style={contactStyles.sectionTitle}>Contact Us</h2>
 
-      {/* ✅ Success Popup */}
-      {successMsg && (
-        <div style={{
-          backgroundColor: "#28a745",
-          color: "#fff",
-          padding: "12px",
-          borderRadius: "5px",
-          marginBottom: "15px",
-          textAlign: "center",
-          fontWeight: "bold"
-        }}>
-          ✅ Message sent successfully!
-        </div>
+      {status === "success" && (
+        <div style={contactStyles.successBanner}>✅ Message sent successfully!</div>
+      )}
+      {status === "error" && (
+        <div style={contactStyles.errorBanner}>❌ Failed to send. Please check your connection.</div>
       )}
 
-      <form style={styles.contactForm} onSubmit={handleSubmit}>
-        
+      <form ref={form} style={contactStyles.contactForm} onSubmit={handleSubmit}>
         <input
           type="text"
+          name="name" // Matches {{name}} in your template
           placeholder="Your Name"
-          style={styles.input}
+          style={contactStyles.input}
           required
         />
-
+{/* 
         <input
           type="tel"
+          name="mobile" // Matches {{mobile}} in your template
           placeholder="Enter 10-digit Mobile Number"
           style={{
-            ...styles.input,
+            ...contactStyles.input,
             border: mobileError ? "2px solid red" : "1px solid #ccc"
           }}
           required
-          onInput={handleMobileChange}
+          onInput={(e) => {
+            const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+            e.target.value = val;
+            if (val.length === 10 && /^[6-9]\d{9}$/.test(val)) setMobileError("");
+          }}
         />
 
         {mobileError && (
-          <span style={{ color: "red", fontSize: "13px", marginTop: "-10px" }}>
+          <span style={{ color: "red", fontSize: "13px", marginTop: "-10px", fontFamily: "serif" }}>
             {mobileError}
           </span>
-        )}
+        )} */}
+
+<input
+  type="tel"
+  name="mobile"
+  placeholder="Enter 10-digit Mobile Number"
+  style={{
+    ...contactStyles.input,
+    // Highlight the border red if there is an error
+    border: mobileError ? "2px solid red" : "1px solid #ccc"
+  }}
+  required
+  onInput={(e) => {
+    // 1. Only allow numbers and max 10 characters
+    const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+    e.target.value = val;
+
+    // 2. Immediate validation logic
+    if (val.length > 0 && val.length < 10) {
+      setMobileError("Number must be exactly 10 digits.");
+    } else if (val.length === 10 && !/^[6-9]/.test(val)) {
+      setMobileError("Must start with 6, 7, 8, or 9.");
+    } else {
+      setMobileError(""); // Clear error if empty or valid 10 digits
+    }
+  }}
+/>
+
+{/* Red Error Message directly below the field */}
+{mobileError && (
+  <div style={{ 
+    color: "red", 
+    fontSize: "13px", 
+    marginTop: "5px", 
+    textAlign: "left",
+    paddingLeft: "5px",
+    fontFamily: "'Times New Roman', serif",
+    fontWeight: "bold"
+  }}>
+    ⚠️ {mobileError}
+  </div>
+)}
+
 
         <textarea
+          name="message" // Matches {{message}} in your template
           placeholder="Your Message (Optional)"
           rows="4"
-          style={styles.textarea}
+          style={contactStyles.textarea}
         ></textarea>
 
-        <button type="submit" style={styles.submitBtn}>
-          Submit
+        <button 
+          type="submit" 
+          disabled={status === "sending"}
+          style={{
+            ...contactStyles.submitBtn,
+            backgroundColor: status === "sending" ? "#ccc" : "#00b4d8"
+          }}
+        >
+          {status === "sending" ? "Sending..." : "Submit Enquiry"}
         </button>
       </form>
-
-      <p style={{ marginTop: "15px", color: "#555" }}>
-        We will contact you soon.
-      </p>
     </section>
   );
 };
@@ -467,7 +717,80 @@ const Footer = () => (
 
 
 
+const contactStyles = {
+  contactSection: {
+    padding: "60px 20px",
+    textAlign: "center",
+    fontFamily: "'Times New Roman', Times, serif"
+  },
+  sectionTitle: {
+    fontSize: "32px",
+    marginBottom: "30px",
+    fontWeight: "bold"
+  },
+  contactForm: {
+    maxWidth: "500px",
+    margin: "0 auto",
+    display: "flex",
+    flexDirection: "column",
+    gap: "15px",
+    background: "rgba(255,255,255,0.9)",
+    padding: "30px",
+    borderRadius: "15px",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
+  },
+  input: {
+    padding: "12px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+    fontSize: "16px",
+    fontFamily: "'Times New Roman', serif"
+  },
+  textarea: {
+    padding: "12px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+    fontSize: "16px",
+    fontFamily: "'Times New Roman', serif",
+    resize: "none"
+  },
+  submitBtn: {
+    padding: "15px",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "18px",
+    fontWeight: "bold",
+    transition: "0.3s",
+    fontFamily: "'Times New Roman', serif"
+  },
+  successBanner: {
+    backgroundColor: "#28a745",
+    color: "#fff",
+    padding: "12px",
+    borderRadius: "5px",
+    marginBottom: "15px",
+    maxWidth: "500px",
+    margin: "0 auto 15px auto"
+  },
+  errorBanner: {
+    backgroundColor: "#dc3545",
+    color: "#fff",
+    padding: "12px",
+    borderRadius: "5px",
+    marginBottom: "15px",
+    maxWidth: "500px",
+    margin: "0 auto 15px auto"
+  }
+};
+
+
+
 const styles = {
+
+
+  
   // Global Layout & Background
 
 
@@ -490,31 +813,60 @@ const styles = {
   // },
 
 
+// subHeader: { 
+//     padding: "0",              // Removed padding to allow edge-to-edge
+//     margin: "0",
+//     width: "100%",
+//     overflow: "hidden",
+//     background: "transparent",
+//   },
+  
+//   subHeaderInner: {
+//     width: "100%",
+//     backgroundImage: `url(${process.env.PUBLIC_URL + "/shipbg.jpeg"})`,
+//     height: "auto",
+//     display: "flex",
+//     opacity : 0.5, // Slight opacity for a subtle effect
+//   },
+
+//   fullScreenImg: {
+//     width: "100vw",            // 100% of the viewport width
+//     height: "80vh",           // 80% of the viewport height (adjust to 100vh for total screen)
+//     objectFit: "cover",       // Crops black bars and fills the space
+//     display: "block",
+//     border: "none",
+//     // Optional: if you want rounded corners, keep them; otherwise set to 0
+//     borderRadius: "0px",       
+//   },
+  
+
 subHeader: { 
-    padding: "0",              // Removed padding to allow edge-to-edge
+    padding: "0",
     margin: "0",
     width: "100%",
+    maxWidth: "100vw", // Prevents horizontal scrolling
     overflow: "hidden",
     background: "transparent",
+    marginTop: "-1px", // Small overlap to prevent white gaps from the navbar
   },
   
   subHeaderInner: {
     width: "100%",
-    height: "auto",
     display: "flex",
-    opacity : 0.5, // Slight opacity for a subtle effect
+    opacity: 0.9, // Increased slightly; 0.5 can look "faded" on mobile screens
   },
 
   fullScreenImg: {
-    width: "100vw",            // 100% of the viewport width
-    height: "80vh",           // 80% of the viewport height (adjust to 100vh for total screen)
-    objectFit: "cover",       // Crops black bars and fills the space
+    width: "100vw",           // Force full viewport width
+    objectFit: "cover",       // Fills space without stretching
+    objectPosition: "center", // Keeps the ship centered
     display: "block",
     border: "none",
-    // Optional: if you want rounded corners, keep them; otherwise set to 0
-    borderRadius: "0px",       
+    borderRadius: "0px",
+    fontFamily: "'Times New Roman', Times, serif", // Consistent font
   },
-  
+
+
   subHeaderSideImg: {
     borderRadius: "24px", 
     objectFit: "cover", // This crops the black bars from your image

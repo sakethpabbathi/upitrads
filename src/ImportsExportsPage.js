@@ -200,17 +200,17 @@ const handleOpenBrochure = (data, currentPath) => {
 
   const commonImg = process.env.PUBLIC_URL + "/fishone.jpg";
   const images = {
-    feed: process.env.PUBLIC_URL + "/feedcardimg.png",
-    hcp: process.env.PUBLIC_URL + "/hcpcardimg.png",
-    fishfeed: process.env.PUBLIC_URL + "/fishfeedcardimg.jpg",
+    feed: process.env.PUBLIC_URL + "/feedicon.jpeg",
+    hcp: process.env.PUBLIC_URL + "/hcpicon.jpeg",
+    fishfeed: process.env.PUBLIC_URL + "/fishfeedicon.jpeg",
     // marian: process.env.PUBLIC_URL + "/marianfishfeedAi.png",
-       marian: process.env.PUBLIC_URL + "/marianfeedimg.jpg",
-    freshwater: process.env.PUBLIC_URL + "/freshwatercard.jpg",
-    prawnfeed: process.env.PUBLIC_URL + "/prawnfeedcardimg.jpg",
-    nursery: process.env.PUBLIC_URL + "/nurseryprawnfeedcardimg.webp",
-    grower: process.env.PUBLIC_URL + "/growerprawnfeedcardimg.jpg",
-    vannamei: process.env.PUBLIC_URL + "/vannameicard.png",
-    tiger: process.env.PUBLIC_URL + "/tigercardimg.png",
+       marian: process.env.PUBLIC_URL + "/marianicon.jpeg",
+    freshwater: process.env.PUBLIC_URL + "/freshwatericon.jpeg",
+    prawnfeed: process.env.PUBLIC_URL + "/prawnfeedicon.jpeg",
+    nursery: process.env.PUBLIC_URL + "/nurseryfeedicon.jpeg",
+    grower: process.env.PUBLIC_URL + "/growerfeedicon.jpeg",
+    vannamei: process.env.PUBLIC_URL + "/vannameiicon.jpeg",
+    tiger: process.env.PUBLIC_URL + "/tigericon.jpeg",
   };
 
   const renderCard = (title, description, onClickAction, imgOverride = null) => {
@@ -382,7 +382,7 @@ const handleOpenBrochure = (data, currentPath) => {
       setActiveSlide(10);
     },
     // Adding the manual card image for Slide 8 itself
-    process.env.PUBLIC_URL + "/Toponecardimg.png" 
+    process.env.PUBLIC_URL + "/Toponeicon.jpeg" 
   )}
 </div>
 
@@ -544,7 +544,7 @@ const handleOpenBrochure = (data, currentPath) => {
 
     const productData = {
       "UNIVANA PEARL": {
-        cardSrc: process.env.PUBLIC_URL + "/pearlcardimg.png",
+        cardSrc: process.env.PUBLIC_URL + "/univanapearlicon.jpeg",
         brochure: {
           type: "grid",
           main: "UNIPEARL.jpg",
@@ -552,21 +552,21 @@ const handleOpenBrochure = (data, currentPath) => {
         }
       },
       "UNIVANA-P": {
-        cardSrc: process.env.PUBLIC_URL + "/univanapcards.png",  
+        cardSrc: process.env.PUBLIC_URL + "/univanapicon.jpeg",  
         brochure: "UNIVANA P.jpg"
       },
       
       "UNIVANAMI": {
-        cardSrc: process.env.PUBLIC_URL + "/univanamicardss.png",
+        cardSrc: process.env.PUBLIC_URL + "/univanamiicon.jpeg",
         brochure: "UNIVANAMI.jpg"
       },
       "UNIVANA": {
-        cardSrc: process.env.PUBLIC_URL + "/univanacardimg.png", 
+        cardSrc: process.env.PUBLIC_URL + "/univanaicon.jpeg", 
         brochure: "univana.png" 
       },
       // --- UPDATED LA-ONE TO GRID MODE ---
       "LA-ONE": {
-        cardSrc: process.env.PUBLIC_URL + "/laonecards.png",
+        cardSrc: process.env.PUBLIC_URL + "/laoneicon.jpeg",
         brochure: {
           type: "grid",
           // main: "LAONE.jpg", // This is the large one at the bottom
@@ -856,7 +856,7 @@ const handleOpenBrochure = (data, currentPath) => {
         main: "minerals_main.jpg",
         images: [
           { url: "lightgreenquartz.jpeg", name: "Light Green Quartz" },
-          { url: "mileyquartz.jpeg", name: "Milky Quartz" },
+          { url: "milkyquartzimg.png", name: "Milky Quartz" },
           { url: "pinkquartz.jpeg", name: "Pink Quartz" },
           { url: "quartzbgrade.jpeg", name: "Quartz B-Grade" },
           { url: "quartzgranual.jpeg", name: "Quartz Granules" }
@@ -877,7 +877,7 @@ const handleOpenBrochure = (data, currentPath) => {
       const config = exportData[item];
       return renderCard(
         item,
-        `Top-grade ${item} processed for international export.`,
+        ``,
         () => {
           setSelectedBrochure(config);
           setPath(["Exports", item]);
