@@ -36,7 +36,7 @@ const Navbar = ({ setActiveSlide, setPath }) => {
           alt="Logo"
           style={{
             ...navStyles.logoImg,
-            marginLeft: isMobile ? "-8px" : "-110px",
+            marginLeft: isMobile ? "-8px" : "-99px",
           }}
           onClick={() => navigate("/")}
         />
@@ -85,7 +85,7 @@ const ImportsExportsPage = () => {
   const [path, setPath] = useState(["Imports & Exports"]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [hoveredCard, setHoveredCard] = useState(null);
-  
+  const localStyles = getLocalStyles(isMobile);
   // Dynamic Brochure State
   const [selectedBrochure, setSelectedBrochure] = useState("");
 
@@ -291,7 +291,9 @@ const handleOpenBrochure = (data, currentPath) => {
       <Navbar setActiveSlide={setActiveSlide} setPath={setPath} />
 
       <section id="imports-exports" style={localStyles.importExportSection}>
-        <h2 style={localStyles.sectionTitle}>
+
+        
+        {/* <h2 style={localStyles.sectionTitle}>
           {path.map((item, index) => (
             <span
               key={index}
@@ -304,7 +306,79 @@ const handleOpenBrochure = (data, currentPath) => {
               {item} {index < path.length - 1 && " > "}
             </span>
           ))}
-        </h2>
+        </h2> */}
+
+
+{/* <h2 style={localStyles.sectionTitle}>
+  {path.map((item, index) => (
+    <span
+      key={index}
+      style={{
+        cursor: "pointer",
+        // The last item in the path gets the highlight color
+        color: index === path.length - 1 ? "#00b4d8" : "#0d1b2a",
+        whiteSpace: "nowrap", // Prevents individual words from breaking
+      }}
+      onClick={() => handleBreadcrumbClick(index)}
+    >
+      
+      {item === "/" ? "Imports & Exports" : item} 
+      
+      
+      {index < path.length - 1 && (
+        <span style={{ margin: "0 10px", color: "#ccc", fontWeight: "normal" }}>
+          &gt;
+        </span>
+      )}
+    </span>
+  ))}
+</h2> */}
+
+{/* <h2 style={localStyles.sectionTitle}>
+  <div style={localStyles.breadcrumbContainer}>
+    {path.map((item, index) => (
+      <span key={index} style={{ display: "flex", alignItems: "center" }}>
+        <span
+          style={{
+            cursor: "pointer",
+            color: index === path.length - 1 ? "#00b4d8" : "#0d1b2a",
+          }}
+          onClick={() => handleBreadcrumbClick(index)}
+        >
+          {index === 0 ? "Imports" : item}
+        </span>
+        {index < path.length - 1 && (
+          <span style={{ margin: "0 10px", color: "#00b4d8" }}>➔</span>
+        )}
+      </span>
+    ))}
+  </div>
+</h2> */}
+
+
+<h2 style={localStyles.sectionTitle}>
+  <div style={localStyles.breadcrumbContainer}>
+    {path.map((item, index) => (
+      <span key={index} style={{ display: "flex", alignItems: "center" }}>
+        <span
+          style={{
+            cursor: "pointer",
+            color: index === path.length - 1 ? "#00b4d8" : "#0d1b2a",
+          }}
+          onClick={() => handleBreadcrumbClick(index)}
+        >
+          {/* FIX: Use 'item' directly or check if it's the root slash */}
+          {item === "/" ? "Home" : item}
+        </span>
+        
+        {index < path.length - 1 && (
+          <span style={{ margin: "0 10px", color: "#00b4d8" }}>➔</span>
+        )}
+      </span>
+    ))}
+  </div>
+</h2>
+
 
         <div style={localStyles.sliderWrapper}>
           {/* SLIDE 0: ROOT */}
@@ -917,13 +991,13 @@ const styles = {
 
 
 footer: {
-    // background: "rgba(13, 27, 42, 0.95)", 
+     background: "rgba(13, 27, 42, 0.95)", 
     color: "#fff",
     padding: "25px 20px",
     textAlign: "center",
     fontSize: "14px",
     backdropFilter: "blur(5px)",
-    background:"transparent",
+    // background:"transparent",
   },
   footerTop: {
     display: "flex",
@@ -941,45 +1015,188 @@ footer: {
   
 };
 
-const localStyles = {
-  app: {
+// const localStyles = {
+//   app: {
     
-    // --- ADDED WATER BACKGROUND ---
+//     // --- ADDED WATER BACKGROUND ---
+//     fontFamily: "'Times New Roman'",
+//     backgroundImage: `url(${process.env.PUBLIC_URL + "/waterbg.jpeg"})`,
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//     backgroundAttachment: "fixed",
+//     backgroundRepeat: "no-repeat",
+//     // ------------------------------
+//     paddingTop: "70px",
+//     minHeight: "100vh",
+//     overflowX: "hidden",
+//   },
+//   importExportSection: {
+//     padding: "60px 20px",
+//     textAlign: "center",
+//     minHeight: "calc(100vh - 150px)",
+//     transition: "all 0.5s ease",
+//     // Changed from solid gradient to semi-transparent glass effect
+//     background: "rgba(255, 255, 255, 0.3)", 
+//     backdropFilter: "blur(5px)", // Optional: adds a premium frosted look
+//   },
+//   // sectionTitle: {
+//   //   fontSize: "30px",
+//   //   marginBottom: "50px",
+//   //   color: "#0d1b2a",
+//   //   fontWeight: "bold",
+//   //   // Added text shadow to ensure title is readable over image
+//   //   textShadow: "0 2px 4px rgba(255,255,255,0.8)",
+//   //   fontFamily: "'Times New Roman'",
+//   //   marginLeft: "-240px",
+//   // },
+// sectionTitle: {
+//   fontSize: isMobile ? "20px" : "28px", // Smaller font for long paths
+//   marginBottom: isMobile ? "20px" : "40px",
+//   color: "#0d1b2a",
+//   fontWeight: "bold",
+//   textShadow: "0 2px 4px rgba(255,255,255,0.8)",
+//   fontFamily: "'Times New Roman'",
+//   textAlign: "left", // Force text to start from left
+//   width: "100%",
+//   maxWidth: "1000px", // Match your card width
+//   margin: "0 auto 40px auto", // Centers the container, but text inside is left-aligned
+//   paddingLeft: isMobile ? "10px" : "0px",
+//   display: "flex",
+//   flexWrap: "wrap", // Allows path to wrap to next line if it's too long
+// },
+  
+//   sliderWrapper: {
+//     position: "relative",
+//     width: "100%",
+//     maxWidth: "1000px",
+//     margin: "0 auto",
+//     overflow: "visible", // Changed to visible so shadows aren't clipped
+//     fontFamily: "'Times New Roman'",
+//   },
+//   slide: {
+//     width: "100%",
+//   },
+//   importExportCard: {
+//     display: "flex",
+//     flexDirection: "row",
+//     fontFamily: "'Times New Roman'",
+//     alignItems: "center",
+//     width: "100%",
+//     borderRadius: "15px",
+//     overflow: "hidden",
+//     // Made cards more solid (0.95) so text remains very clear
+//     background: "rgba(255, 255, 255, 0.95)", 
+//     boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+//     cursor: "pointer",
+//     marginBottom: "30px",
+//     border: "2px solid #f0f0f0",
+//     transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease",
+//   },
+//   imageWrapper: {
+//     width: "250px",
+//     height: "180px",
+//     flexShrink: 0,
+//     overflow: "hidden",
+//   },
+//   importExportImg: {
+//     width: "100%",
+//     height: "100%",
+//     objectFit: "cover",
+//     transition: "transform 0.5s ease",
+//   },
+//   cardContent: {
+//     padding: "30px",
+//     textAlign: "left",
+//     flex: 1,
+//     fontFamily: "'Times New Roman'",
+//   },
+//   cardText: {
+//     fontSize: "16px",
+//     color: "#4a5568",
+//     lineHeight: "1.6",
+//     fontFamily: "'Times New Roman'",
+//     margin: "10px 0 0 0",
+//   },
+// };
+
+
+// Function that takes isMobile as an argument
+const getLocalStyles = (isMobile) => ({
+
+breadcrumbContainer: {
+    display: "inline-flex", // Box only takes up as much space as the text
+    alignItems: "center",
+    // backgroundColor: "rgba(255, 255, 255, 0.7)", // Semi-transparent white
+    padding: isMobile ? "8px 15px" : "12px 25px",
+    borderRadius: "10px", // Rounded pill shape
+    border: "0.8px solid lightblue", // Subtle blue border
+    boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
+    marginBottom: "30px",
+    flexWrap: "wrap",
+    gap: "5px",
+    backgroundColor:"transparent",
+    borderColor: "lightblue",
+  },
+  
+  sectionTitle: {
+    fontSize: isMobile ? "20px" : "28px",
+    marginBottom: isMobile ? "20px" : "40px",
+    color: "#0d1b2a",
+    fontWeight: "bold",
+    textShadow: "0 2px 4px rgba(255,255,255,0.8)",
+    fontFamily: "'Times New Roman'",
+    textAlign: "left",
+    width: "100%",
+    maxWidth: "1000px",
+    margin: "0 auto 40px auto",
+    paddingLeft: isMobile ? "10px" : "0px",
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "5px",
+  },
+
+
+  
+  app: {
     fontFamily: "'Times New Roman'",
     backgroundImage: `url(${process.env.PUBLIC_URL + "/waterbg.jpeg"})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundAttachment: "fixed",
     backgroundRepeat: "no-repeat",
-    // ------------------------------
     paddingTop: "70px",
     minHeight: "100vh",
     overflowX: "hidden",
   },
   importExportSection: {
-    padding: "60px 20px",
+    padding: isMobile ? "20px 15px" : "60px 20px",
     textAlign: "center",
     minHeight: "calc(100vh - 150px)",
-    transition: "all 0.5s ease",
-    // Changed from solid gradient to semi-transparent glass effect
-    background: "rgba(255, 255, 255, 0.3)", 
-    backdropFilter: "blur(5px)", // Optional: adds a premium frosted look
-  },
-  sectionTitle: {
-    fontSize: "36px",
-    marginBottom: "50px",
-    color: "#0d1b2a",
-    fontWeight: "bold",
-    // Added text shadow to ensure title is readable over image
-    textShadow: "0 2px 4px rgba(255,255,255,0.8)",
-    fontFamily: "'Times New Roman'",
-  },
+    background: "rgba(255, 255, 255, 0.3)",
+    backdropFilter: "blur(5px)",
+   },
+  // sectionTitle: {
+  //   fontSize: isMobile ? "20px" : "28px",
+  //   marginBottom: isMobile ? "20px" : "40px",
+  //   color: "#0d1b2a",
+  //   fontWeight: "bold",
+  //   textShadow: "0 2px 4px rgba(255,255,255,0.8)",
+  //   fontFamily: "'Times New Roman'",
+  //   textAlign: "left",
+  //   width: "100%",
+  //   maxWidth: "1000px",
+  //   margin: "0 auto 40px auto",
+  //   paddingLeft: isMobile ? "10px" : "0px",
+  //   display: "flex",
+  //   flexWrap: "wrap",
+  //   gap: "5px",
+  // },
   sliderWrapper: {
     position: "relative",
     width: "100%",
     maxWidth: "1000px",
     margin: "0 auto",
-    overflow: "visible", // Changed to visible so shadows aren't clipped
+    overflow: "visible",
     fontFamily: "'Times New Roman'",
   },
   slide: {
@@ -987,23 +1204,22 @@ const localStyles = {
   },
   importExportCard: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: isMobile ? "column" : "row",
     fontFamily: "'Times New Roman'",
     alignItems: "center",
     width: "100%",
     borderRadius: "15px",
     overflow: "hidden",
-    // Made cards more solid (0.95) so text remains very clear
-    background: "rgba(255, 255, 255, 0.95)", 
+    background: "rgba(255, 255, 255, 0.95)",
     boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
     cursor: "pointer",
     marginBottom: "30px",
     border: "2px solid #f0f0f0",
-    transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease",
+    transition: "all 0.3s ease",
   },
   imageWrapper: {
-    width: "250px",
-    height: "180px",
+    width: isMobile ? "100%" : "250px",
+    height: isMobile ? "200px" : "180px",
     flexShrink: 0,
     overflow: "hidden",
   },
@@ -1014,8 +1230,8 @@ const localStyles = {
     transition: "transform 0.5s ease",
   },
   cardContent: {
-    padding: "30px",
-    textAlign: "left",
+    padding: isMobile ? "20px" : "30px",
+    textAlign: isMobile ? "center" : "left",
     flex: 1,
     fontFamily: "'Times New Roman'",
   },
@@ -1026,7 +1242,6 @@ const localStyles = {
     fontFamily: "'Times New Roman'",
     margin: "10px 0 0 0",
   },
-};
-
+});
 
 export default ImportsExportsPage;

@@ -72,7 +72,7 @@ const navLinks = [
     ...styles.logoImg,
     // If mobile, move it 15px from the left edge. 
     // If desktop, keep your original -120px.
-    marginLeft: isMobile ? "-45px" : "-70px", 
+    marginLeft: isMobile ? "-35px" : "-70px", 
   }}
   // onClick={() => (window.location.href = "#")}
   onClick={() => navigate("/")}
@@ -159,10 +159,10 @@ const ImportExportSection = () => {
 
   return (
     <section id="imports-exports" style={styles.importExportSection}>
-      <h2 style={styles.sectionTitle}>Imports & Exports</h2>
+      <h2 style={styles.sectionTitle}>IMPORTS & EXPORTS</h2>
       <div style={styles.gridContainer}>
-        
         {/* Transparent Import Card */}
+        
         <div 
           style={{ ...styles.importExportCard, ...styles.transparentCard }} 
           onClick={handleImportClick}
@@ -180,7 +180,7 @@ const ImportExportSection = () => {
           </div>
         </div>
 
-        {/* Transparent Export Card */}
+       
         <div 
           style={{ ...styles.importExportCard, ...styles.transparentCard }} 
           onClick={handleExportClick}
@@ -429,7 +429,8 @@ const contactStyles = {
   sectionTitle: {
     fontSize: "32px",
     marginBottom: "30px",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color:"lightblue",
   },
   contactForm: {
     maxWidth: "500px",
@@ -554,7 +555,7 @@ const styles = {
     width: "100%",
     top: 0,
     zIndex: 100,
-    marginLeft: "-4px", // To prevent any tiny gap on the left edge
+    marginLeft: "-8px", // To prevent any tiny gap on the left edge
   },
   headerInner: {
     display: "flex",
@@ -782,13 +783,13 @@ const styles = {
 
   // Footer
   footer: {
-    // background: "rgba(13, 27, 42, 0.95)", 
+    background: "rgba(13, 27, 42, 0.95)", 
     color: "#fff",
     padding: "25px 20px",
     textAlign: "center",
     fontSize: "14px",
     backdropFilter: "blur(5px)",
-    background:"transparent",
+    // background:"transparent",
   },
   footerTop: {
     display: "flex",
