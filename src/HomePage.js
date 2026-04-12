@@ -132,7 +132,7 @@ const SubHeader = () => {
     <section style={styles.subHeader}>
       <div style={styles.subHeaderInner}>
         <img 
-          src={process.env.PUBLIC_URL + "/ship.jpeg"} 
+          src={process.env.PUBLIC_URL + "/bgship1.png"} 
           alt="UPIN Trading Shipping" 
           style={styles.fullScreenImg} 
         />
@@ -142,30 +142,6 @@ const SubHeader = () => {
 };
 
 
-// const SubHeader = () => {
-//   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-//   useEffect(() => {
-//     const handleResize = () => setIsMobile(window.innerWidth <= 768);
-//     window.addEventListener("resize", handleResize);
-//     return () => window.removeEventListener("resize", handleResize);
-//   }, []);
-
-//   return (
-//     <section style={styles.subHeader}>
-//       <div style={styles.subHeaderInner}>
-//         <img 
-//           src={process.env.PUBLIC_URL + "/loadshipbg.jpeg"} 
-//           alt="UPIN Trading Shipping" 
-//           style={{
-//             ...styles.fullScreenImg,
-//             height: isMobile ? "40vh" : "80vh", // Shorter height on mobile for better UX
-//           }} 
-//         />
-//       </div>
-//     </section>
-//   );
-// };
 
 
 const ImportExportSection = () => {
@@ -525,6 +501,7 @@ const styles = {
     overflow: "hidden",
     background: "#fff", // Matches your header color to prevent flickering
     marginTop: "-1px", 
+   
   },
   
   subHeaderInner: {
@@ -542,31 +519,7 @@ const styles = {
     border: "none",
   },
 
-// subHeader: { 
-//     padding: "0",
-//     margin: "0",
-//     width: "100%",
-//     maxWidth: "100vw", // Prevents horizontal scrolling
-//     overflow: "hidden",
-//     background: "transparent",
-//     marginTop: "-1px", // Small overlap to prevent white gaps from the navbar
-//   },
-  
-//   subHeaderInner: {
-//     width: "100%",
-//     display: "flex",
-//     opacity: 1, // Increased slightly; 0.5 can look "faded" on mobile screens
-//   },
 
-//   fullScreenImg: {
-//     width: "100vw",           // Force full viewport width
-//     objectFit: "cover",       // Fills space without stretching
-//     objectPosition: "center", // Keeps the ship centered
-//     display: "block",
-//     border: "none",
-//     borderRadius: "0px",
-//     fontFamily: "'Times New Roman', Times, serif", // Consistent font
-//   },
 
 
   subHeaderSideImg: {
@@ -601,6 +554,7 @@ const styles = {
     width: "100%",
     top: 0,
     zIndex: 100,
+    marginLeft: "-4px", // To prevent any tiny gap on the left edge
   },
   headerInner: {
     display: "flex",
@@ -639,22 +593,7 @@ const styles = {
     boxShadow: "0 10px 15px rgba(0,0,0,0.1)"
   },
 
-  // Hero / SubHeader
-  // subHeader: { 
-  //   padding: "80px 20px", 
-  //   background: "rgba(255, 255, 255, 0.3)", 
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   textAlign: "center",
-  // },
-  // subHeaderInner: {
-  //   display: "flex",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   maxWidth: "1200px",
-  //   gap: "40px",
-  //   width: "100%"
-  // },
+  
   subHeaderTitle: {
     fontSize: "2.5rem",
     color: "#023e8a",
@@ -667,14 +606,6 @@ const styles = {
     fontWeight: "600",
     letterSpacing: "1px"
   },
-  // subHeaderSideImg: {
-  //   width: "220px",
-  //   height: "160px",
-  //   borderRadius: "15px",
-  //   objectFit: "cover",
-  //   // boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
-  //   // border: "4px solid #fff"
-  // },
 
   // Import / Export Section & Small Cards
   importExportSection: { 

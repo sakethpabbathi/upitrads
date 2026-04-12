@@ -155,14 +155,6 @@ const handleBreadcrumbClick = (index) => {
 };
 
 
-  
-  // UNIQUE BROCHURE HANDLER: Sets image AND triggers the slide
-  // const handleOpenBrochure = (productName, currentPath) => {
-  //   setSelectedBrochure(`${productName}.png`); // Matches your filename
-  //   setPath([...currentPath, productName]);
-  //   setActiveSlide(10); // Slides to brochure view
-  // };
-
 const handleOpenBrochure = (data, currentPath) => {
   // If data is just a string (e.g. "Marian Feed"), add .png. 
   // If it's already an object (the Grid), just use it.
@@ -198,6 +190,11 @@ const handleOpenBrochure = (data, currentPath) => {
     };
   };
 
+
+
+
+
+  
   const commonImg = process.env.PUBLIC_URL + "/fishone.jpg";
   const images = {
     feed: process.env.PUBLIC_URL + "/feedicon.jpeg",
@@ -764,74 +761,6 @@ const handleOpenBrochure = (data, currentPath) => {
   })()}
 </div>
 
-          {/* SLIDE 6: EXPORTS */}
-{/* <div style={getSlideStyle(6)}>
-  {["Shrimp", "Minerals", "Chemicals"].map((item) =>
-    renderCard(item, `Top-grade ${item} processed for international export.`, () => {
-      // Removed handleOpenBrochure
-      setPath(["Exports", item]);
-    })
-  )}
-</div> */}
-
-
-
-{/* SLIDE 6: EXPORTS */}
-{/* <div style={getSlideStyle(6)}>
-  {(() => {
-    // Manually defined data with labels for the grid viewer
-    const exportData = {
-      "Shrimp": {
-        type: "grid",
-        main: "shrimp_main.jpg",
-        images: [
-          { url: "shrimp1.jpg" },
-          { url: "shrimp2.jpg" },
-          { url: "shrimp3.jpg"},
-          { url: "shrimp4.jpg" },
-          { url: "shrimp5.jpg" }
-        ]
-      },
-      "Minerals": {
-        type: "grid",
-        main: "minerals_main.jpg",
-        images: [
-          { url: "lightgreenquartz.jpeg", name: "Light Green Quartz" },
-          { url: "mileyquartz.jpeg", name: "Milky Quartz" },
-          { url: "pinkquartz.jpeg", name: "Pink Quartz" },
-          { url: "quartzbgrade.jpeg", name: "Quartz B-Grade" },
-          { url: "quartzgranual.jpeg", name: "Quartz Granules" }
-        ]
-      },
-      "Chemicals": {
-        type: "grid",
-        main: "chem_main.jpg",
-        images: [
-          { url: "cacl2chemical.jpeg", name: "Calcium Chloride" },
-          { url: "mgcl2chemical.jpeg", name: "Magnesium Chloride" },
-          // { url: "chem3.jpg", name: "Disinfectant" },
-          // { url: "chem4.jpg", name: "Oxygen Enhancer" }
-        ]
-      }
-    };
-
-    return Object.keys(exportData).map((item) =>
-      renderCard(
-        item,
-        `Top-grade ${item} processed for international export.`,
-        () => {
-          // Set the specific grid data for Slide 10
-          setSelectedBrochure(exportData[item]);
-          // Update breadcrumb path
-          setPath(["Exports", item]);
-          // Navigate to the Grid Viewer
-          setActiveSlide(10);
-        }
-      )
-    );
-  })()}
-</div>
-       */}
 
 {/* SLIDE 6: EXPORTS */}
 <div style={getSlideStyle(6)}>
@@ -897,17 +826,6 @@ const handleOpenBrochure = (data, currentPath) => {
   );
 };
 
-// const Footer = () => (
-//   <footer style={styles.footer}>
-//     <div style={styles.footerTop}>
-//       <span>UPIN TRADING CORPORATION</span>
-//       <span>📍 Hyderabad, India</span>
-//     </div>
-//     <p style={styles.footerBottom}>
-//       © 2026 UPIN Tradeing Corporation. All Rights Reserved.
-//     </p>
-//   </footer>
-// );
 
 
 const Footer = () => (
@@ -933,7 +851,7 @@ const navStyles = {
     background: "white", 
     color: "#180e0e",
     padding: "12px 20px",
-    marginLeft: "-8px",
+     marginLeft: "-8px",
     position: "fixed",
     width: "100%",
     boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
@@ -996,28 +914,6 @@ const navStyles = {
 };
 
 const styles = {
-  // footer: {
-  //   // background: "#0d1b2a",
-  //   background:"transparent",
-  //   color: "#fff",
-  //   padding: "10px 20px",
-  //   textAlign: "center",
-  //   fontSize: "14px",
-  //   marginTop: "16px",
-  //   fontFamily: "'Times New Roman'",
-  // },
-  // footerTop: {
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   gap: "25px",
-  //   flexWrap: "wrap",
-  //   alignItems: "center",
-  // },
-  // footerBottom: {
-  //   marginTop: "5px",
-  //   fontSize: "12px",
-  //   opacity: 0.8,
-  // },
 
 
 footer: {
