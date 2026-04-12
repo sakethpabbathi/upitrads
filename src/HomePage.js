@@ -132,7 +132,7 @@ const SubHeader = () => {
     <section style={styles.subHeader}>
       <div style={styles.subHeaderInner}>
         <img 
-          src={process.env.PUBLIC_URL + "/loadshipbg.jpeg"} 
+          src={process.env.PUBLIC_URL + "/ship.jpeg"} 
           alt="UPIN Trading Shipping" 
           style={styles.fullScreenImg} 
         />
