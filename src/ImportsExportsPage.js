@@ -81,6 +81,7 @@ const Navbar = ({ setActiveSlide, setPath }) => {
 
 // --- MAIN PAGE COMPONENT ---
 const ImportsExportsPage = () => {
+  // const navigate = useNavigate();
   const [activeSlide, setActiveSlide] = useState(0);
   const [path, setPath] = useState(["Imports & Exports"]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -104,8 +105,6 @@ const ImportsExportsPage = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-
 
 
 const handleBreadcrumbClick = (index) => {
@@ -285,14 +284,45 @@ const handleOpenBrochure = (data, currentPath) => {
       </div>
     );
   };
+const handleBack = () => {
+  if (path.length > 1) {
+    const newPath = path.slice(0, -1);
+    setPath(newPath);
 
+    // Trigger same logic as breadcrumb click
+    handleBreadcrumbClick(newPath.length - 1);
+  }
+};
   return (
     <div style={localStyles.app}>
       <Navbar setActiveSlide={setActiveSlide} setPath={setPath} />
 
       <section id="imports-exports" style={localStyles.importExportSection}>
 
-        
+        <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "10px" }}>
+  {path.length > 1 && (
+    <button
+      onClick={handleBack}
+      style={{
+        padding: "12px 30px",
+        backgroundColor: "#0d1b2a",
+        color: "#fff",
+        border: "none",
+        borderRadius: "20px",
+        cursor: "pointer",
+        fontWeight: "bold",
+        fontSize: "16px",
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        marginLeft: "122px"
+      }}
+    >
+      ← Back
+    </button>
+  )}
+</div>
+
         {/* <h2 style={localStyles.sectionTitle}>
           {path.map((item, index) => (
             <span
@@ -381,8 +411,8 @@ const handleOpenBrochure = (data, currentPath) => {
 
 
         <div style={localStyles.sliderWrapper}>
-          {/* SLIDE 0: ROOT */}
-          <div style={getSlideStyle(0)}>
+        
+          {/* <div style={getSlideStyle(0)}>
             {renderCard("Imports", "Global aquaculture sourcing and supply chain excellence.", () => {
               setActiveSlide(1);
               setPath(["/"]);
@@ -391,7 +421,7 @@ const handleOpenBrochure = (data, currentPath) => {
               setActiveSlide(6);
               setPath(["/"]);
             })}
-          </div>
+          </div> */}
 
 
           {/* SLIDE 1: IMPORTS */}
@@ -405,6 +435,34 @@ const handleOpenBrochure = (data, currentPath) => {
                 setPath(["Imports", "HCP"]);
               }, images.hcp)}
           </div>
+
+
+<div style={getSlideStyle(1)}>
+
+
+
+
+  {renderCard(
+    "Feed",
+    "High-quality nutritional solutions for aquatic growth.",
+    () => {
+      setActiveSlide(2);
+      setPath(["Imports", "Feed"]);
+    },
+    images.feed
+  )}
+
+  {renderCard(
+    "HCP",
+    "Specialized Healthcare & Processing products.",
+    () => {
+      setActiveSlide(3);
+      setPath(["Imports", "HCP"]);
+    },
+    images.hcp
+  )}
+</div>
+          
 
           {/* SLIDE 2: FEED CATEGORIES */}
           <div style={getSlideStyle(2)}>
@@ -434,6 +492,7 @@ const handleOpenBrochure = (data, currentPath) => {
   }, 
     images.grower)}
 </div>
+
 
 
 {/* SLIDE 8: NURSERY -> TOP ONE (Manual Gallery) */}
@@ -584,24 +643,7 @@ const handleOpenBrochure = (data, currentPath) => {
       </div>
     )}
 
-    {/* BACK BUTTON */}
-    <div style={{ marginTop: "50px" }}>
-      <button
-        onClick={() => handleBreadcrumbClick(path.length - 2)}
-        style={{
-          padding: "15px 50px",
-          backgroundColor: "#00b4d8",
-          color: "white",
-          border: "none",
-          borderRadius: "30px",
-          cursor: "pointer",
-          fontWeight: "bold",
-          fontSize: "16px"
-        }}
-      >
-        ← Back to List
-      </button>
-    </div>
+    
   </div>
 </div>
 
@@ -837,7 +879,7 @@ const handleOpenBrochure = (data, currentPath) => {
 
 
 {/* SLIDE 6: EXPORTS */}
-<div style={getSlideStyle(6)}>
+{/* <div style={getSlideStyle(6)}>
   {(() => {
     // Manually defined data with cardImg added for each category
     const exportData = {
@@ -890,6 +932,64 @@ const handleOpenBrochure = (data, currentPath) => {
       );
     });
   })()}
+</div> */}
+
+
+<div style={getSlideStyle(6)}>
+
+  {/* ✅ BACK TO HOME BUTTON */}
+
+  {(() => {
+    const exportData = {
+      "Shrimp": {
+        cardImg: "shrimpcard.jpg",
+        type: "grid",
+        main: "shrimp_main.jpg",
+        images: [
+          { url: "shrimp1.jpg", name: "Head-Less-Shell on Vannamei " },
+          { url: "shrimp2.jpg", name: "Peald and Devined Vannamei " },
+          { url: "shrimp3.jpg", name: "Peald and unDevined Vannamei" },
+          { url: "shrimp4.jpg", name: "Head On Shell On Vannamei" },
+          { url: "shrimp5.jpg", name: "Peald Devined Tail On Vannamei" }
+        ]
+      },
+      "Minerals": {
+        cardImg: "mineralscard.jpg",
+        type: "grid",
+        main: "minerals_main.jpg",
+        images: [
+          { url: "lightgreenquartz.jpeg", name: "Light Green Quartz" },
+          { url: "milkyquartzimg.png", name: "Milky Quartz" },
+          { url: "pinkquartz.jpeg", name: "Pink Quartz" },
+          { url: "quartzbgrade.jpeg", name: "Quartz B-Grade" },
+          { url: "quartzgranual.jpeg", name: "Quartz Granules" }
+        ]
+      },
+      "Chemicals": {
+        cardImg: "chemicalcard.jpg",
+        type: "grid",
+        main: "chem_main.jpg",
+        images: [
+          { url: "cacl2chemical.jpeg", name: "Calcium Chloride" },
+          { url: "mgcl2chemical.jpeg", name: "Magnesium Chloride" }
+        ]
+      }
+    };
+
+    return Object.keys(exportData).map((item) => {
+      const config = exportData[item];
+      return renderCard(
+        item,
+        ``,
+        () => {
+          setSelectedBrochure(config);
+          setPath(["Exports", item]);
+          setActiveSlide(10);
+        },
+        process.env.PUBLIC_URL + "/" + config.cardImg
+      );
+    });
+  })()}
 </div>
 
        
@@ -899,6 +999,14 @@ const handleOpenBrochure = (data, currentPath) => {
     </div>
   );
 };
+
+
+
+
+
+
+
+
 
 
 
