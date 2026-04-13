@@ -82,8 +82,11 @@ const Navbar = ({ setActiveSlide, setPath }) => {
 // --- MAIN PAGE COMPONENT ---
 const ImportsExportsPage = () => {
   // const navigate = useNavigate();
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [path, setPath] = useState(["Imports & Exports"]);
+  const [activeSlide, setActiveSlide] = useState(1);
+  const [path, setPath] = useState(["Imports"]);
+
+ 
+  
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [hoveredCard, setHoveredCard] = useState(null);
   const localStyles = getLocalStyles(isMobile);
@@ -100,6 +103,9 @@ const ImportsExportsPage = () => {
     }
   }, [location]);
 
+
+
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", handleResize);
@@ -107,51 +113,162 @@ const ImportsExportsPage = () => {
   }, []);
 
 
-const handleBreadcrumbClick = (index) => {
-  // 1. Get the new path by slicing up to the clicked index
-  const newPath = path.slice(0, index + 1);
-  setPath(newPath);
+// const handleBreadcrumbClick = (index) => {
+//   // 1. Get the new path by slicing up to the clicked index
+//   const newPath = path.slice(0, index + 1);
+//   setPath(newPath);
   
-  const depth = newPath.length;
-  const lastItem = newPath[depth - 1];
+//   const depth = newPath.length;
+//   const lastItem = newPath[depth - 1];
 
-  // --- Depth 1: Root Categories ---
-  if (depth === 1) {
-    if (lastItem === "Imports" || lastItem === "Imports & Exports") setActiveSlide(1);
-    if (lastItem === "Exports") setActiveSlide(6);
-  }
+//   // --- Depth 1: Root Categories ---
+//   if (depth === 1) {
+//     if (lastItem === "Imports" || lastItem === "Imports & Exports") setActiveSlide(1);
+//     if (lastItem === "Exports") setActiveSlide(6);
+//   }
 
-  // --- Depth 2: Sub-Categories (e.g., Imports > Feed) ---
-  else if (depth === 2) {
-    if (lastItem === "Feed") setActiveSlide(2);
-    if (lastItem === "HCP") setActiveSlide(3);
-    // If it's an Export sub-item, stay on Slide 6 or specific export slide
-  }
+// // if (depth === 1) {
+// //   // Use the actual item name instead of guessing
+// //   if (lastItem === "Imports" || lastItem === "Imports & Exports") {
+// //     setActiveSlide(1);
+// //   } else if (lastItem === "Exports") {
+// //     setActiveSlide(6);
+// //   }
+// // }
 
-  // --- Depth 3: Specific Feeds (e.g., Feed > Prawn Feed) ---
-  else if (depth === 3) {
-    if (lastItem === "Prawn Feed") setActiveSlide(7);
-    if (lastItem === "Fish Feed") setActiveSlide(5);
-    // Handle HCP items if they are at depth 3
-    if (newPath[1] === "HCP") setActiveSlide(10); 
-  }
 
-  // --- Depth 4: Growth Stages (e.g., Prawn Feed > Nursery) ---
-  else if (depth === 4) {
-    if (lastItem === "Nursery Feed") setActiveSlide(8);
-    if (lastItem === "Grower Feed") setActiveSlide(9);
-  }
+//   // --- Depth 2: Sub-Categories (e.g., Imports > Feed) ---
+//   else if (depth === 2) {
+//     if (lastItem === "Feed") setActiveSlide(2);
+//     if (lastItem === "HCP") setActiveSlide(3);
+//     // If it's an Export sub-item, stay on Slide 6 or specific export slide
+//   }
 
-  // --- Depth 5: Species (e.g., Grower > Vannamei) ---
-  else if (depth === 5) {
-    if (lastItem === "Vannamei" || lastItem === "Tiger") setActiveSlide(11);
-  }
+//   // --- Depth 3: Specific Feeds (e.g., Feed > Prawn Feed) ---
+//   else if (depth === 3) {
+//     if (lastItem === "Prawn Feed") setActiveSlide(7);
+//     if (lastItem === "Fish Feed") setActiveSlide(5);
+//     // Handle HCP items if they are at depth 3
+//     if (newPath[1] === "HCP") setActiveSlide(10); 
+//   }
+
+//   // --- Depth 4: Growth Stages (e.g., Prawn Feed > Nursery) ---
+//   else if (depth === 4) {
+//     if (lastItem === "Nursery Feed") setActiveSlide(8);
+//     if (lastItem === "Grower Feed") setActiveSlide(9);
+//   }
+
+//   // --- Depth 5: Species (e.g., Grower > Vannamei) ---
+//   else if (depth === 5) {
+//     if (lastItem === "Vannamei" || lastItem === "Tiger") setActiveSlide(11);
+//   }
   
-  // --- Depth 6: Final Product (Brochure View) ---
-  else if (depth === 6) {
-    setActiveSlide(10);
-  }
-};
+//   // --- Depth 6: Final Product (Brochure View) ---
+//   else if (depth === 6) {
+//     setActiveSlide(10);
+//   }
+// };
+
+// const handleBreadcrumbClick = (index, providedPath = null) => {
+//   // Use providedPath if available (useful for handleBack), otherwise use current state
+//   const currentPath = providedPath || path;
+//   const newPath = currentPath.slice(0, index + 1);
+  
+//   // Only update state if we aren't already handling it elsewhere
+//   if (!providedPath) setPath(newPath);
+
+//   const depth = newPath.length;
+//   const lastItem = newPath[depth - 1];
+
+//   switch (depth) {
+//     case 1:
+//       // Root Level: Logic for Imports vs Exports
+//       if (lastItem === "Exports") {
+//         setActiveSlide(6);
+//       } else {
+//         // Handles "Imports" or "Imports & Exports"
+//         setActiveSlide(1);
+//       }
+//       break;
+
+//     case 2:
+//       // Sub-Categories
+//       if (lastItem === "Feed") setActiveSlide(2);
+//       else if (lastItem === "HCP") setActiveSlide(3);
+//       else if (newPath[0] === "Exports") setActiveSlide(10); // Export details
+//       break;
+
+//     case 3:
+//       // Specific Feeds or HCP Details
+//       if (lastItem === "Prawn Feed") setActiveSlide(7);
+//       else if (lastItem === "Fish Feed") setActiveSlide(5);
+//       else if (newPath[1] === "HCP") setActiveSlide(10);
+//       break;
+
+//     case 4:
+//       // Growth Stages
+//       if (lastItem === "Nursery Feed") setActiveSlide(8);
+//       else if (lastItem === "Grower Feed") setActiveSlide(9);
+//       break;
+
+//     case 5:
+//       // Species Selection
+//       if (lastItem === "Vannamei" || lastItem === "Tiger") setActiveSlide(11);
+//       break;
+
+//     case 6:
+//       // Final Product View
+//       setActiveSlide(10);
+//       break;
+
+//     default:
+//       setActiveSlide(1);
+//       break;
+//   }
+// };
+
+
+
+const handleBreadcrumbClick = (index, providedPath = null) => {
+    const currentPath = providedPath || path;
+    const newPath = currentPath.slice(0, index + 1);
+    
+    if (!providedPath) setPath(newPath);
+
+    const depth = newPath.length;
+    const lastItem = newPath[depth - 1];
+
+    switch (depth) {
+      case 1:
+        lastItem === "Exports" ? setActiveSlide(6) : setActiveSlide(1);
+        break;
+      case 2:
+        if (lastItem === "Feed") setActiveSlide(2);
+        else if (lastItem === "HCP") setActiveSlide(3);
+        else if (newPath[0] === "Exports") setActiveSlide(10); 
+        break;
+      case 3:
+        if (lastItem === "Prawn Feed") setActiveSlide(7);
+        else if (lastItem === "Fish Feed") setActiveSlide(5);
+        else if (newPath[1] === "HCP") setActiveSlide(10);
+        break;
+      case 4:
+        if (lastItem === "Nursery Feed") setActiveSlide(8);
+        else if (lastItem === "Grower Feed") setActiveSlide(9);
+        break;
+      case 5:
+        if (lastItem === "Vannamei" || lastItem === "Tiger") setActiveSlide(11);
+        break;
+      case 6:
+        setActiveSlide(10);
+        break;
+      default:
+        setActiveSlide(1);
+        break;
+    }
+  };
+
+
 
 
 const handleOpenBrochure = (data, currentPath) => {
@@ -188,9 +305,6 @@ const handleOpenBrochure = (data, currentPath) => {
       pointerEvents: isActive ? "auto" : "none",
     };
   };
-
-
-
 
 
   
@@ -290,9 +404,10 @@ const handleBack = () => {
     setPath(newPath);
 
     // Trigger same logic as breadcrumb click
-    handleBreadcrumbClick(newPath.length - 1);
+    handleBreadcrumbClick(newPath.length - 1,newPath);
   }
 };
+
   return (
     <div style={localStyles.app}>
       <Navbar setActiveSlide={setActiveSlide} setPath={setPath} />
@@ -325,68 +440,6 @@ const handleBack = () => {
   )}
 </div>
 
-        {/* <h2 style={localStyles.sectionTitle}>
-          {path.map((item, index) => (
-            <span
-              key={index}
-              style={{
-                cursor: "pointer",
-                color: index === path.length - 1 ? "#00b4d8" : "#0d1b2a",
-              }}
-              onClick={() => handleBreadcrumbClick(index)}
-            >
-              {item} {index < path.length - 1 && " > "}
-            </span>
-          ))}
-        </h2> */}
-
-
-{/* <h2 style={localStyles.sectionTitle}>
-  {path.map((item, index) => (
-    <span
-      key={index}
-      style={{
-        cursor: "pointer",
-        // The last item in the path gets the highlight color
-        color: index === path.length - 1 ? "#00b4d8" : "#0d1b2a",
-        whiteSpace: "nowrap", // Prevents individual words from breaking
-      }}
-      onClick={() => handleBreadcrumbClick(index)}
-    >
-      
-      {item === "/" ? "Imports & Exports" : item} 
-      
-      
-      {index < path.length - 1 && (
-        <span style={{ margin: "0 10px", color: "#ccc", fontWeight: "normal" }}>
-          &gt;
-        </span>
-      )}
-    </span>
-  ))}
-</h2> */}
-
-{/* <h2 style={localStyles.sectionTitle}>
-  <div style={localStyles.breadcrumbContainer}>
-    {path.map((item, index) => (
-      <span key={index} style={{ display: "flex", alignItems: "center" }}>
-        <span
-          style={{
-            cursor: "pointer",
-            color: index === path.length - 1 ? "#00b4d8" : "#0d1b2a",
-          }}
-          onClick={() => handleBreadcrumbClick(index)}
-        >
-          {index === 0 ? "Imports" : item}
-        </span>
-        {index < path.length - 1 && (
-          <span style={{ margin: "0 10px", color: "#00b4d8" }}>➔</span>
-        )}
-      </span>
-    ))}
-  </div>
-</h2> */}
-
 
 <h2 style={localStyles.sectionTitle}>
   <div style={localStyles.breadcrumbContainer}>
@@ -399,10 +452,9 @@ const handleBack = () => {
           }}
           onClick={() => handleBreadcrumbClick(index)}
         >
-          {/* FIX: Use 'item' directly or check if it's the root slash */}
-          {item === "/" ? "Home" : item}
+          {item}
+          {/* {index === 0 ? "Imports" : item} */}
         </span>
-        
         {index < path.length - 1 && (
           <span style={{ margin: "0 10px", color: "#00b4d8" }}>➔</span>
         )}
@@ -412,9 +464,10 @@ const handleBack = () => {
 </h2>
 
 
+
         <div style={localStyles.sliderWrapper}>
         
-          {/* <div style={getSlideStyle(0)}>
+          <div style={getSlideStyle(0)}>
             {renderCard("Imports", "Global aquaculture sourcing and supply chain excellence.", () => {
               setActiveSlide(1);
               setPath(["/"]);
@@ -423,7 +476,7 @@ const handleBack = () => {
               setActiveSlide(6);
               setPath(["/"]);
             })}
-          </div> */}
+          </div>
 
 
           {/* SLIDE 1: IMPORTS */}
@@ -438,12 +491,8 @@ const handleBack = () => {
               }, images.hcp)}
           </div>
 
-
+{/* 
 <div style={getSlideStyle(1)}>
-
-
-
-
   {renderCard(
     "Feed",
     "High-quality nutritional solutions for aquatic growth.",
@@ -463,7 +512,7 @@ const handleBack = () => {
     },
     images.hcp
   )}
-</div>
+</div> */}
           
 
           {/* SLIDE 2: FEED CATEGORIES */}
