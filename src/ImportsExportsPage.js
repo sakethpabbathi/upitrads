@@ -730,7 +730,7 @@ const handleBack = () => {
       },
       // --- UPDATED LA-ONE TO GRID MODE ---
       "LA-ONE": {
-        cardSrc: process.env.PUBLIC_URL + "/laoneicon.jpeg",
+        cardSrc: process.env.PUBLIC_URL + "/Laoneicon.jpeg",
         brochure: {
           type: "grid",
           // main: "LAONE.jpg", // This is the large one at the bottom
@@ -821,7 +821,7 @@ const handleBack = () => {
       "GUTPRO": {
         card: "gutproicon.png",
         desc: "Probiotic supplement for better gut health.",
-        brochure: { type: "grid", main: "Gutprobro.png", images: ["Gutpro.jpg"] }
+        brochure: { type: "grid", main: "Gutprobro.png", images: ["GutPro.jpg"] }
       },
       "ENGRO": {
         card: "engroicon.png", 
@@ -836,7 +836,7 @@ const handleBack = () => {
       "NURI BSL": {
         card: "nuribslicon.png", 
         desc: "Essential nutrients for healthy shrimp growth.",
-        brochure: ["Nuribsl.jpg","NuriBsl.png"] 
+        brochure: ["NuriBsl.jpg","Nuribsl.png"] 
       },
       "ZEOLITE": { 
         card: "zeoliteicon.png", 
