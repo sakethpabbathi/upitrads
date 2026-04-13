@@ -304,18 +304,20 @@ const handleBack = () => {
     <button
       onClick={handleBack}
       style={{
-        padding: "12px 30px",
-        backgroundColor: "#0d1b2a",
-        color: "#fff",
-        border: "none",
-        borderRadius: "20px",
+        padding: "12px 20px",
+        backgroundColor: "transparent",
+        // color: "#fff",
+        color: "lightblue",
+        borderRadius: "10px",
+        border: "0.8px solid lightblue",
         cursor: "pointer",
         fontWeight: "bold",
         fontSize: "16px",
         display: "flex",
         alignItems: "center",
         gap: "8px",
-        marginLeft: "122px"
+        marginLeft: "8px",
+      
       }}
     >
       ← Back
