@@ -177,6 +177,7 @@ const ImportExportSection = () => {
           <div style={styles.cardContent}>
             <h3 style={styles.cardTitle}>Imports</h3>
             <p style={styles.cardText}>High-quality seafood and feed sourced globally.</p>
+            <center style={{ margin: "0 10px", color: "#00b4d8" }} >➔</center>
           </div>
         </div>
 
@@ -195,6 +196,7 @@ const ImportExportSection = () => {
           <div style={styles.cardContent}>
             <h3 style={styles.cardTitle}>Exports</h3>
             <p style={styles.cardText}>Trusted export services delivering worldwide freshness.</p>
+            <center style={{ margin: "0 10px", color: "#00b4d8" }} >➔</center>
           </div>
         </div>
 
@@ -493,7 +495,9 @@ const contactStyles = {
 
 const styles = {
 
-
+center:{
+color:"lightblue",
+},
   
   subHeader: { 
     padding: "0",
