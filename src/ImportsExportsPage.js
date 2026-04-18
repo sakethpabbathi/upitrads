@@ -726,7 +726,12 @@ const handleBack = () => {
       },
       "UNIVANA": {
         cardSrc: process.env.PUBLIC_URL + "/univanaicon.jpeg", 
-        brochure: "univana.png" 
+        // brochure: "univana.png" 
+        brochure: {
+          type: "grid",
+          main: "univanabrochure1.jpg",
+          images: ["univanao1.jpeg", "univana02.jpeg", "univana02s.jpeg", "univana03.jpeg", "univana04.jpeg","univana05.jpeg"]
+        }
       },
       // --- UPDATED LA-ONE TO GRID MODE ---
       "LA-ONE": {
@@ -814,12 +819,12 @@ const handleBack = () => {
 
     const hcpData = {
       "OXY-BESTOT": { 
-        card: "Bestoto2.png", 
+        card: "oxybestoicon1.png", 
         desc: "Advanced oxygen booster for pond stability." ,
         brochure: { type: "grid", main: "", images: ["oxybestotimg.jpg"] }
       },
       "GUTPRO": {
-        card: "gutproicon.png",
+        card: "gutproicon1.png",
         desc: "Probiotic supplement for better gut health.",
         brochure: { type: "grid", main: "Gutprobro.png", images: ["GutPro.jpg"] }
       },
