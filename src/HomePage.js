@@ -117,8 +117,6 @@ const navLinks = [
 >
   {link.name}
 </button>
-
-
 ))}
           </nav>
         )}
@@ -127,20 +125,89 @@ const navLinks = [
   );
 };
 
+// const SubHeader = () => {
+//   return (
+//     <section style={styles.subHeader}>
+//       <div style={styles.subHeaderInner}>
+//         <img 
+//           src={process.env.PUBLIC_URL + "/bgship1.png"} 
+//           alt="UPIN Trading Shipping" 
+//           style={styles.fullScreenImg} 
+//         />
+//       </div>
+//     </section>
+//   );
+// };
+
+// const SubHeader = () => {
+//   const [currentImg, setCurrentImg] = useState(0);
+//   const images = ["/bgship1.png", "/bgship2.jpeg"];
+
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setCurrentImg((prev) => (prev === 0 ? 1 : 0));
+//     }, 3000);
+//     return () => clearInterval(interval);
+//   }, []);
+
+//   return (
+//     <section style={styles.subHeader}>
+//       <div style={styles.subHeaderInner}>
+//         {images.map((img, index) => (
+//           <img
+//             key={index}
+//             src={process.env.PUBLIC_URL + img}
+//             alt="UPIN Trading Shipping"
+//             style={{
+//               ...styles.fullScreenImg,
+//               // Stack images on top of each other using grid area
+//               gridArea: "1 / 1 / 2 / 2", 
+//               opacity: currentImg === index ? 1 : 0,
+//               transition: "opacity 1s ease-in-out",
+//               zIndex: currentImg === index ? 2 : 1,
+//             }}
+//           />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
+
+
+
 const SubHeader = () => {
+  const [currentImg, setCurrentImg] = useState(0);
+  const images = ["/bgship1.png", "/bgship2.0.png"];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImg((prev) => (prev === 0 ? 1 : 0));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section style={styles.subHeader}>
       <div style={styles.subHeaderInner}>
-        <img 
-          src={process.env.PUBLIC_URL + "/bgship1.png"} 
-          alt="UPIN Trading Shipping" 
-          style={styles.fullScreenImg} 
-        />
+        {images.map((img, index) => (
+          <img
+            key={index}
+            src={process.env.PUBLIC_URL + img}
+            alt="UPIN Trading Shipping"
+            style={{
+              ...styles.fullScreenImg,
+              // This stacks images on top of each other
+              gridArea: "1 / 1 / 2 / 2", 
+              opacity: currentImg === index ? 1 : 0,
+              transition: "opacity 1s ease-in-out",
+              zIndex: currentImg === index ? 2 : 1,
+            }}
+          />
+        ))}
       </div>
     </section>
   );
 };
-
 
 
 
@@ -499,32 +566,97 @@ center:{
 color:"lightblue",
 },
   
-  subHeader: { 
-    padding: "0",
-    margin: "0",
-    width: "100%",
-    overflow: "hidden",
-    background: "#fff", // Matches your header color to prevent flickering
-    marginTop: "-1px", 
+  // subHeader: { 
+  //   padding: "0",
+  //   margin: "0",
+  //   width: "100%",
+  //   overflow: "hidden",
+  //   background: "#fff", // Matches your header color to prevent flickering
+  //   marginTop: "-1px", 
    
-  },
+  // },
   
-  subHeaderInner: {
-    width: "100%",
-    display: "flex",
-  },
-
-  fullScreenImg: {
-    width: "100%",            // Fill the width of the screen
-    height: "auto",           // Let the height adjust naturally based on image shape
-    maxWidth: "100%",
-    display: "block",
-    objectFit: "cover",       // Keeps it crisp if container size varies slightly
-    objectPosition: "center", 
-    border: "none",
-  },
+  // subHeaderInner: {
+  //   width: "100%",
+  //   display: "flex",
+  // },
 
 
+
+  
+  // fullScreenImg: {
+  //   width: "100%",            // Fill the width of the screen
+  //   height: "auto",           // Let the height adjust naturally based on image shape
+  //   maxWidth: "100%",
+  //   display: "block",
+  //   objectFit: "cover",       // Keeps it crisp if container size varies slightly
+  //   objectPosition: "center", 
+  //   border: "none",
+  // },
+
+
+
+// Update these specific parts in your styles object:
+
+// subHeader: { 
+//   padding: "0",
+//   margin: "0",
+//   width: "100%",
+//   background: "#fff",
+//   marginTop: "-1px", 
+//   lineHeight: 0, // Removes any tiny text-level gaps
+// },
+
+// subHeaderInner: {
+//   display: "grid",      // Magic fix: stacks children automatically
+//   width: "100%",
+//   overflow: "hidden",
+//   margin: 0,
+//   padding: 0,
+// },
+
+// fullScreenImg: {
+//   width: "100%",
+//   height: "auto",      // Let the image dictate the height naturally
+//   display: "block",
+//   objectFit: "cover",
+//   border: "none",
+//   margin: 0,
+// },
+  
+
+
+
+// Inside your styles object:
+
+subHeader: { 
+  padding: "0",
+  margin: "0",
+  width: "100%",
+  background: "#fff",
+  marginTop: "-1px", 
+  // Removes tiny 3px gap browsers add to images
+  lineHeight: 0, 
+  fontSize: 0,
+},
+
+subHeaderInner: {
+  display: "grid", // Fixes stacking and height issues
+  width: "100%",
+  overflow: "hidden",
+  margin: 0,
+  padding: 0,
+},
+
+fullScreenImg: {
+  width: "100%",
+  height: "100%", // Changed to 100% to fill the grid area
+  display: "block",
+  objectFit: "cover", // Forces the image to fill the space without gaps
+  border: "none",
+  margin: 0,
+  padding: 0,
+},
 
 
   subHeaderSideImg: {
